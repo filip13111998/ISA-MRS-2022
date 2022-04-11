@@ -47,19 +47,25 @@ public class Cottage {
     @Column(name = "more_information")
     private String moreInformation;
 
-    @OneToMany
+    @Column(name = "delete_ctg")
+    private Boolean delete;
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private Set<CottageImage> cottageImages;
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottagePricelist> cottagePricelists;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottageMark> marks;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottageResevation> cottageResevations;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<CottageAction> cottageActions;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "cottages",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<MyUser> myUsers;
 
     public double averageMarks(){

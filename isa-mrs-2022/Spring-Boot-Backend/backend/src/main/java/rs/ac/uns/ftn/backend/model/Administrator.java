@@ -26,7 +26,7 @@ public class Administrator {
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "delete")
+    @Column(name = "delete_adm")
     private Boolean delete;
 
 }

@@ -20,6 +20,9 @@ public class BoatOwner {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "delete")
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "delete_own_boat")
     private Boolean delete;
 }

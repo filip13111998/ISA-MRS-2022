@@ -22,10 +22,13 @@ public class Instructor {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "delete")
+    @Column(name = "email")
+    private String email;
+
+    @Column(name = "delete_ins")
     private Boolean delete;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<InstructorMark> marks;
 
     public double averageMarks(){

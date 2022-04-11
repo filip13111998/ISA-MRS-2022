@@ -10,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "complaint")
-public class Complaint {
+@Table(name = "boat_owner_complaint")
+public class BoatOwnerComplaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,19 +20,13 @@ public class Complaint {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "my_user_id")
-    private MyUser myUser;
+    private MyUser myUser=null;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "instructor_id")
-    private Instructor instructor;
-
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boat_owner_id")
     private BoatOwner boatOwner = null;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "cottage_owner_id")
-    private CottageOwner cottageOwner=null;
+
 }

@@ -23,7 +23,7 @@ public class Boat {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "type")
+    @Column(name = "type_boat")
     private String type;
 
     @Column(name = "lenght")
@@ -65,22 +65,22 @@ public class Boat {
     @Column(name = "more_information")
     private String moreInformation;
 
-    @Column(name = "delete")
+    @Column(name = "delete_bt")
     private Boolean delete;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BoatMark> marks;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BoatPricelist> boatPricelists;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BoatResevation> boatResevations;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<BoatAction> boatActions;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "boats",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<MyUser> myUsers;
 
     public double averageMarks(){

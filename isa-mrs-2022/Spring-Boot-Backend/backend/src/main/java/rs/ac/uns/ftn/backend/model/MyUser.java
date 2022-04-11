@@ -24,22 +24,25 @@ public class MyUser {
     @Column(name = "email")
     private String email;
 
+    @Column(name = "username")
+    private String username;
+
     @Column(name = "password")
     private String password;
 
     @Column(name = "active")
     private Boolean active;
 
-    @Column(name = "delete")
+    @Column(name = "delete_usr")
     private Boolean delete;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Cottage> cottages;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Boat> boats;
 
-    @ManyToMany
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<Adventure> adventures;
 
 

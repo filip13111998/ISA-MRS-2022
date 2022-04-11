@@ -35,7 +35,7 @@ public class Adventure {
     @Column(name = "description")
     private String description;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
@@ -51,19 +51,19 @@ public class Adventure {
     @Column(name = "cancellation_conditions")
     private String cancellationConditions;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AdventureMark> marks;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AdventurePricelist> adventurePricelists;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AdventureReservation> adventureReservations;
 
-    @OneToMany
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<AdventureAction> adventureActions;
 
-    @ManyToMany
+    @ManyToMany(mappedBy = "adventures",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private Set<MyUser> myUsers;
 
     public double averageMarks(){

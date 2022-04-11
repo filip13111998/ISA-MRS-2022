@@ -10,8 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "cottage_owner")
-public class CottageOwner {
+@Table(name = "adventure_image")
+public class AdventureImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -20,9 +20,7 @@ public class CottageOwner {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
-
-    @Column(name = "delete_own_ctg")
-    private Boolean delete;
+    @Lob
+    @Column(name = "image_byte")
+    private byte[] image;
 }

@@ -10,9 +10,8 @@ import javax.persistence.*;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "delete_request")
-public class DeleteRequest {
-
+@Table(name = "instructor_complaint")
+public class InstructorComplaint {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -23,7 +22,10 @@ public class DeleteRequest {
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "my_user_id")
-    private MyUser myUser;
+    private MyUser myUser=null;
 
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "instructor_id")
+    private Instructor instructor=null;
 
 }
