@@ -1,11 +1,17 @@
 package rs.ac.uns.ftn.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -13,6 +19,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "boat")
+//@JsonIgnoreProperties(value= {"boatImages","marks","boatPricelists","boatResevations","boatActions"})
 public class Boat {
 
     @Id
@@ -27,10 +34,10 @@ public class Boat {
     private String type;
 
     @Column(name = "lenght")
-    private String lenght;
+    private Integer lenght;
 
     @Column(name = "engine_num")
-    private String engineNum;
+    private Integer engineNum;
 
     @Column(name = "engine_power")
     private String enginePower;
@@ -68,20 +75,30 @@ public class Boat {
     @Column(name = "delete_bt")
     private Boolean delete;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BoatMark> marks;
+    @ManyToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatImage> boatImages = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BoatPricelist> boatPricelists;
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatMark> marks = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY,cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatPricelist> boatPricelists = new HashSet<BoatPricelist>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BoatResevation> boatResevations;
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatResevation> boatResevations = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<BoatAction> boatActions;
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatAction> boatActions= new HashSet<>();
 
-    @ManyToMany(mappedBy = "boats",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<MyUser> myUsers;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    @JoinTable(name = "my_user_boats", joinColumns = @JoinColumn(name = "boats_id"), inverseJoinColumns = @JoinColumn(name = "my_users_id"))
+    @Fetch(FetchMode.JOIN)
+    private Set<MyUser> myUsers = new HashSet<MyUser>();
 
     public double averageMarks(){
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);

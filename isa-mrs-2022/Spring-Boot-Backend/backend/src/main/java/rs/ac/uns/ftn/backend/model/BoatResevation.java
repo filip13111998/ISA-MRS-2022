@@ -27,7 +27,7 @@ public class BoatResevation {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boat_pricelist_id")
     private BoatPricelist pricelistItem;
 

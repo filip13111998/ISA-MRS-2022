@@ -28,7 +28,7 @@ public class CottageResevation {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cottage_pricelist_id")
     private CottagePricelist pricelistItem;
 

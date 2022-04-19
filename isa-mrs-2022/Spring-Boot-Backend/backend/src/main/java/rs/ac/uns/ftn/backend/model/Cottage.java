@@ -1,11 +1,15 @@
 package rs.ac.uns.ftn.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -23,8 +27,8 @@ public class Cottage {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "longitude")
     private Long longitude;
@@ -51,27 +55,34 @@ public class Cottage {
     private Boolean delete;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottageImage> cottageImages;
+    @Fetch(FetchMode.JOIN)
+    private Set<CottageImage> cottageImages =new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottagePricelist> cottagePricelists;
+    @Fetch(FetchMode.JOIN)
+    private Set<CottagePricelist> cottagePricelists= new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottageMark> marks;
+    @Fetch(FetchMode.JOIN)
+    private Set<CottageMark> marks = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottageResevation> cottageResevations;
+    @Fetch(FetchMode.JOIN)
+    private Set<CottageResevation> cottageResevations = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<CottageAction> cottageActions;
+    @Fetch(FetchMode.JOIN)
+    private Set<CottageAction> cottageActions = new HashSet<>();
 
-    @ManyToMany(mappedBy = "cottages",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<MyUser> myUsers;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<MyUser> myUsers = new HashSet<MyUser>();
 
     public double averageMarks(){
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
     }
 
+    public Integer sumBedNumer(){ return Integer.parseInt(String.valueOf(numberOfRoom))*Integer.parseInt(String.valueOf(numberOfBedPerRoom));}
 
     public boolean checkReservationDate(LocalDate start , LocalDate end){
         for(CottageResevation cr : cottageResevations){

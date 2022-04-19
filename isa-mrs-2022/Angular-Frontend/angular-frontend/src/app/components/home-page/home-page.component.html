@@ -1,0 +1,176 @@
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" href="#">Filip Vasić</a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-light" mdbWavesEffect>ISA-MRS-2022<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect>Home</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" mdbWavesEffect>Pricing</a>
+            </li>
+
+            <!-- Dropdown -->
+            <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Basic dropdown<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+                </div>
+            </li>
+
+        </ul>
+        <!-- Links -->
+
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link">
+                    <mdb-icon fab icon="twitter"></mdb-icon>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <mdb-icon fab icon="google-plus"></mdb-icon>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link">
+                    <div class="btn-group" mdbDropdown>
+                        <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="divider dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>
+<div style="margin-top: 10em; text-align: center;">
+    REKLAMAAAA
+</div>
+<mat-grid-list cols="16" [style.background]="'skyblue'" style="margin-top: 10em;">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile><button type="button" class="btn btn-new"><i class="fa fa-home" aria-hidden="true"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button type="button" class="btn btn-primary"><i class="fa-solid fa-ship"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button type=" button" class="btn btn-info"><i class="fas fa-map-marked-alt"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button type="button" class="btn btn-success"><i class="fa fa-user" aria-hidden="true"
+                style="font-size: 50px;"></i></button></mat-grid-tile>
+</mat-grid-list>
+
+<div class="basic-container">
+    <mat-grid-list cols="3" rowHeight="2:1" [style.background]="'skyblue'" [gutterSize]="'30px'">
+        <mat-grid-tile class="btn-primary">1</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">2</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">3</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">4</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">5</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">6</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">7</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">8</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">9</mat-grid-tile>
+    </mat-grid-list>
+
+
+</div>
+
+<div class="center">
+    <nav style="justify-content: center;">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
+            <li class="page-item active">
+                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>
+<!--/.Navbar-->
+<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+<i class="fas fa-band-aid"></i>
+<i class="fas fa-cat"></i>
+<i class="fas fa-dragon"></i>
+<i class="far fa-clock"></i>
+<i class="fas fa-clock"></i>
+
+<p>home-page works!</p>
+<button type="button" class="btn btn-primary">Primary</button>
+<button type="button" class="btn btn-secondary">Secondary</button>
+<button type="button" class="btn btn-success">Success</button>
+<button type="button" class="btn btn-danger">Danger</button>
+<button type="button" class="btn btn-warning">Warning</button>
+<button type="button" class="btn btn-info">Info</button>
+<button type="button" class="btn btn-light">Light</button>
+<button type="button" class="btn btn-dark">Dark</button>
+
+<hr>
+
+<label for="name">Name: </label>
+<input id="name" type="text" [formControl]="name">
+<br />
+<div class="btn-group" role="group" aria-label="Radio Buttons with Bootstrap 5">
+    <input type="radio" [formControl]="radio" [value]="1" class="btn-check" id="btnradio1" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnradio1">One</label>
+
+    <input type="radio" [formControl]="radio" [value]="2" class="btn-check" id="btnradio2" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btnradio2">Two</label>
+</div>
+
+<pre>Value: {{ radio.value }}</pre>
+
+<div class="btn-group" [formGroup]="checkbox" role="group" aria-label="Checkboxes with Bootstrap 5">
+    <input type="checkbox" formControlName="one" class="btn-check" id="btncheck1" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck1">One</label>
+
+    <input type="checkbox" formControlName="two" class="btn-check" id="btncheck2" autocomplete="off">
+    <label class="btn btn-outline-primary" for="btncheck2">Two</label>
+</div>
+
+<pre>Value: {{ checkbox.value | json }}</pre>
+
+<div class="btn-group" role="group">
+    <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.left"> Left (pre-checked)
+    </label>
+    <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.middle"> Middle
+    </label>
+    <label class="btn-primary" ngbButtonLabel>
+        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.right"> Right
+    </label>
+</div>

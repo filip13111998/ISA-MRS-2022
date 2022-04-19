@@ -20,13 +20,13 @@ public class BoatOwnerComplaint {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "my_user_id")
-    private MyUser myUser=null;
+    private MyUser myUser;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boat_owner_id")
-    private BoatOwner boatOwner = null;
+    private BoatOwner boatOwner;
 
 
 }

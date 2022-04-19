@@ -25,9 +25,9 @@ public class HelloController {
         return new ResponseEntity<>("Filip Vasic" , HttpStatus.OK);
     }
 
-    @GetMapping(value = "avgCot")
-    public ResponseEntity<String> getAvg(){
-        double avg = cs.averageCottageMarks();
-        return new ResponseEntity<>("AVERAGE IS: " + avg , HttpStatus.OK);
-    }
+//    @GetMapping(value = "avgCot")
+//    public ResponseEntity<String> getAvg(){
+//        double avg = cs.averageCottageMarks();
+//        return new ResponseEntity<>("AVERAGE IS: " + avg , HttpStatus.OK);
+//    }
 }

@@ -22,4 +22,6 @@ public class BoatPricelist {
 
     @Column(name = "description")
     private String description;
+
+
 }

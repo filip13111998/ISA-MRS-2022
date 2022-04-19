@@ -21,7 +21,7 @@ public class DeleteRequest {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "my_user_id")
     private MyUser myUser;
 

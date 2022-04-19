@@ -27,7 +27,7 @@ public class AdventureReservation {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "adventure_pricelist_id")
     private AdventurePricelist pricelistItem;
 

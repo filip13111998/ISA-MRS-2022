@@ -1,11 +1,15 @@
 package rs.ac.uns.ftn.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -35,7 +39,7 @@ public class Adventure {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.EAGER)
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "instructor_id")
     private Instructor instructor;
 
@@ -51,20 +55,29 @@ public class Adventure {
     @Column(name = "cancellation_conditions")
     private String cancellationConditions;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AdventureMark> marks;
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventureImage> adventureImages = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AdventurePricelist> adventurePricelists;
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventureMark> marks = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AdventureReservation> adventureReservations;
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventurePricelist> adventurePricelists = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<AdventureAction> adventureActions;
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventureReservation> adventureReservations = new HashSet<>();
 
-    @ManyToMany(mappedBy = "adventures",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<MyUser> myUsers;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventureAction> adventureActions = new HashSet<>();
+
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<MyUser> myUsers = new HashSet<MyUser>();
 
     public double averageMarks(){
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);

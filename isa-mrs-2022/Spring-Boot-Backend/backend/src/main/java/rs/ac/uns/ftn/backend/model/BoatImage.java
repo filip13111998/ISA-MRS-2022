@@ -25,8 +25,5 @@ public class BoatImage {
     @Column(name = "image_byte")
     private byte[] image;
 
-//    @ManyToOne
-//    private Cottage cottage;
-
 
 }

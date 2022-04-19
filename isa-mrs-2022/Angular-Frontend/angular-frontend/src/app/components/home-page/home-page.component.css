@@ -1,0 +1,61 @@
+.basic-container {
+    margin: 160px 160px 10px 160px;
+}
+
+.center {
+    margin: auto;
+    width: 30%;
+
+
+}
+
+.center nav {
+    display: flex;
+    padding: 0.2rem 0;
+}
+
+.btn-new {
+    color: #FFFFFF;
+    background-color: #612426;
+    border-color: #612426;
+}
+
+.btn-new:hover,
+.btn-new:focus,
+.btn-new:active,
+.btn-new.active,
+.open .dropdown-toggle.btn-new {
+    color: #FFFFFF;
+    background-color: #470B14;
+    border-color: #612426;
+}
+
+.btn-new:active,
+.btn-new.active,
+.open .dropdown-toggle.btn-new {
+    background-image: none;
+}
+
+.btn-new.disabled,
+.btn-new[disabled],
+fieldset[disabled] .btn-new,
+.btn-new.disabled:hover,
+.btn-new[disabled]:hover,
+fieldset[disabled] .btn-new:hover,
+.btn-new.disabled:focus,
+.btn-new[disabled]:focus,
+fieldset[disabled] .btn-new:focus,
+.btn-new.disabled:active,
+.btn-new[disabled]:active,
+fieldset[disabled] .btn-new:active,
+.btn-new.disabled.active,
+.btn-new[disabled].active,
+fieldset[disabled] .btn-new.active {
+    background-color: #612426;
+    border-color: #612426;
+}
+
+.btn-new .badge {
+    color: #612426;
+    background-color: #FFFFFF;
+}

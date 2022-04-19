@@ -1,10 +1,16 @@
 package rs.ac.uns.ftn.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.ToString;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @NoArgsConstructor
@@ -37,13 +43,15 @@ public class MyUser {
     private Boolean delete;
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Cottage> cottages;
+    @Fetch(FetchMode.JOIN)
+    private Set<Cottage> cottages = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Boat> boats;
+    @Fetch(FetchMode.JOIN)
+    private Set<Boat> boats = new HashSet<Boat>();
 
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private Set<Adventure> adventures;
-
+    @Fetch(FetchMode.JOIN)
+    private Set<Adventure> adventures = new HashSet<>();
 
 }

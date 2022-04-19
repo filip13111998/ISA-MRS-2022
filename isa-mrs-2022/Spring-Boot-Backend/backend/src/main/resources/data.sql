@@ -5,11 +5,11 @@ SET datestyle = dmy;
 --CREATE EXTENSION pgcrypto;
 
 --MY USER
-INSERT INTO my_user (name,email,username,password,active,delete_usr) VALUES ('Filip' ,'ff', 'vaskebonf22@gmail.com' , crypt('ff', gen_salt('bf')),true,false);
-INSERT INTO my_user (name,email,username,password,active,delete_usr) VALUES ('Marko' ,'mm', 'vaskebonf22@gmail.com' , crypt('mm', gen_salt('bf')),true,false);
-INSERT INTO my_user (name,email,username,password,active,delete_usr) VALUES ('Nikola' ,'nn', 'vaskebonf22@gmail.com' , crypt('nn', gen_salt('bf')),true,false);
-INSERT INTO my_user (name,email,username,password,active,delete_usr) VALUES ('Petar' ,'pp', 'vaskebonf22@gmail.com' , crypt('pp', gen_salt('bf')),true,false);
-INSERT INTO my_user (name,email,username,password,active,delete_usr) VALUES ('Sasa' ,'ss', 'vaskebonf22@gmail.com' , crypt('ss', gen_salt('bf')),true,false);
+INSERT INTO my_user (name,username,email,password,active,delete_usr) VALUES ('Filip' ,'ff', 'vaskebonf22@gmail.com' , crypt('ff', gen_salt('bf')),true,false);
+INSERT INTO my_user (name,username,email,password,active,delete_usr) VALUES ('Marko' ,'mm', 'vaskebonf22@gmail.com' , crypt('mm', gen_salt('bf')),true,false);
+INSERT INTO my_user (name,username,email,password,active,delete_usr) VALUES ('Nikola' ,'nn', 'vaskebonf22@gmail.com' , crypt('nn', gen_salt('bf')),true,false);
+INSERT INTO my_user (name,username,email,password,active,delete_usr) VALUES ('Petar' ,'pp', 'vaskebonf22@gmail.com' , crypt('pp', gen_salt('bf')),true,false);
+INSERT INTO my_user (name,username,email,password,active,delete_usr) VALUES ('Sasa' ,'ss', 'vaskebonf22@gmail.com' , crypt('ss', gen_salt('bf')),true,false);
 
 --BOAT OWNER
 INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Zarko' , 'vaskebonf22@gmail.com',false);
@@ -22,9 +22,9 @@ INSERT INTO cottage_owner (name,email,delete_own_ctg) VALUES ('Zeka' , 'vaskebon
 INSERT INTO cottage_owner (name,email,delete_own_ctg) VALUES ('Peka' , 'vaskebonf22@gmail.com',false);
 
 --INSTRUCTOR
-INSERT INTO instructor (name,email,delete_ins) VALUES ('Instructor 1' , 'vaskebonf22@gmail.com',false);
-INSERT INTO instructor (name,email,delete_ins) VALUES ('Instructor 2' ,'vaskebonf22@gmail.com', false);
-INSERT INTO instructor (name,email,delete_ins) VALUES ('Instructor 3' , 'vaskebonf22@gmail.com',false);
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 1' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 1',false);
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 2' ,'vaskebonf22@gmail.com', 'Rodjen sam tad i tad..','adr 2',false);
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 3' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 3',false);
 
 
 --ADMINISTRATOR
@@ -53,6 +53,10 @@ INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, 
 --ADVENTURE IMAGE
 INSERT INTO adventure_image ( name , image_byte) VALUES ('adventure_1' , lo_import('C:/tmp/adventure1.jpg'));
 INSERT INTO adventure_image ( name , image_byte) VALUES ('adventure_2' , lo_import('C:/tmp/adventure2.jpg'));
+
+--ADVENTURE ADVENTURE IMAGE
+INSERT INTO adventure_adventure_images(adventure_id , adventure_images_id) VALUES (1,1);
+INSERT INTO adventure_adventure_images(adventure_id , adventure_images_id) VALUES (2,1);
 
 --ADVENTURE MARK
 INSERT INTO adventure_mark (mark) VALUES (2);
@@ -95,6 +99,20 @@ INSERT INTO boat_mark (mark) VALUES (3);
 INSERT INTO boat_mark (mark) VALUES (1);
 INSERT INTO boat_mark (mark) VALUES (5);
 
+--BOAT
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 1','type1',5,2,'200ks','230km','adr1',23.3333,54.2222,'capacity 1','description1','navitagtion1','rule_behaviour1','fishing_eqp1','more_info1',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 2','type2',5,3,'200ks','230km','adr2',23.3333,54.2222,'capacity 2','description2','navitagtion2','rule_behaviour2','fishing_eqp2','more_info2',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 3','type3',9,3,'200ks','230km','adr3',23.3333,54.2222,'capacity 3','description3','navitagtion3','rule_behaviour3','fishing_eqp3','more_info3',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 4','type4',7,6,'200ks','230km','adr4',23.3333,54.2222,'capacity 4','description4','navitagtion4','rule_behaviour4','fishing_eqp4','more_info4',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 5','type5',9,4,'200ks','230km','adr5',23.3333,54.2222,'capacity 5','description5','navitagtion5','rule_behaviour5','fishing_eqp5','more_info5',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 6','type6',3,4,'200ks','230km','adr6',23.3333,54.2222,'capacity 6','description6','navitagtion6','rule_behaviour6','fishing_eqp6','more_info6',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 7','type7',4,7,'200ks','230km','adr7',23.3333,54.2222,'capacity 7','description7','navitagtion7','rule_behaviour7','fishing_eqp7','more_info7',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 8','type8',15,6,'200ks','230km','adr8',23.3333,54.2222,'capacity 8','description8','navitagtion8','rule_behaviour8','fishing_eqp8','more_info8',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 9','type9',15,3,'200ks','230km','adr9',23.3333,54.2222,'capacity 9','description9','navitagtion9','rule_behaviour9','fishing_eqp9','more_info9',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 10','type10',25,1,'200ks','230km','adr10',23.3333,54.2222,'capacity 10','description10','navitagtion10','rule_behaviour10','fishing_eqp10','more_info10',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 11','type11',6,2,'200ks','230km','adr11',23.3333,54.2222,'capacity 11','description11','navitagtion11','rule_behaviour11','fishing_eqp11','more_info11',false);
+INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 12','type12',11,2,'200ks','230km','adr12',23.3333,54.2222,'capacity 12','description12','navitagtion12','rule_behaviour12','fishing_eqp12','more_info12',false);
+
 --BOAT PRICELIST
 INSERT INTO boat_pricelist (price,description) VALUES (5000,'max 3 osobe');
 INSERT INTO boat_pricelist (price,description) VALUES (4000,'2 osobe');
@@ -108,20 +126,10 @@ INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pric
 INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,2);
 
 
---BOAT
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 1','type1','5','2','200ks','230km','adr1',23.3333,54.2222,'capacity 1','description1','navitagtion1','rule_behaviour1','fishing_eqp1','more_info1',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 2','type2','5','2','200ks','230km','adr2',23.3333,54.2222,'capacity 2','description2','navitagtion2','rule_behaviour2','fishing_eqp2','more_info2',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 3','type3','5','2','200ks','230km','adr3',23.3333,54.2222,'capacity 3','description3','navitagtion3','rule_behaviour3','fishing_eqp3','more_info3',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 4','type4','5','2','200ks','230km','adr4',23.3333,54.2222,'capacity 4','description4','navitagtion4','rule_behaviour4','fishing_eqp4','more_info4',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 5','type5','5','2','200ks','230km','adr5',23.3333,54.2222,'capacity 5','description5','navitagtion5','rule_behaviour5','fishing_eqp5','more_info5',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 6','type6','5','2','200ks','230km','adr6',23.3333,54.2222,'capacity 6','description6','navitagtion6','rule_behaviour6','fishing_eqp6','more_info6',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 7','type7','5','2','200ks','230km','adr7',23.3333,54.2222,'capacity 7','description7','navitagtion7','rule_behaviour7','fishing_eqp7','more_info7',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 8','type8','5','2','200ks','230km','adr8',23.3333,54.2222,'capacity 8','description8','navitagtion8','rule_behaviour8','fishing_eqp8','more_info8',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 9','type9','5','2','200ks','230km','adr9',23.3333,54.2222,'capacity 9','description9','navitagtion9','rule_behaviour9','fishing_eqp9','more_info9',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 10','type10','5','2','200ks','230km','adr10',23.3333,54.2222,'capacity 10','description10','navitagtion10','rule_behaviour10','fishing_eqp10','more_info10',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 11','type11','5','2','200ks','230km','adr11',23.3333,54.2222,'capacity 11','description11','navitagtion11','rule_behaviour11','fishing_eqp11','more_info11',false);
-INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,adress,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 12','type12','5','2','200ks','230km','adr12',23.3333,54.2222,'capacity 12','description12','navitagtion12','rule_behaviour12','fishing_eqp12','more_info12',false);
 
+--BOAT BOAT IMAGE
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (2,2);
 
 --BOAT COMPLAINT
 INSERT INTO boat_complaint(description,my_user_id,boat_id) VALUES ('opsi zalbe' , 2,2);
@@ -139,18 +147,18 @@ INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, m
 INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '2'  , 4000 , 'some more information ......');
 
 --COTTAGE
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea Cottage','Wilson 4',23.3556,23.7777 , 'Description 2332',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss','Street 21' ,23.3556,23.7777, 'Description 212',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Araptment','Street Lea',23.3556,23.7777 , 'Description 2grfgf',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea 2','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea ','Wilson 4' ,23.3556,23.7777, 'Description 2332',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss 22','Street 21',23.3556,23.7777 , 'Description 212',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Dep','Street Lea' ,23.3556,23.7777, 'Description 2grfgf',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea Corp','Wilson 51' ,23.3556,23.7777, 'Description 2wqee',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Cottage','Wilson 4',23.3556,23.7777 , 'Description 2332',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss4','Street 21' ,23.3556,23.7777, 'Description 212',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Aggg2','Street Lea',23.3556,23.7777 , 'Description 2grfgf',4,3,'rule behaviour','more informations',false);
-INSERT INTO cottage (name,adress,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea 256','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea Cottage','Wilson 4',23.3556,23.7777 , 'Description 2332',4,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss','Street 21' ,23.3556,23.7777, 'Description 212',4,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Araptment','Street Lea',23.3556,23.7777 , 'Description 2grfgf',4,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea 2','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,6,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea ','Wilson 4' ,23.3556,23.7777, 'Description 2332',3,4,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss 22','Street 21',23.3556,23.7777 , 'Description 212',5,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Dep','Street Lea' ,23.3556,23.7777, 'Description 2grfgf',5,2,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea Corp','Wilson 51' ,23.3556,23.7777, 'Description 2wqee',2,2,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Cottage','Wilson 4',23.3556,23.7777 , 'Description 2332',4,3,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Swiiss4','Street 21' ,23.3556,23.7777, 'Description 212',4,1,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Lea Aggg2','Street Lea',23.3556,23.7777 , 'Description 2grfgf',2,7,'rule behaviour','more informations',false);
+INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea 256','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,3,'rule behaviour','more informations',false);
 
 
 --COTTAGE IMAGE
@@ -235,10 +243,10 @@ INSERT INTO instructor_marks(instructor_id,marks_id) VALUES (1,1);
 
 
 --MY USER ADVENTURES
-INSERT INTO my_user_adventures(my_users_id,adventures_id) VALUES (1,1);
+INSERT INTO adventure_my_users(adventure_id,my_users_id) VALUES (1,1);
 
 --MY USER BOATS
-INSERT INTO my_user_boats(my_users_id,boats_id) VALUES (1,2);
+INSERT INTO boat_my_users(boat_id,my_users_id) VALUES (2,1);
 
 --MY USER COTTAGES
-INSERT INTO my_user_cottages(my_users_id,cottages_id) VALUES (1,2);
+INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (2,1);
