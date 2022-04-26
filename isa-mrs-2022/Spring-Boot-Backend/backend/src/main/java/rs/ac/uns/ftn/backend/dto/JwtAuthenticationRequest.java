@@ -1,4 +1,4 @@
-package rs.ac.uns.ftn.backend.dto.request;
+package rs.ac.uns.ftn.backend.dto;
 
 // DTO za login
 public class JwtAuthenticationRequest {

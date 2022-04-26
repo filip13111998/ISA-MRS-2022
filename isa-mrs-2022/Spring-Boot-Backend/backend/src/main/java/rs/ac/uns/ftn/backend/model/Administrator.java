@@ -11,11 +11,11 @@ import javax.persistence.*;
 @Data
 @Entity
 //@Table(name = "administrator")
-public class Administrator {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+public class Administrator extends User{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
+//    private Long id;
 
     @Column(name = "name_admin")
     private String nameAdmin;

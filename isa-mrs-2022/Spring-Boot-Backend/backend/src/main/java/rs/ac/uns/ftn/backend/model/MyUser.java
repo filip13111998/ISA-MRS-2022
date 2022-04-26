@@ -17,15 +17,15 @@ import java.util.Set;
 @AllArgsConstructor
 @Data
 @Entity
-@Table(name = "my_user")
-public class MyUser{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private Long id;
+//@Table(name = "my_user")
+public class MyUser extends User{
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Column(name = "id")
+//    private Long id;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "name_user")
+    private String nameUser;
 
 //    @Column(name = "email")
 //    private String email;

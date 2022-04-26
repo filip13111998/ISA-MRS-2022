@@ -50,8 +50,8 @@ public class UserServiceImpl implements UserService {
 		// treba voditi racuna da se koristi isi password encoder bean koji je postavljen u AUthenticationManager-u kako bi koristili isti algoritam
 		u.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		
-		u.setFirstName(userRequest.getFirstname());
-		u.setLastName(userRequest.getLastname());
+		u.setName(userRequest.getFirstname() + " " + userRequest.getLastname());
+
 		u.setEnabled(true);
 		u.setEmail(userRequest.getEmail());
 

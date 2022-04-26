@@ -15,7 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-import rs.ac.uns.ftn.backend.dto.request.JwtAuthenticationRequest;
+
+import rs.ac.uns.ftn.backend.dto.JwtAuthenticationRequest;
 import rs.ac.uns.ftn.backend.dto.request.UserRequest;
 import rs.ac.uns.ftn.backend.dto.request.UserTokenState;
 import rs.ac.uns.ftn.backend.exception.ResourceConflictException;
