@@ -1,5 +1,5 @@
 <!--Navbar-->
-<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark unique-color" [containerInside]="false">
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark" class="nav-css" [containerInside]="false">
 
     <!-- Navbar brand -->
     <mdb-navbar-brand><a class="navbar-brand" href="#">Filip Vasić</a></mdb-navbar-brand>
@@ -39,15 +39,18 @@
         <ul class="navbar-nav ml-auto nav-flex-icons">
             <li class="nav-item">
                 <a class="nav-link">
-                    <mdb-icon fab icon="twitter"></mdb-icon>
+                    <!-- <mdb-icon fab icon="google-plus"></mdb-icon> -->
+                    <i class="fa fa-sign-in fa-xl" aria-hidden="true" style="margin-right: 0.5em;"></i>
                 </a>
             </li>
             <li class="nav-item">
                 <a class="nav-link">
-                    <mdb-icon fab icon="google-plus"></mdb-icon>
+                    <!-- <mdb-icon fab icon="twitter"></mdb-icon> -->
+                    <i class="fa-solid fa-user-plus fa-xl"></i>
                 </a>
             </li>
-            <li class="nav-item">
+
+            <!-- <li class="nav-item">
                 <a class="nav-link">
                     <div class="btn-group" mdbDropdown>
                         <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
@@ -60,16 +63,18 @@
                         </div>
                     </div>
                 </a>
-            </li>
+            </li> -->
         </ul>
     </links>
     <!-- Collapsible content -->
 
 </mdb-navbar>
-<div style="margin-top: 10em; text-align: center;">
-    REKLAMAAAA
+<div style="margin-top: 15em; text-align: center;">
+    <img src="assets/ad212.png" width="300" height="200" style="margin-right: 1em;">
+    <img src="assets/ads9.png" width="350" height="200">
+    <img src="assets/ads10.png" width="350" height="200">
 </div>
-<mat-grid-list cols="16" [style.background]="'skyblue'" style="margin-top: 10em;">
+<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;" [gutterSize]="'5px'">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
@@ -77,51 +82,40 @@
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
 
-    <mat-grid-tile><button type="button" class="btn btn-new"><i class="fa fa-home" aria-hidden="true"
+    <mat-grid-tile><button (click)="set_entity_type_cottage()" type="button"
+            class="btn btn-new btn-lg box-shadow--8dp"><i class="fa fa-home" aria-hidden="true"
                 style="font-size: 50px;"></i></button> </mat-grid-tile>
-    <mat-grid-tile><button type="button" class="btn btn-primary"><i class="fa-solid fa-ship"
+    <mat-grid-tile><button (click)="set_entity_type_boat()" type="button"
+            class="btn btn-primary btn-lg box-shadow--8dp"><i class="fa-solid fa-ship"
                 style="font-size: 50px;"></i></button> </mat-grid-tile>
-    <mat-grid-tile><button type=" button" class="btn btn-info"><i class="fas fa-map-marked-alt"
+    <mat-grid-tile><button (click)="set_entity_type_adventure()" type=" button"
+            class="btn btn-info btn-lg box-shadow--8dp"><i class="fas fa-map-marked-alt"
                 style="font-size: 50px;"></i></button> </mat-grid-tile>
-    <mat-grid-tile><button type="button" class="btn btn-success"><i class="fa fa-user" aria-hidden="true"
-                style="font-size: 50px;"></i></button></mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_instructor()" type="button"
+            class="btn btn-success btn-lg box-shadow--8dp" style="margin-left: -0.8em;"><i class="fa fa-user"
+                aria-hidden="true" style="font-size: 50px;"></i></button>
+    </mat-grid-tile>
 </mat-grid-list>
 
-<div class="basic-container">
-    <mat-grid-list cols="3" rowHeight="2:1" [style.background]="'skyblue'" [gutterSize]="'30px'">
-        <mat-grid-tile class="btn-primary">1</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">2</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">3</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">4</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">5</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">6</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">7</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">8</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">9</mat-grid-tile>
-    </mat-grid-list>
 
+<div>
+    <div *ngIf="entity_type==0">
+        <app-cottages-home-page></app-cottages-home-page>
+    </div>
+    <div *ngIf="entity_type==1">
+        <app-boats-home-page></app-boats-home-page>
+    </div>
+    <div *ngIf="entity_type==2">
+        <app-adventures-home-page></app-adventures-home-page>
+    </div>
+    <div *ngIf="entity_type==3">
 
+    </div>
 </div>
 
-<div class="center">
-    <nav style="justify-content: center;">
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <!-- <li class="page-item"><a class="page-link" href="#">1</a></li>
-            <li class="page-item active">
-                <a class="page-link" href="#">2 <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="page-item"><a class="page-link" href="#">3</a></li> -->
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
-</div>
+
 <!--/.Navbar-->
-<mat-slider min="1" max="100" step="1" value="50"></mat-slider>
+<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
 <i class="fas fa-band-aid"></i>
 <i class="fas fa-cat"></i>
 <i class="fas fa-dragon"></i>
@@ -173,4 +167,4 @@
     <label class="btn-primary" ngbButtonLabel>
         <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.right"> Right
     </label>
-</div>
+</div> -->

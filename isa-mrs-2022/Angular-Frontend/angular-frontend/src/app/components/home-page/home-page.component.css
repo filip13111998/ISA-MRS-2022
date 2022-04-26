@@ -1,17 +1,5 @@
-.basic-container {
-    margin: 160px 160px 10px 160px;
-}
-
-.center {
-    margin: auto;
-    width: 30%;
-
-
-}
-
-.center nav {
-    display: flex;
-    padding: 0.2rem 0;
+::ng-deep .nav-css nav {
+    background-color: #0BDA51;
 }
 
 .btn-new {
@@ -58,4 +46,8 @@ fieldset[disabled] .btn-new.active {
 .btn-new .badge {
     color: #612426;
     background-color: #FFFFFF;
+}
+
+.box-shadow--8dp {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2)
 }

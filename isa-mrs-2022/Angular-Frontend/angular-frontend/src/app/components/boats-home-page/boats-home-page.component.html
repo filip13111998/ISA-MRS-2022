@@ -1,0 +1,45 @@
+<div class="search-bar">
+    SEARCH BAR
+</div>
+
+<div class="sort-container">
+
+    <mat-form-field appearance="fill">
+        <mat-label>Sort Boats</mat-label>
+        <mat-select>
+            <mat-option *ngFor="let boat of boats" [value]="boat.value">
+                {{boat.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+</div>
+
+<div class="basic-container">
+    <mat-grid-list cols="3" rowHeight="2:1" [style.background]="'skyblue'" [gutterSize]="'30px'">
+        <mat-grid-tile class="btn-primary">1</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">2</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">3</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">4</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">5</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">6</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">7</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">8</mat-grid-tile>
+        <mat-grid-tile class="btn-primary">9</mat-grid-tile>
+    </mat-grid-list>
+
+
+</div>
+
+<div class="center">
+    <nav style="justify-content: center;">
+        <ul class="pagination">
+            <li class="page-item disabled">
+                <a class="page-link" href="#" tabindex="-1">Previous</a>
+            </li>
+            <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+            </li>
+        </ul>
+    </nav>
+</div>

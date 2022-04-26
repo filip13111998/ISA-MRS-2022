@@ -18,7 +18,7 @@ import java.util.Set;
 @Data
 @Entity
 @Table(name = "my_user")
-public class MyUser {
+public class MyUser{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
@@ -27,17 +27,17 @@ public class MyUser {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "email")
-    private String email;
+//    @Column(name = "email")
+//    private String email;
 
-    @Column(name = "username")
-    private String username;
+//    @Column(name = "username")
+//    private String username;
+//
+//    @Column(name = "password")
+//    private String password;
 
-    @Column(name = "password")
-    private String password;
-
-    @Column(name = "active")
-    private Boolean active;
+//    @Column(name = "active")
+//    private Boolean active;
 
     @Column(name = "delete_usr")
     private Boolean delete;

@@ -1,0 +1,23 @@
+.search-bar {
+    margin: 5em 30em 5em 10em;
+    display: flex;
+    justify-content: center;
+}
+
+.sort-container {
+    display: flex;
+    justify-content: center;
+    margin: 5em 0em 0em 74em;
+}
+
+.basic-container {
+    margin: 1em 10em 1em 10em;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+
+}

@@ -22,11 +22,11 @@ public class BoatComplaint {
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "my_user_id")
-    private MyUser myUser=null;
+    private MyUser myUser;
 
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "boat_id")
-    private Boat boat=null;
+    private Boat boat;
 
 
 }
