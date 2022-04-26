@@ -16,30 +16,29 @@
 </div>
 
 <div class="basic-container">
-    <mat-grid-list cols="3" rowHeight="2:1" [style.background]="'skyblue'" [gutterSize]="'30px'">
-        <mat-grid-tile class="btn-primary">1</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">2</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">3</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">4</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">5</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">6</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">7</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">8</mat-grid-tile>
-        <mat-grid-tile class="btn-primary">9</mat-grid-tile>
+    <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
+
+        <mat-grid-tile *ngFor="let boat of this.btList">
+            <div id="over" class="card text-center" style="width: auto; background-color: skyblue;">
+                <img [src]="getImageName(boat.bi.name)" width="50%" style="margin-left: 25%;">
+                <div class="card-body">
+                    <h5 class="card-title">{{boat.name}}</h5>
+
+                    <p class="card-text">{{boat.address}}</p>
+                    <p class="card-text">{{boat.type}}</p>
+                    <p class="card-text">{{boat.averageMark}}</p>
+
+                    <a href="#" class="btn btn-primary">Go Profile</a>
+                </div>
+            </div>
+        </mat-grid-tile>
+
+
+
     </mat-grid-list>
+    <div style="text-align: center;padding: 5em;">
+        <button type="button" class="btn btn-primary" (click)=" pageMinus()">Previous</button>
+        <button type="button" class="btn btn-primary" (click)=" pagePlus()" style="margin-left :5px ">Next</button>
+    </div>
 
-
-</div>
-
-<div class="center">
-    <nav style="justify-content: center;">
-        <ul class="pagination">
-            <li class="page-item disabled">
-                <a class="page-link" href="#" tabindex="-1">Previous</a>
-            </li>
-            <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-            </li>
-        </ul>
-    </nav>
 </div>

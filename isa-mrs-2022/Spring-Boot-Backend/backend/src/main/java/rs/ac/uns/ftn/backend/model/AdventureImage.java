@@ -20,7 +20,4 @@ public class AdventureImage {
     @Column(name = "name")
     private String name;
 
-    @Lob
-    @Column(name = "image_byte")
-    private byte[] image;
 }

@@ -8,7 +8,7 @@ import rs.ac.uns.ftn.backend.dto.response.AdventureDTO;
 import rs.ac.uns.ftn.backend.dto.response.AdventureProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
-import rs.ac.uns.ftn.backend.model.Adventure;
+//import rs.ac.uns.ftn.backend.model.Adventure;
 import rs.ac.uns.ftn.backend.service.AdventureService;
 import rs.ac.uns.ftn.backend.service.CottageService;
 
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping(value = "adventure")
+@RequestMapping(value = "home/adventure")
 public class AdventureController {
 
     private AdventureService as;

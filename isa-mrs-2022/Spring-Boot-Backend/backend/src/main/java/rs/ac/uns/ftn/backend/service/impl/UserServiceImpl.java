@@ -1,21 +1,19 @@
 package rs.ac.uns.ftn.backend.service.impl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-import rs.ac.uns.ftn.backend.dto.request.UserRequest;
+import rs.ac.uns.ftn.backend.dto.response.UserRequest;
 import rs.ac.uns.ftn.backend.model.Role;
-import rs.ac.uns.ftn.backend.model.User;
 import rs.ac.uns.ftn.backend.repository.UserRepository;
 import rs.ac.uns.ftn.backend.service.RoleService;
 import rs.ac.uns.ftn.backend.service.UserService;
+import rs.ac.uns.ftn.backend.model.User;
 
-@Transactional
+import java.util.List;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -50,8 +48,8 @@ public class UserServiceImpl implements UserService {
 		// treba voditi racuna da se koristi isi password encoder bean koji je postavljen u AUthenticationManager-u kako bi koristili isti algoritam
 		u.setPassword(passwordEncoder.encode(userRequest.getPassword()));
 		
-		u.setName(userRequest.getFirstname() + " " + userRequest.getLastname());
-
+		u.setFirstName(userRequest.getFirstname());
+		u.setLastName(userRequest.getLastname());
 		u.setEnabled(true);
 		u.setEmail(userRequest.getEmail());
 

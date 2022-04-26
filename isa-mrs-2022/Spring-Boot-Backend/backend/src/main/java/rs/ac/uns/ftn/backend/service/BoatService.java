@@ -60,6 +60,7 @@ public class BoatService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(bdto);
+//        return null;
     }
 
     @Async
@@ -88,6 +89,7 @@ public class BoatService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(bdto);
+//        return null;
     }
 
     @Async
@@ -105,6 +107,7 @@ public class BoatService {
 
 
         return CompletableFuture.completedFuture(bpdto);
+
 
     }
 

@@ -1,25 +1,24 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
+import org.springframework.beans.support.PagedListHolder;
+import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.model.Cottage;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import static java.lang.Math.log;
 
 @Transactional
 @Slf4j
@@ -37,7 +36,7 @@ public class CottageService {
     @Async
     public CompletableFuture<List<CottageDTO>> getAllCottages(Integer pageNum , Integer pageSize) {
 
-        log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
+        CottageService.log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
 
         Pageable singlePage = PageRequest.of(pageNum, pageSize);
 
@@ -49,12 +48,13 @@ public class CottageService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(cdto);
+
     }
 
     @Async
     public CompletableFuture<List<CottageDTO>> getAllCottages(Integer pageNum , Integer pageSize, String sortType , Boolean direction) {
 
-        log.info("GET ALL COTTAGES SORTED"+ Thread.currentThread().getName());
+        CottageService.log.info("GET ALL COTTAGES SORTED"+ Thread.currentThread().getName());
 
         if(!possibleType.contains(sortType)){
             return CompletableFuture.completedFuture(new ArrayList<>());
@@ -77,6 +77,7 @@ public class CottageService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(cdto);
+
     }
 
     @Async
@@ -94,5 +95,140 @@ public class CottageService {
 
         return CompletableFuture.completedFuture(cpdto);
 
+
+
+    }
+
+    @Async
+    public CompletableFuture<List<CottageDTO>>  getAllCottages(CottageSearchSortDTO sccdto, Integer pageNum, Integer pageSize, String type, Boolean direction) {
+
+        CottageService.log.info("GET ALL COTTAGES SORTED"+ Thread.currentThread().getName());
+
+        if(!possibleType.contains(type)){
+            return CompletableFuture.completedFuture(new ArrayList<>());
+        }
+
+        Pageable singlePage;
+
+        if(direction){
+            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(type));
+        }
+        else {
+            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(type).descending());
+        }
+
+        Page<Cottage> cottages = cr.findAllByParams(sccdto.getName(),sccdto.getAddress(),sccdto.getNumberOfRoom(),singlePage);
+
+        List<CottageDTO> cdto = cottages.stream().map(
+                c->
+                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
+        ).collect(Collectors.toList());
+
+        return CompletableFuture.completedFuture(cdto);
+    }
+
+    @Async
+    public CompletableFuture<List<CottageDTO>> getAllCottagesBestWay(CottageSearchSortDTO sccdto,Integer pageNum , Integer pageSize, String sortType , Boolean direction) {
+
+        CottageService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
+
+        if(!possibleType.contains(sortType)){
+            return CompletableFuture.completedFuture(new ArrayList<>());
+        }
+
+        Pageable singlePage;
+
+        if(direction){
+            System.out.println("OPS");
+//            log.info("OVDE SAM ISAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
+            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(sortType));
+        }
+        else {
+            System.out.println("OVDE");
+            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(sortType).descending());
+        }
+//        System.out.println("NULL");
+//        System.out.println(sccdto.getAverageMark() == null);
+        List<CottageDTO> listaFinal;
+        Stream<Cottage> stream = cr.findAll().stream();
+        listaFinal = stream.filter(e ->( this.checkCottage(e,sccdto)))
+                            .map(
+                                    c-> new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null),
+                                    c.getAddress(), c.sumBedNumer(),c.averageMarks())
+        ).collect(Collectors.toList());
+        System.out.println("LISTA SIZEE" + listaFinal.size());
+
+//        long total = listaFinal.size();
+        PagedListHolder page = new PagedListHolder(listaFinal);
+        page.setPageSize(pageSize); // number of items per page
+        page.setPage(pageNum);      // set to first page
+
+// Retrieval
+//        page.getPageCount(); // number of pages
+//        page.getPageList();
+//        List<Cottage> list = page.getPageList();
+//        Page<Cottage> cottages = cr.findAll(singlePage);
+
+//        Page<Cottage> pageWithFilteredData = new PageImpl<Cottage>(cr.findAll().stream().filter(cottageFilt -> cottageFilt.getAddress().equals(sccdto.getAddress()))
+//                .collect(Collectors.toList()), singlePage, 1);
+
+//        List<CottageDTO> cdto =pageWithFilteredData.stream()
+//                .filter(cottage -> cottage.getAddress().equals(sccdto.getAddress())
+//                        (cottage.getName().equals(sccdto.getName()) || sccdto.getName() == null ) &&
+//                        (cottage.getAddress().equals(sccdto.getAddress()) || sccdto.getAddress() == null ) &&
+//                        (cottage.getNumberOfRoom().equals(sccdto.getNumberOfRoom()) || sccdto.getNumberOfRoom() == null) &&
+//                        (cottage.getMarks().equals(sccdto.getAverageMark()) || sccdto.getAverageMark() == null)
+
+//                )
+//                .map(
+//                c->
+//                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
+//        ).collect(Collectors.toList());
+
+
+//        System.out.println(cdto.size());
+        return CompletableFuture.completedFuture(page.getPageList());
+
+    }
+
+
+    public Boolean checkCottage(Cottage c,CottageSearchSortDTO sc){
+
+        if(sc.getAddress() != null){
+            if(!c.getAddress().equals(sc.getAddress())){
+
+                return false;
+            }
+
+        }
+
+        if(sc.getName() != null){
+            if(!c.getName().equals(sc.getName())){
+
+                return false;
+            }
+
+        }
+        if(sc.getNumberOfRoom() != null){
+            if(!c.getNumberOfRoom().equals(sc.getNumberOfRoom())){
+
+                return false;
+            }
+
+        }
+//        if(c.averageMarks() == 0){
+//            return false;
+//        }
+        if(sc.getAverageMark() != null){
+            if( c.averageMarks() < sc.getAverageMark()){
+                System.out.println("USO de ne trebaaa");
+                System.out.println(c.averageMarks());
+                System.out.println(sc.getAverageMark());
+                return false;
+            }
+
+        }
+        System.out.println("STIGO OVDE");
+        return true;
     }
 }

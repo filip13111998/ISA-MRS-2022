@@ -1,4 +1,5 @@
-package rs.ac.uns.ftn.backend.dto.request;
+package rs.ac.uns.ftn.backend.dto.response;
+
 // DTO koji preuzima podatke iz HTML forme za registraciju
 public class UserRequest {
 

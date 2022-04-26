@@ -1,10 +1,10 @@
 package rs.ac.uns.ftn.backend.service;
 
-import java.util.List;
 
-import rs.ac.uns.ftn.backend.dto.request.UserRequest;
+import rs.ac.uns.ftn.backend.dto.response.UserRequest;
 import rs.ac.uns.ftn.backend.model.User;
 
+import java.util.List;
 
 public interface UserService {
     User findById(Long id);

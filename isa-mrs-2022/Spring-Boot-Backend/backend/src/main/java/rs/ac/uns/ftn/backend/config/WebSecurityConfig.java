@@ -14,7 +14,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-
 import rs.ac.uns.ftn.backend.security.auth.RestAuthenticationEntryPoint;
 import rs.ac.uns.ftn.backend.security.auth.TokenAuthenticationFilter;
 import rs.ac.uns.ftn.backend.service.impl.CustomUserDetailsService;
@@ -29,7 +28,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	// Implementacija PasswordEncoder-a koriscenjem BCrypt hashing funkcije.
 	// BCrypt po defalt-u radi 10 rundi hesiranja prosledjene vrednosti.
 	@Bean
-	public static PasswordEncoder passwordEncoder() {
+	public PasswordEncoder passwordEncoder() {
 		return new BCryptPasswordEncoder();
 	}
 
@@ -81,10 +80,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 			// svim korisnicima dopusti da pristupe sledecim putanjama:
 			.authorizeRequests().antMatchers("/auth/**").permitAll()		// /auth/**
-								.antMatchers("/h2-console/**").permitAll()	// /h2-console/** ako se koristi H2 baza)
-								.antMatchers("/api/foo").permitAll()		// /api/foo
-								
-			// ukoliko ne zelimo da koristimo @PreAuthorize anotacije nad metodama kontrolera, moze se iskoristiti hasRole() metoda da se ogranici
+				.antMatchers("/admin/**").hasRole("ADMIN")
+				.antMatchers("/h2-console/**").permitAll()	// /h2-console/** ako se koristi H2 baza)
+				.antMatchers("/api/foo").permitAll()		// /api/foo
+				.antMatchers("/home/**").permitAll()
+
+
+				// ukoliko ne zelimo da koristimo @PreAuthorize anotacije nad metodama kontrolera, moze se iskoristiti hasRole() metoda da se ogranici
 			// koji tip korisnika moze da pristupi odgovarajucoj ruti. Npr. ukoliko zelimo da definisemo da ruti 'admin' moze da pristupi
 			// samo korisnik koji ima rolu 'ADMIN', navodimo na sledeci nacin: 
 			// .antMatchers("/admin").hasRole("ADMIN") ili .antMatchers("/admin").hasAuthority("ROLE_ADMIN")

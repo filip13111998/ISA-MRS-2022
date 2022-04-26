@@ -1,7 +1,5 @@
 package rs.ac.uns.ftn.backend.controller;
 
-import javax.servlet.http.HttpServletResponse;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -15,15 +13,16 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
-
-import rs.ac.uns.ftn.backend.dto.JwtAuthenticationRequest;
-import rs.ac.uns.ftn.backend.dto.request.UserRequest;
-import rs.ac.uns.ftn.backend.dto.request.UserTokenState;
+import rs.ac.uns.ftn.backend.dto.response.JwtAuthenticationRequest;
+import rs.ac.uns.ftn.backend.dto.response.UserRequest;
+import rs.ac.uns.ftn.backend.dto.response.UserTokenState;
 import rs.ac.uns.ftn.backend.exception.ResourceConflictException;
 import rs.ac.uns.ftn.backend.model.User;
 import rs.ac.uns.ftn.backend.service.UserService;
 import rs.ac.uns.ftn.backend.util.TokenUtils;
 
+
+import javax.servlet.http.HttpServletResponse;
 
 //Kontroler zaduzen za autentifikaciju korisnika
 @RestController

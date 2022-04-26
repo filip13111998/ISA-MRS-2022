@@ -1,5 +1,5 @@
 import { CottageDTO } from './../../models/response/http-cottage-response/cottage-dto';
-import { CottageServiceService } from './../../services/cottage-service.service';
+import { CottageServiceService } from '../../services/cottageService/cottage-service.service';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
@@ -22,7 +22,7 @@ export class CottagesHomePageComponent implements OnInit {
 
   pageNum: number = 0;
 
-  constructor(private css: CottageServiceService, private sanitizer: DomSanitizer) {
+  constructor(private css: CottageServiceService) {
   }
 
   ngOnInit() {
@@ -31,7 +31,6 @@ export class CottagesHomePageComponent implements OnInit {
 
 
   public getAllCottage() {
-    console.log("dsa");
     this.css.getAllCotages(this.pageNum).subscribe((cdto: CottageDTO[]) => {
       console.log(cdto);
       this.cttList = cdto;

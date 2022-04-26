@@ -1,4 +1,5 @@
-package rs.ac.uns.ftn.backend.dto.request;
+package rs.ac.uns.ftn.backend.dto.response;
+
 // DTO koji enkapsulira generisani JWT i njegovo trajanje koji se vracaju klijentu
 public class UserTokenState {
 	

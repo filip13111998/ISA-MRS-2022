@@ -15,7 +15,7 @@ public class AdventureDTO {
 
     private String name;
 
-    private AdventureImage bi;
+    private AdventureImage ai;
 
     private String address;
 

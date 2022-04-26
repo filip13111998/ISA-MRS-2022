@@ -1,3 +1,5 @@
+import { AdventureserviceService } from './../../services/adventureService/adventureservice.service';
+import { AdventureDTO } from './../../models/response/http-adventure-response/adventure-dto';
 import { AdventureComboBox } from 'src/app/models/combo-home-page/adventure-combo-box';
 import { Component, OnInit } from '@angular/core';
 
@@ -15,13 +17,46 @@ export class AdventuresHomePageComponent implements OnInit {
     { value: 'tacos-2', viewValue: 'Bed Number' },
   ];
 
-  constructor() { }
+  adList: AdventureDTO[] = [];
+
+  pageNum: number = 0;
+
+  constructor(private as: AdventureserviceService) { }
 
   ngOnInit(): void {
+    this.getAllAdventure();
+  }
+  public getAllAdventure() {
+    this.as.getAllAdventures(this.pageNum).subscribe((adto: AdventureDTO[]) => {
+      console.log(adto);
+      this.adList = adto;
+    }
+    );
+
   }
 
-}
-interface Cottage {
-  value: string;
-  viewValue: string;
+  public getImageName(name: string): String {
+    return "assets/" + name;
+  }
+
+  public pagePlus() {
+    if (this.adList.length != 9) {
+      return;
+    }
+    this.pageNum += 1;
+    this.getAllAdventure();
+    if (this.adList.length != 9) {
+      this.pageNum -= 1;
+      this.getAllAdventure();
+    }
+  }
+
+  public pageMinus() {
+    if (this.pageNum == 0) {
+      return;
+    }
+    this.pageNum -= 1;
+    this.getAllAdventure();
+  }
+
 }

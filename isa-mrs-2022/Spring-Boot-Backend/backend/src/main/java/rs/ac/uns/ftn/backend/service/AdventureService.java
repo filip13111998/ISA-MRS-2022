@@ -49,6 +49,7 @@ public class AdventureService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(adto);
+
     }
 
     @Async
@@ -77,6 +78,7 @@ public class AdventureService {
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(adto);
+
     }
 
     @Async

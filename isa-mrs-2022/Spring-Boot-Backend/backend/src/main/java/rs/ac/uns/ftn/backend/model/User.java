@@ -1,32 +1,28 @@
 package rs.ac.uns.ftn.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.*;
-
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
 @Entity
-@Table(name="user")
-//@MappedSuperclass
-@Inheritance(strategy = InheritanceType.JOINED)
-//@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
-//@MappedSuperclass
+@Table(name="USERS")
+@Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy= GenerationType.IDENTITY, generator = "cust_seq_user")
+    @SequenceGenerator(name = "cust_seq_user", sequenceName = "cust_seq_user", initialValue = 1, allocationSize = 1)
     private Long id;
 
     @Column(name = "username")
@@ -36,8 +32,11 @@ public class User implements UserDetails {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "name")
-    private String name;
+    @Column(name = "first_name")
+    private String firstName;
+
+    @Column(name = "last_name")
+    private String lastName;
 
     @Column(name = "email")
     private String email;
@@ -80,15 +79,21 @@ public class User implements UserDetails {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setName(String firstName) {
-        this.name = firstName;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
+    public String getLastName() {
+        return lastName;
+    }
 
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
 
     public void setRoles(List<Role> roles) {
         this.roles = roles;

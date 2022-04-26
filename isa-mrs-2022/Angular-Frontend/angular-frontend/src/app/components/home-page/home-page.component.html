@@ -99,72 +99,16 @@
 
 
 <div>
-    <div *ngIf="entity_type==0">
+    <div *ngIf="entity_type==0" [@fadeInOut]>
         <app-cottages-home-page></app-cottages-home-page>
     </div>
-    <div *ngIf="entity_type==1">
+    <div *ngIf="entity_type==1" [@fadeInOut]>
         <app-boats-home-page></app-boats-home-page>
     </div>
-    <div *ngIf="entity_type==2">
+    <div *ngIf="entity_type==2" [@fadeInOut]>
         <app-adventures-home-page></app-adventures-home-page>
     </div>
-    <div *ngIf="entity_type==3">
+    <div *ngIf="entity_type==3" [@fadeInOut]>
 
     </div>
 </div>
-
-
-<!--/.Navbar-->
-<!-- <mat-slider min="1" max="100" step="1" value="50"></mat-slider>
-<i class="fas fa-band-aid"></i>
-<i class="fas fa-cat"></i>
-<i class="fas fa-dragon"></i>
-<i class="far fa-clock"></i>
-<i class="fas fa-clock"></i>
-
-<p>home-page works!</p>
-<button type="button" class="btn btn-primary">Primary</button>
-<button type="button" class="btn btn-secondary">Secondary</button>
-<button type="button" class="btn btn-success">Success</button>
-<button type="button" class="btn btn-danger">Danger</button>
-<button type="button" class="btn btn-warning">Warning</button>
-<button type="button" class="btn btn-info">Info</button>
-<button type="button" class="btn btn-light">Light</button>
-<button type="button" class="btn btn-dark">Dark</button>
-
-<hr>
-
-<label for="name">Name: </label>
-<input id="name" type="text" [formControl]="name">
-<br />
-<div class="btn-group" role="group" aria-label="Radio Buttons with Bootstrap 5">
-    <input type="radio" [formControl]="radio" [value]="1" class="btn-check" id="btnradio1" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnradio1">One</label>
-
-    <input type="radio" [formControl]="radio" [value]="2" class="btn-check" id="btnradio2" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btnradio2">Two</label>
-</div>
-
-<pre>Value: {{ radio.value }}</pre>
-
-<div class="btn-group" [formGroup]="checkbox" role="group" aria-label="Checkboxes with Bootstrap 5">
-    <input type="checkbox" formControlName="one" class="btn-check" id="btncheck1" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btncheck1">One</label>
-
-    <input type="checkbox" formControlName="two" class="btn-check" id="btncheck2" autocomplete="off">
-    <label class="btn btn-outline-primary" for="btncheck2">Two</label>
-</div>
-
-<pre>Value: {{ checkbox.value | json }}</pre>
-
-<div class="btn-group" role="group">
-    <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.left"> Left (pre-checked)
-    </label>
-    <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.middle"> Middle
-    </label>
-    <label class="btn-primary" ngbButtonLabel>
-        <input type="checkbox" class="btn-check" ngbButton [(ngModel)]="model.right"> Right
-    </label>
-</div> -->
