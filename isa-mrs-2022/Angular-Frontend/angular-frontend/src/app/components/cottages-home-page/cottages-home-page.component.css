@@ -4,6 +4,9 @@
     justify-content: center;
 }
 
+
+
+
 .sort-container {
     display: flex;
     justify-content: center;
@@ -26,4 +29,20 @@
     margin-left: auto;
     margin-right: auto;
     display: block;
+}
+
+.mat-form-field--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mat-form-field--inline .mat-form-field {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mat-form-field--inline .mat-form-field:nth-child(n) {
+    margin-right: 10px;
 }

@@ -132,61 +132,34 @@ public class CottageService {
 
         CottageService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
 
-        if(!possibleType.contains(sortType)){
+        if(!possibleType.contains(sortType)) {
             return CompletableFuture.completedFuture(new ArrayList<>());
         }
 
-        Pageable singlePage;
-
+        List<CottageDTO> listCottageDTO = new ArrayList<>();
+        Stream<Cottage> stream;
         if(direction){
-            System.out.println("OPS");
-//            log.info("OVDE SAM ISAOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO");
-            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(sortType));
+            stream = cr.findAll(Sort.by(Sort.Direction.ASC, sortType)).stream();
+
         }
         else {
-            System.out.println("OVDE");
-            singlePage = PageRequest.of(pageNum, pageSize,Sort.by(sortType).descending());
+            stream = cr.findAll(Sort.by(Sort.Direction.DESC, sortType)).stream();
+
         }
-//        System.out.println("NULL");
-//        System.out.println(sccdto.getAverageMark() == null);
-        List<CottageDTO> listaFinal;
-        Stream<Cottage> stream = cr.findAll().stream();
-        listaFinal = stream.filter(e ->( this.checkCottage(e,sccdto)))
+
+        listCottageDTO = stream.filter(e ->( this.checkCottage(e,sccdto)))
                             .map(
                                     c-> new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null),
                                     c.getAddress(), c.sumBedNumer(),c.averageMarks())
         ).collect(Collectors.toList());
-        System.out.println("LISTA SIZEE" + listaFinal.size());
 
-//        long total = listaFinal.size();
-        PagedListHolder page = new PagedListHolder(listaFinal);
+
+
+        PagedListHolder page = new PagedListHolder(listCottageDTO);
+
         page.setPageSize(pageSize); // number of items per page
         page.setPage(pageNum);      // set to first page
 
-// Retrieval
-//        page.getPageCount(); // number of pages
-//        page.getPageList();
-//        List<Cottage> list = page.getPageList();
-//        Page<Cottage> cottages = cr.findAll(singlePage);
-
-//        Page<Cottage> pageWithFilteredData = new PageImpl<Cottage>(cr.findAll().stream().filter(cottageFilt -> cottageFilt.getAddress().equals(sccdto.getAddress()))
-//                .collect(Collectors.toList()), singlePage, 1);
-
-//        List<CottageDTO> cdto =pageWithFilteredData.stream()
-//                .filter(cottage -> cottage.getAddress().equals(sccdto.getAddress())
-//                        (cottage.getName().equals(sccdto.getName()) || sccdto.getName() == null ) &&
-//                        (cottage.getAddress().equals(sccdto.getAddress()) || sccdto.getAddress() == null ) &&
-//                        (cottage.getNumberOfRoom().equals(sccdto.getNumberOfRoom()) || sccdto.getNumberOfRoom() == null) &&
-//                        (cottage.getMarks().equals(sccdto.getAverageMark()) || sccdto.getAverageMark() == null)
-
-//                )
-//                .map(
-//                c->
-//                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
-//        ).collect(Collectors.toList());
-
-
-//        System.out.println(cdto.size());
         return CompletableFuture.completedFuture(page.getPageList());
 
     }
@@ -196,7 +169,6 @@ public class CottageService {
 
         if(sc.getAddress() != null){
             if(!c.getAddress().equals(sc.getAddress())){
-
                 return false;
             }
 
@@ -204,31 +176,25 @@ public class CottageService {
 
         if(sc.getName() != null){
             if(!c.getName().equals(sc.getName())){
-
                 return false;
             }
 
         }
+
         if(sc.getNumberOfRoom() != null){
             if(!c.getNumberOfRoom().equals(sc.getNumberOfRoom())){
-
                 return false;
             }
 
         }
-//        if(c.averageMarks() == 0){
-//            return false;
-//        }
+
         if(sc.getAverageMark() != null){
             if( c.averageMarks() < sc.getAverageMark()){
-                System.out.println("USO de ne trebaaa");
-                System.out.println(c.averageMarks());
-                System.out.println(sc.getAverageMark());
                 return false;
             }
 
         }
-        System.out.println("STIGO OVDE");
+
         return true;
     }
 }

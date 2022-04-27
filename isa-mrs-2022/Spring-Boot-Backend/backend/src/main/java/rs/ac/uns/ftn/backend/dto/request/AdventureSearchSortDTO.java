@@ -4,18 +4,18 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Column;
-
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class CottageSearchSortDTO {
+public class AdventureSearchSortDTO {
 
     private String name;
 
     private String address;
 
-    private Long numberOfRoom;
+    private Integer maxNumPersonFrom;
+
+    private Integer maxNumPersonTo;
 
     private Double averageMark;
 

@@ -19,7 +19,7 @@ public class AdventureDTO {
 
     private String address;
 
-    private String maxNumPerson;
+    private Integer maxNumPerson;
 
     private double averageMark;
 }

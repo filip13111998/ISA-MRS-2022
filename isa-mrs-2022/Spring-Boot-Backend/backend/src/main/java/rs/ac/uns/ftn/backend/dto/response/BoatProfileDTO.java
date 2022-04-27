@@ -18,13 +18,13 @@ public class BoatProfileDTO {
 
     private String type;
 
-    private Integer lenght;
+    private Double lenght;
 
     private Integer engineNum;
 
-    private String enginePower;
+    private Double enginePower;
 
-    private String maxSpeed;
+    private Double maxSpeed;
 
     private String address;
 

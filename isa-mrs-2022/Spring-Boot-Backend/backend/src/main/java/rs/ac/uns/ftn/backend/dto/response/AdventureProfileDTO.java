@@ -26,7 +26,7 @@ public class AdventureProfileDTO {
 
     private InstructorDTO instructor;
 
-    private String maxNumPerson;
+    private Integer maxNumPerson;
 
      private String ruleBehavior;
 

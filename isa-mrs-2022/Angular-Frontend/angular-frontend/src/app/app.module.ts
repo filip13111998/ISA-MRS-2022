@@ -21,6 +21,10 @@ import { CottagesHomePageComponent } from './components/cottages-home-page/cotta
 import { BoatsHomePageComponent } from './components/boats-home-page/boats-home-page.component';
 import { AdventuresHomePageComponent } from './components/adventures-home-page/adventures-home-page.component';
 import { InstructorsHomePageComponent } from './components/instructors-home-page/instructors-home-page.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from "@angular/material/form-field";
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -47,7 +51,9 @@ import { InstructorsHomePageComponent } from './components/instructors-home-page
     MatPaginatorModule,
     MatOptionModule,
     MatSelectModule,
-    HttpClientModule
+    HttpClientModule,
+    MatInputModule,
+    MatFormFieldModule
 
   ],
   providers: [],

@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.AdventureDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatProfileDTO;
@@ -35,6 +36,12 @@ public class BoatController {
     public CompletableFuture<ResponseEntity<List<BoatDTO>>> getAllBoatsSorted(@RequestParam Integer pageNum , @RequestParam Integer pageSize, @PathVariable String type , @PathVariable Boolean direction) {
         return  bs.getAllBoats(pageNum , pageSize,type,direction).thenApplyAsync(ResponseEntity::ok);
     }
+
+    @PostMapping(value = "sort/{type}/{direction}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<BoatDTO>>> getAllBoatsSorted(@RequestBody BoatSearchSortDTO bssdto, @RequestParam Integer pageNum , @RequestParam Integer pageSize, @PathVariable String type , @PathVariable Boolean direction) {
+        return  bs.getAllBoatSearchSort(bssdto,pageNum , pageSize,type,direction).thenApplyAsync(ResponseEntity::ok);
+    }
+
 
     @GetMapping(value = "/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<BoatProfileDTO>> getOneBoat(@PathVariable Long id) {

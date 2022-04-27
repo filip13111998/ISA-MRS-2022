@@ -44,7 +44,7 @@ public class Adventure {
     private Instructor instructor;
 
     @Column(name = "max_num")
-    private String maxNumPerson;
+    private Integer maxNumPerson;
 
     @Column(name = "rule_behaviour")
     private String ruleBehavior;

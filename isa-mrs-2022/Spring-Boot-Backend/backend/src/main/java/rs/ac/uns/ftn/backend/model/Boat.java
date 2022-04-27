@@ -34,16 +34,16 @@ public class Boat {
     private String type;
 
     @Column(name = "lenght")
-    private Integer lenght;
+    private Double lenght;
 
     @Column(name = "engine_num")
     private Integer engineNum;
 
     @Column(name = "engine_power")
-    private String enginePower;
+    private Double enginePower;
 
     @Column(name = "max_speed")
-    private String maxSpeed;
+    private Double maxSpeed;
 
     @Column(name = "adress")
     private String adress;

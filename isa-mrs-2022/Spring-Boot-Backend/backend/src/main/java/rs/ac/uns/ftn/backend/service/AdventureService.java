@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -8,10 +9,14 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.AdventureDTO;
 import rs.ac.uns.ftn.backend.dto.response.AdventureProfileDTO;
+import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.InstructorDTO;
 import rs.ac.uns.ftn.backend.model.Adventure;
+import rs.ac.uns.ftn.backend.model.Boat;
 import rs.ac.uns.ftn.backend.repository.AdventureRepository;
 
 import java.util.ArrayList;
@@ -19,14 +24,16 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @Slf4j
 @Transactional
 @Service
 public class AdventureService {
 
-    AdventureRepository ar;
+    private AdventureRepository ar;
 
     private List<String> possibleType = Arrays.asList("name","address", "maxNumPerson");
 
@@ -100,4 +107,81 @@ public class AdventureService {
 
     }
 
+    public CompletableFuture<List<AdventureDTO>> getAllAdventuresSearchSort(AdventureSearchSortDTO assdto, Integer pageNum, Integer pageSize, String type, Boolean direction) {
+        AdventureService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
+
+        if(!possibleType.contains(type)) {
+            return CompletableFuture.completedFuture(new ArrayList<>());
+        }
+
+        List<AdventureDTO> listAdventureDTO = new ArrayList<>();
+        Stream<Adventure> stream;
+        if(direction){
+            stream = ar.findAll(Sort.by(Sort.Direction.ASC, type)).stream();
+
+        }
+        else {
+            stream = ar.findAll(Sort.by(Sort.Direction.DESC, type)).stream();
+
+        }
+
+        listAdventureDTO = stream.filter(e ->( this.checkAdventure(e,assdto)))
+                .map(
+                        a-> new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null),
+                                a.getAdress(), a.getMaxNumPerson(),a.averageMarks())
+                ).collect(Collectors.toList());
+
+
+
+        PagedListHolder page = new PagedListHolder(listAdventureDTO);
+
+        page.setPageSize(pageSize); // number of items per page
+        page.setPage(pageNum);      // set to first page
+
+        return CompletableFuture.completedFuture(page.getPageList());
+
+    }
+
+
+    public Boolean checkAdventure(Adventure a, AdventureSearchSortDTO as){
+
+        if(as.getAddress() != null){
+            if(!a.getAdress().equals(as.getAddress())){
+                return false;
+            }
+
+        }
+
+        if(as.getName() != null){
+            if(!a.getName().equals(as.getName())){
+                return false;
+            }
+
+        }
+
+        if(as.getMaxNumPersonFrom() != null && as.getMaxNumPersonTo() !=null){
+            if(!(a.getMaxNumPerson() > as.getMaxNumPersonFrom() && a.getMaxNumPerson() < as.getMaxNumPersonTo())){
+                return false;
+            }
+
+        }else  if(as.getMaxNumPersonFrom() != null){
+            if(!(a.getMaxNumPerson() > as.getMaxNumPersonFrom())){
+                return false;
+            }
+        } else if (as.getMaxNumPersonTo() !=null){
+            if(!(a.getMaxNumPerson() < as.getMaxNumPersonTo())){
+                return false;
+            }
+        }
+
+
+        if(as.getAverageMark() != null){
+            if( a.averageMarks() < as.getAverageMark()){
+                return false;
+            }
+
+        }
+
+        return true;
+    }
 }
