@@ -12,13 +12,11 @@ import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.model.Cottage;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
+import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
-import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-
-import static java.lang.Math.log;
 
 @Transactional
 @Slf4j
@@ -38,13 +36,15 @@ public class CottageService {
 
         CottageService.log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
 
+
+
         Pageable singlePage = PageRequest.of(pageNum, pageSize);
 
         Page<Cottage> cottages = cr.findAll(singlePage);
 
         List<CottageDTO> cdto = cottages.stream().map(
                 c->
-                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
+                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), Math.toIntExact(c.getNumberOfBedPerRoom()),c.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(cdto);
@@ -55,6 +55,8 @@ public class CottageService {
     public CompletableFuture<List<CottageDTO>> getAllCottages(Integer pageNum , Integer pageSize, String sortType , Boolean direction) {
 
         CottageService.log.info("GET ALL COTTAGES SORTED"+ Thread.currentThread().getName());
+
+
 
         if(!possibleType.contains(sortType)){
             return CompletableFuture.completedFuture(new ArrayList<>());
@@ -73,7 +75,7 @@ public class CottageService {
 
         List<CottageDTO> cdto = cottages.stream().map(
                 c->
-                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
+                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), Math.toIntExact(c.getNumberOfBedPerRoom()),c.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(cdto);
@@ -83,14 +85,19 @@ public class CottageService {
     @Async
     public CompletableFuture<CottageProfileDTO> getOneCottage(Long id) {
 
+        log.info("GET ONE COTTAGE WITH ID: " + id);
+
+
+
         Optional<Cottage> cto = cr.findById(id);
 
         Cottage ct = cto.get();
 
+
         CottageProfileDTO cpdto = new CottageProfileDTO(
                     ct.getId(),ct.getName(),ct.getAddress(),ct.getLongitude(), ct.getLatitude(), ct.getDescription(),
                     ct.getNumberOfRoom(),ct.getNumberOfBedPerRoom(),ct.getRuleBehavior(), ct.getMoreInformation(), ct.getCottageImages(),
-                    ct.getCottagePricelists(),ct.averageMarks(), ct.getCottageResevations() , ct.getCottageActions()
+                ct.getCottagePricelists(),ct.averageMarks(), ct.getCottageResevations() , ct.getCottageActions()
                 );
 
         return CompletableFuture.completedFuture(cpdto);
@@ -98,6 +105,16 @@ public class CottageService {
 
 
     }
+
+
+//    public Set<CottageAction> getLastFiveActions(Set<CottageAction> elem){
+//        if(elem.size()>5){
+//            return elem.stream()
+//                    .skip(elem.size() - 5)
+//                    .collect(Collectors.toSet());
+//        }
+//        return elem;
+//    }
 
     @Async
     public CompletableFuture<List<CottageDTO>>  getAllCottages(CottageSearchSortDTO sccdto, Integer pageNum, Integer pageSize, String type, Boolean direction) {
@@ -121,7 +138,7 @@ public class CottageService {
 
         List<CottageDTO> cdto = cottages.stream().map(
                 c->
-                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), c.sumBedNumer(),c.averageMarks())
+                        new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null), c.getAddress(), Math.toIntExact(c.getNumberOfBedPerRoom()),c.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(cdto);
@@ -136,10 +153,11 @@ public class CottageService {
             return CompletableFuture.completedFuture(new ArrayList<>());
         }
 
+        System.out.println(sortType);
         List<CottageDTO> listCottageDTO = new ArrayList<>();
         Stream<Cottage> stream;
         if(direction){
-            stream = cr.findAll(Sort.by(Sort.Direction.ASC, sortType)).stream();
+            stream = cr.findAll(Sort.by(Sort.Order.asc( sortType))).stream();
 
         }
         else {
@@ -150,10 +168,10 @@ public class CottageService {
         listCottageDTO = stream.filter(e ->( this.checkCottage(e,sccdto)))
                             .map(
                                     c-> new CottageDTO(c.getId(),c.getName(), c.getCottageImages().stream().findFirst().orElse(null),
-                                    c.getAddress(), c.sumBedNumer(),c.averageMarks())
+                                    c.getAddress(), Math.toIntExact(c.getNumberOfBedPerRoom()),c.averageMarks())
         ).collect(Collectors.toList());
 
-
+        listCottageDTO.stream().forEach(System.out::println);
 
         PagedListHolder page = new PagedListHolder(listCottageDTO);
 

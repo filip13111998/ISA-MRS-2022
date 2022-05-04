@@ -2,25 +2,25 @@
     <form [formGroup]="profileForm" (ngSubmit)="filterCottage()">
         <div class="row" style="width: 50%;margin-left: 25%;">
 
-            <div class="col col-example"><input class="form-control" id="first-name" type="text" formControlName="name"
+            <div class="col col-example"><input class="form-control" type="text" formControlName="name"
                     placeholder="Name">
             </div>
-            <div class="col col-example"><input class="form-control" id="last-name" type="text"
-                    formControlName="address" placeholder="Address">
+            <div class="col col-example"><input class="form-control" type="text" formControlName="address"
+                    placeholder="Address">
             </div>
             <div class="w-100"></div>
             <p></p>
-            <div class="col col-example"><input class="form-control" id="last-name" type="text"
-                    formControlName="numberOfRoom" placeholder="Room Number">
+            <div class="col col-example"><input class="form-control" type="text" formControlName="numberOfRoom"
+                    placeholder="Room Number">
             </div>
 
-            <div class="col col-example"><input class="form-control" id="last-name" type="text"
-                    formControlName="averageMark" placeholder="Average Mark">
+            <div class="col col-example"><input class="form-control" type="text" formControlName="averageMark"
+                    placeholder="Average Mark">
             </div>
 
             <!-- <p>Form Status: {{ profileForm.status }}</p> -->
             <p></p>
-            <button class="btn btn-primary" type="submit" style="width: 20%;margin-left: 40%;">Search</button>
+            <button class="btn btn-primary" type="submit" style="width: 60%;margin-left: 20%;">Search</button>
         </div>
 
 
@@ -57,7 +57,7 @@
                     <p class="card-text">{{cottage.bedNums}}</p>
                     <p class="card-text">{{cottage.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary">Go Profile</a>
+                    <a href="#" class="btn btn-primary" [routerLink]="goProfile(cottage.id)">Go Profile</a>
                 </div>
             </div>
         </mat-grid-tile>

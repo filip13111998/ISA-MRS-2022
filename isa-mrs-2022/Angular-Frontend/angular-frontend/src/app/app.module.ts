@@ -23,7 +23,11 @@ import { AdventuresHomePageComponent } from './components/adventures-home-page/a
 import { InstructorsHomePageComponent } from './components/instructors-home-page/instructors-home-page.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from "@angular/material/form-field";
-
+import { ProfileAdventureComponent } from './components/profile-adventure/profile-adventure.component';
+import { ProfileBoatComponent } from './components/profile-boat/profile-boat.component';
+import { NgImageSliderModule } from 'ng-image-slider';
+import { MatTableModule } from '@angular/material/table';
+import { MyUserProfileComponent } from './components/my-user-profile/my-user-profile.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +40,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     BoatsHomePageComponent,
     AdventuresHomePageComponent,
     InstructorsHomePageComponent,
+    ProfileAdventureComponent,
+    ProfileBoatComponent,
+    MyUserProfileComponent,
 
   ],
   imports: [
@@ -53,7 +60,9 @@ import { MatFormFieldModule } from "@angular/material/form-field";
     MatSelectModule,
     HttpClientModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    NgImageSliderModule,
+    MatTableModule
 
   ],
   providers: [],

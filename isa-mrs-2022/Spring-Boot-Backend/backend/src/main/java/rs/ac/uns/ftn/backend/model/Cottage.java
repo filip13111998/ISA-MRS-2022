@@ -82,7 +82,7 @@ public class Cottage {
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
     }
 
-    public Integer sumBedNumer(){ return Integer.parseInt(String.valueOf(numberOfRoom))*Integer.parseInt(String.valueOf(numberOfBedPerRoom));}
+    //public Integer sumBedNumer(){ return Integer.parseInt(String.valueOf(numberOfRoom))*Integer.parseInt(String.valueOf(numberOfBedPerRoom));}
 
     public boolean checkReservationDate(LocalDate start , LocalDate end){
         for(CottageResevation cr : cottageResevations){

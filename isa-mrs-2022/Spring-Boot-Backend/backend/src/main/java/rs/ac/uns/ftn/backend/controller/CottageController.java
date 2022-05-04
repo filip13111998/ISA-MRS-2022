@@ -42,7 +42,7 @@ public class CottageController {
 
     @PostMapping(value = "sortBest/{type}/{direction}",produces = "application/json")
     public CompletableFuture<ResponseEntity<List<CottageDTO>>> getAllCottagesSortedSearchedBestWAy(@RequestBody CottageSearchSortDTO sccdto, @RequestParam Integer pageNum , @RequestParam Integer pageSize, @PathVariable String type , @PathVariable Boolean direction) {
-        System.out.println("DOAO");
+
         return  cs.getAllCottagesBestWay(sccdto,pageNum , pageSize,type,direction).thenApplyAsync(ResponseEntity::ok);
     }
 

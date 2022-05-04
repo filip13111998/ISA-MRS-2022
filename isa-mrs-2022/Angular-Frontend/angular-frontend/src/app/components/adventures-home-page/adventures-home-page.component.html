@@ -1,13 +1,42 @@
-<div class="search-bar">
-    SEARCH BAR
+<div class="search-bar form-group container">
+    <form [formGroup]="profileForm" (ngSubmit)="filterAdventure()">
+        <div class="row" style="width: 50%;margin-left: 25%;">
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="name"
+                    placeholder="Name">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="address"
+                    placeholder="Address">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="averageMark"
+                    placeholder="Average Mark">
+            </div>
+            <div class="w-100"></div>
+            <p></p>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxNumPersonFrom"
+                    placeholder="Max Number Person From">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxNumPersonTo"
+                    placeholder="Max Number Person From">
+            </div>
+
+            <!-- <p>Form Status: {{ profileForm.status }}</p> -->
+            <p></p>
+            <button class="btn btn-primary" type="submit" style="width: 50%;margin-left: 25%;">Search</button>
+        </div>
+
+
+    </form>
+
 </div>
 
 <div class="sort-container">
 
     <mat-form-field appearance="fill">
         <mat-label>Sort Adventure</mat-label>
-        <mat-select>
-            <mat-option *ngFor="let adventure of adventures" [value]="adventure.value">
+        <mat-select (selectionChange)="setSortType($event.value)">
+            <mat-option *ngFor=" let adventure of adventures" [value]="adventure.value">
                 {{adventure.viewValue}}
             </mat-option>
         </mat-select>
@@ -28,7 +57,7 @@
                     <p class="card-text">{{adventure.maxNumPerson}}</p>
                     <p class="card-text">{{adventure.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary">Go Profile</a>
+                    <a class="btn btn-primary" [routerLink]="goProfile(adventure.id)">Go Profile</a>
                 </div>
             </div>
         </mat-grid-tile>

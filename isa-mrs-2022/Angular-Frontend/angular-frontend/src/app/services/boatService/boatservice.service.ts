@@ -1,3 +1,4 @@
+import { BoatProfileDTO } from './../../models/response/http-boat-response/boat-profile';
 import { BoatDTO } from './../../models/response/http-boat-response/boat-dto';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,11 +16,17 @@ export class BoatserviceService {
 
   constructor(private http: HttpClient) { }
 
+  public getOneBoat(id: number): Observable<BoatProfileDTO> {
+    return this.http.get<BoatProfileDTO>(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
   public getAllBoats(pageNum: number): Observable<BoatDTO[]> {
     return this.http.get<BoatDTO[]>(`${this.apiUrl}?pageNum=${pageNum}&pageSize=9`, { headers: this.headers });
   }
 
-
+  public filterBoat(pageNum: number, sortType: String, sortDirection: Boolean, bs: any): Observable<BoatDTO[]> {
+    return this.http.post<BoatDTO[]>(`${this.apiUrl}/sort/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, bs, { headers: this.headers });
+  }
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

@@ -1,12 +1,69 @@
-<div class="search-bar">
-    SEARCH BAR
+<div class="search-bar form-group container">
+    <form [formGroup]="profileForm" (ngSubmit)="filterBoat()">
+        <div class="row" style="width: 80%;margin-left: 10%;">
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="name"
+                    placeholder="Name">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="address"
+                    placeholder="Address">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="type"
+                    placeholder="Type">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="averageMark"
+                    placeholder="Average Mark">
+            </div>
+
+            <div class="w-100"></div>
+            <p></p>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="engineNumFrom"
+                    placeholder="Engine Number From">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="engineNumTo"
+                    placeholder="Engine Number To">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="enginePowerFrom"
+                    placeholder="Engine Power From">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="enginePowerTo"
+                    placeholder="Engine Power To">
+            </div>
+            <div class="w-100"></div>
+            <p></p>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxSpeedFrom"
+                    placeholder="Max Speed From">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxSpeedTo"
+                    placeholder="Max Speed To">
+            </div>
+
+            <div class="col col-example"><input class="form-control" type="text" formControlName="lenghtFrom"
+                    placeholder="Lenght From">
+            </div>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="lenghtTo"
+                    placeholder="Lenght To">
+            </div>
+            <!-- <p>Form Status: {{ profileForm.status }}</p> -->
+            <p></p>
+            <p></p>
+            <button class="btn btn-primary" type="submit" style="width: 40%;margin-left: 30%;">Search</button>
+        </div>
+
+
+    </form>
 </div>
 
 <div class="sort-container">
 
     <mat-form-field appearance="fill">
         <mat-label>Sort Boats</mat-label>
-        <mat-select>
+
+        <mat-select (selectionChange)="setSortType($event.value)">
             <mat-option *ngFor="let boat of boats" [value]="boat.value">
                 {{boat.viewValue}}
             </mat-option>
@@ -28,7 +85,7 @@
                     <p class="card-text">{{boat.type}}</p>
                     <p class="card-text">{{boat.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary">Go Profile</a>
+                    <a href="#" class="btn btn-primary" [routerLink]="goProfile(boat.id)">Go Profile</a>
                 </div>
             </div>
         </mat-grid-tile>

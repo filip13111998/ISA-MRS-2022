@@ -1,3 +1,4 @@
+import { AdventureProfileDTO } from './../../models/response/http-adventure-response/adventure-profile';
 import { AdventureDTO } from './../../models/response/http-adventure-response/adventure-dto';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -15,11 +16,17 @@ export class AdventureserviceService {
 
   constructor(private http: HttpClient) { }
 
+  public getOneAdventure(id: number): Observable<AdventureProfileDTO> {
+    return this.http.get<AdventureProfileDTO>(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
   public getAllAdventures(pageNum: number): Observable<AdventureDTO[]> {
     return this.http.get<AdventureDTO[]>(`${this.apiUrl}?pageNum=${pageNum}&pageSize=9`, { headers: this.headers });
   }
 
-
+  public filterAdventure(pageNum: number, sortType: String, sortDirection: Boolean, as: any): Observable<AdventureDTO[]> {
+    return this.http.post<AdventureDTO[]>(`${this.apiUrl}/sort/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, as, { headers: this.headers });
+  }
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

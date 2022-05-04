@@ -1,4 +1,5 @@
 export class CottageSearchDTO {
+
     name: String;
 
     address: String;

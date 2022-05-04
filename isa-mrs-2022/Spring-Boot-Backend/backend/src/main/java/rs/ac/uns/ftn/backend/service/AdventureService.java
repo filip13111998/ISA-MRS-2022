@@ -52,7 +52,7 @@ public class AdventureService {
 
         List<AdventureDTO> adto = adventures.stream().map(
                 a->
-                        new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null), a.getAdress(), a.getMaxNumPerson(),a.averageMarks())
+                        new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null), a.getAddress(), a.getMaxNumPerson(),a.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(adto);
@@ -81,7 +81,7 @@ public class AdventureService {
 
         List<AdventureDTO> adto = adventures.stream().map(
                 a->
-                        new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null), a.getAdress(), a.getMaxNumPerson(),a.averageMarks())
+                        new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null), a.getAddress(), a.getMaxNumPerson(),a.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(adto);
@@ -97,7 +97,7 @@ public class AdventureService {
 
         InstructorDTO idto = new InstructorDTO(ad.getInstructor().getId(),ad.getInstructor().getName(),ad.getInstructor().getEmail(),ad.getInstructor().getDescription(),ad.getInstructor().getAddress(),ad.getInstructor().averageMarks());
 
-        AdventureProfileDTO apdto = new AdventureProfileDTO(ad.getId(),ad.getName(),ad.getAdress(),ad.getLongitude(),ad.getLatitude(),
+        AdventureProfileDTO apdto = new AdventureProfileDTO(ad.getId(),ad.getName(),ad.getAddress(),ad.getLongitude(),ad.getLatitude(),
                 ad.getDescription(),idto, ad.getMaxNumPerson() ,ad.getRuleBehavior() , ad.getMoreInformation(),
                 ad.getCancellationConditions(), ad.getAdventureImages(), ad.getAdventurePricelists(),ad.averageMarks(),
                 ad.getAdventureReservations() , ad.getAdventureActions()
@@ -128,7 +128,7 @@ public class AdventureService {
         listAdventureDTO = stream.filter(e ->( this.checkAdventure(e,assdto)))
                 .map(
                         a-> new AdventureDTO(a.getId(),a.getName(), a.getAdventureImages().stream().findFirst().orElse(null),
-                                a.getAdress(), a.getMaxNumPerson(),a.averageMarks())
+                                a.getAddress(), a.getMaxNumPerson(),a.averageMarks())
                 ).collect(Collectors.toList());
 
 
@@ -146,7 +146,7 @@ public class AdventureService {
     public Boolean checkAdventure(Adventure a, AdventureSearchSortDTO as){
 
         if(as.getAddress() != null){
-            if(!a.getAdress().equals(as.getAddress())){
+            if(!a.getAddress().equals(as.getAddress())){
                 return false;
             }
 

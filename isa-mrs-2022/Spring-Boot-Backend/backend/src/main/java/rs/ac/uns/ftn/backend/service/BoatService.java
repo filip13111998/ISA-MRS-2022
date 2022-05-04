@@ -62,7 +62,7 @@ public class BoatService {
 
         List<BoatDTO> bdto = boats.stream().map(
                 b->
-                        new BoatDTO(b.getId(),b.getName(), b.getBoatImages().stream().findFirst().orElse(null), b.getAdress(), b.getType(),b.averageMarks())
+                        new BoatDTO(b.getId(),b.getName(), b.getBoatImages().stream().findFirst().orElse(null), b.getAddress(), b.getType(),b.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(bdto);
@@ -91,7 +91,7 @@ public class BoatService {
 
         List<BoatDTO> bdto = boats.stream().map(
                 b->
-                        new BoatDTO(b.getId(),b.getName(), b.getBoatImages().stream().findFirst().orElse(null), b.getAdress(), b.getType(),b.averageMarks())
+                        new BoatDTO(b.getId(),b.getName(), b.getBoatImages().stream().findFirst().orElse(null), b.getAddress(), b.getType(),b.averageMarks())
         ).collect(Collectors.toList());
 
         return CompletableFuture.completedFuture(bdto);
@@ -106,7 +106,7 @@ public class BoatService {
         Boat bt = bto.get();
 
         BoatProfileDTO bpdto = new BoatProfileDTO(bt.getId(), bt.getName(),bt.getType(),bt.getLenght(),bt.getEngineNum(),bt.getEnginePower(),
-                    bt.getMaxSpeed(),bt.getAdress(),bt.getLongitude(),bt.getLatitude(),bt.getCapacity(),bt.getDescription(),
+                    bt.getMaxSpeed(),bt.getAddress(),bt.getLongitude(),bt.getLatitude(),bt.getCapacity(),bt.getDescription(),
                     bt.getNavigation(), bt.getRuleBehavior(),bt.getFishingEquipment(),bt.getMoreInformation(),bt.getBoatImages(),
                     bt.getBoatPricelists(),bt.averageMarks(), bt.getBoatResevations() , bt.getBoatActions()
                 );
@@ -122,6 +122,8 @@ public class BoatService {
     public CompletableFuture<List<BoatDTO>> getAllBoatSearchSort(BoatSearchSortDTO bssdto, Integer pageNum , Integer pageSize, String sortType , Boolean direction) {
 
         BoatService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
+
+        System.out.println(bssdto);
 
         if(!possibleType.contains(sortType)) {
             return CompletableFuture.completedFuture(new ArrayList<>());
@@ -141,11 +143,11 @@ public class BoatService {
         listBoatDTO = stream.filter(e ->( this.checkBoat(e,bssdto)))
                 .map(
                         b-> new BoatDTO(b.getId(),b.getName(), b.getBoatImages().stream().findFirst().orElse(null),
-                                b.getAdress(), b.getType(),b.averageMarks())
+                                b.getAddress(), b.getType(),b.averageMarks())
                 ).collect(Collectors.toList());
 
 
-
+        System.out.println("LIST SIZEE: " + listBoatDTO.size());
         PagedListHolder page = new PagedListHolder(listBoatDTO);
 
         page.setPageSize(pageSize); // number of items per page
@@ -159,7 +161,7 @@ public class BoatService {
     public Boolean checkBoat(Boat b, BoatSearchSortDTO bs){
 
         if(bs.getAddress() != null){
-            if(!b.getAdress().equals(bs.getAddress())){
+            if(!b.getAddress().equals(bs.getAddress())){
                 return false;
             }
 
@@ -210,7 +212,9 @@ public class BoatService {
         }
 
         if(bs.getEnginePowerFrom() != null && bs.getEnginePowerTo() !=null){
+            System.out.println("USO");
             if(!(b.getEnginePower() > bs.getEnginePowerFrom() && b.getEnginePower() < bs.getEnginePowerTo())){
+                System.out.println("NEEE");
                 return false;
             }
 

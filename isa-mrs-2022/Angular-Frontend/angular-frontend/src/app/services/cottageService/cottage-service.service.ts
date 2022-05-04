@@ -1,3 +1,4 @@
+import { CottageProfileDTO } from './../../models/response/http-cottage-response/cottage-profile';
 import { CottageSearchDTO } from './../../models/sort-filter-cottage/CottageSearchDTO';
 import { CottageDTO } from '../../models/response/http-cottage-response/cottage-dto';
 import { Injectable } from '@angular/core';
@@ -17,14 +18,15 @@ export class CottageServiceService {
 
   constructor(private http: HttpClient) { }
 
+  public getOneCotages(id: number): Observable<CottageProfileDTO> {
+    return this.http.get<CottageProfileDTO>(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
   public getAllCotages(pageNum: number): Observable<CottageDTO[]> {
     return this.http.get<CottageDTO[]>(`${this.apiUrl}?pageNum=${pageNum}&pageSize=9`, { headers: this.headers });
   }
 
   public filterCottage(pageNum: number, sortType: String, sortDirection: Boolean, cs: any): Observable<CottageDTO[]> {
-    console.log("DOSOO");
-    console.log(`${this.apiUrl}/sortBest/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`);
-    console.log(cs);
     return this.http.post<CottageDTO[]>(`${this.apiUrl}/sortBest/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, cs, { headers: this.headers });
   }
 

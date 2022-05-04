@@ -1,29 +1,32 @@
 package rs.ac.uns.ftn.backend.dto.response;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import rs.ac.uns.ftn.backend.model.Role;
+
+import javax.persistence.Access;
+import javax.persistence.Column;
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class MyUserDTO {
 
-    private String name;
+    private Long id;
+
     private String email;
 
+    private String username;
 
-    public MyUserDTO(String name, String email) {
-        this.name = name;
-        this.email = email;
-    }
+    private String password;
 
-    public void setName(String name) {
-        this.name = name;
-    }
+    private String firstName;
 
-    public void setEmail(String email) {
-        this.email = email;
-    }
+    private String lastName;
 
-    public String getName() {
-        return name;
-    }
+    private List<Role> roles;
 
-    public String getEmail() {
-        return email;
-    }
 }

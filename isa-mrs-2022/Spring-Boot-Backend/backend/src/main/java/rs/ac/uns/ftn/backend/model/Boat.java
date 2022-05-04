@@ -45,8 +45,8 @@ public class Boat {
     @Column(name = "max_speed")
     private Double maxSpeed;
 
-    @Column(name = "adress")
-    private String adress;
+    @Column(name = "address")
+    private String address;
 
     @Column(name = "longitude")
     private Long longitude;

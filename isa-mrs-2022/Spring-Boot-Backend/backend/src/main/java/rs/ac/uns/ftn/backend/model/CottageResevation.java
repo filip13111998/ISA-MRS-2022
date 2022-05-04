@@ -28,13 +28,13 @@ public class CottageResevation {
     @Column(name = "active")
     private Boolean active;
 
-    @OneToOne(fetch = FetchType.LAZY)
+    @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cottage_pricelist_id")
     private CottagePricelist pricelistItem;
 
     //Racuna ukupnu cenu rezervacije kao broj dana pomnozen sa cenom jednog dana
     public Double getPrice(){
-        Period period = Period.between(this.getReservationEnd(), this.getReservationStart());
+        Period period = Period.between( this.getReservationStart(),this.getReservationEnd());
         return period.getDays() * this.getPricelistItem().getPrice();
     }
 

@@ -21,11 +21,11 @@ public class User implements UserDetails {
 
     @Id
     @Column(name = "id")
-    @GeneratedValue(strategy= GenerationType.IDENTITY, generator = "cust_seq_user")
+    @GeneratedValue(strategy= GenerationType.SEQUENCE, generator = "cust_seq_user")
     @SequenceGenerator(name = "cust_seq_user", sequenceName = "cust_seq_user", initialValue = 1, allocationSize = 1)
     private Long id;
 
-    @Column(name = "username")
+    @Column(name = "username",unique = true,nullable = false)
     private String username;
 
     @JsonIgnore
