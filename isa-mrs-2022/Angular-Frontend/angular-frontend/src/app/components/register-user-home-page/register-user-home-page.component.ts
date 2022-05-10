@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
-import { MatGridListModule } from '@angular/material/grid-list';
 import { trigger, style, animate, transition } from '@angular/animations';
 
 @Component({
-  selector: 'app-home-page',
+  selector: 'app-register-user-home-page',
   animations: [
     trigger('fadeInOut', [
       transition(':enter', [   // :enter is alias to 'void => *'
@@ -16,19 +14,31 @@ import { trigger, style, animate, transition } from '@angular/animations';
       ])
     ])
   ],
-  templateUrl: './home-page.component.html',
-  styleUrls: ['./home-page.component.css']
+  templateUrl: './register-user-home-page.component.html',
+  styleUrls: ['./register-user-home-page.component.css']
 })
-
-export class HomePageComponent implements OnInit {
+export class RegisterUserHomePageComponent implements OnInit {
 
   entity_type: Number;
 
+  menu_page: Number;
+
   constructor() {
+    this.set_home_page();
     this.set_entity_type_cottage();
   }
 
   ngOnInit(): void {
+  }
+
+  public set_home_page(): void {
+    this.menu_page = 0;
+  }
+  public set_history_page(): void {
+    this.menu_page = 1;
+  }
+  public set_profile_page(): void {
+    this.menu_page = 2;
   }
 
 
@@ -43,6 +53,12 @@ export class HomePageComponent implements OnInit {
   }
   public set_entity_type_instructor(): void {
 
+  }
+
+
+
+  public logout() {
+    localStorage.clear();
   }
 
 }

@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import org.apache.tomcat.util.buf.StringUtils;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -9,6 +10,7 @@ import java.sql.Timestamp;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.stream.Collectors;
 
 // POJO koji implementira Spring Security UserDetails interfejs koji specificira
 // osnovne osobine Spring korisnika (koje role ima, da li je nalog zakljucan, istekao, da li su kredencijali istekli)
@@ -132,6 +134,14 @@ public class User implements UserDetails {
 
     public void setLastPasswordResetDate(Timestamp lastPasswordResetDate) {
         this.lastPasswordResetDate = lastPasswordResetDate;
+    }
+
+    public String getRolesToString() {
+        String addressID = this.getRoles()
+                .stream()
+                .map(a -> String.valueOf(a.getAuthority()))
+                .collect(Collectors.joining(","));
+        return addressID;
     }
 
     @JsonIgnore

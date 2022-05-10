@@ -10,6 +10,10 @@ import { FormBuilder } from '@angular/forms';
 })
 export class MyUserProfileComponent implements OnInit {
 
+  username: String;
+
+  tkn: any = "";
+
   profileForm = this.fb.group({
     email: [null],
     password: [null],
@@ -23,9 +27,11 @@ export class MyUserProfileComponent implements OnInit {
   constructor(private mss: MyUserService, private fb: FormBuilder) { }
 
   ngOnInit(): void {
-    var path = window.location.href;
-    var username = path.split("/")[path.split("/").length - 1];
-    this.getUser(username);
+    // var path = window.location.href;
+    // var username = path.split("/")[path.split("/").length - 1];
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+    this.getUser();
     this.profileForm.get("email")?.disable;
   }
 
@@ -48,8 +54,9 @@ export class MyUserProfileComponent implements OnInit {
     );
   }
 
-  public getUser(username: string) {
-    this.mss.getMyUser(username).subscribe((mus: MyUserDTO) => {
+  public getUser() {
+    console.log("USERNAME:" + this.username)
+    this.mss.getMyUser(this.username).subscribe((mus: MyUserDTO) => {
       console.log(mus);
       this.myUser = mus;
     }
@@ -57,6 +64,10 @@ export class MyUserProfileComponent implements OnInit {
 
 
 
+  }
+
+  public deleteAccount() {
+    console.log("DELETE");
   }
 
 }

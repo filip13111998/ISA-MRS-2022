@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.concurrent.CompletableFuture;
 
 @RestController
-@RequestMapping(value = "/home/myuser")
+@RequestMapping(value = "/myuser/profile")
 @AllArgsConstructor
 @NoArgsConstructor
 public class MyUserController {

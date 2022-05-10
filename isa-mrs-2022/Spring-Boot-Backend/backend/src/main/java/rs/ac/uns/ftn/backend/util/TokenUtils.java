@@ -5,12 +5,14 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import rs.ac.uns.ftn.backend.model.Role;
 import rs.ac.uns.ftn.backend.model.User;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.Date;
+import java.util.*;
 
 // Utility klasa za rad sa JSON Web Tokenima
 @Component
@@ -53,10 +55,15 @@ public class TokenUtils {
 	 * @param username Korisničko ime korisnika kojem se token izdaje
 	 * @return JWT token
 	 */
-	public String generateToken(String username) {
+	public String generateToken(String username , String roles) {
 		return Jwts.builder()
+				.setClaims(new HashMap<String,Object>(){{
+					put("roles", roles);
+//					put("key2",  roles.toString());
+				}})
 				.setIssuer(APP_NAME)
 				.setSubject(username)
+
 				.setAudience(generateAudience())
 				.setIssuedAt(new Date())
 				.setExpiration(generateExpirationDate())

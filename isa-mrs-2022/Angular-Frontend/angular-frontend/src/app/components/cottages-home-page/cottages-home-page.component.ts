@@ -66,7 +66,7 @@ export class CottagesHomePageComponent implements OnInit {
         this.cttList = cdto;
       }
       );
-      console.log("ROOM SORT");
+
     }
     else if (event === "bed_number") {
       this.sortType = "numberOfBedPerRoom";

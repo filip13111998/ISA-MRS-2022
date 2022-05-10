@@ -8,7 +8,7 @@ import { Observable, throwError } from 'rxjs';
 })
 export class MyUserService {
 
-  public apiUrl: string = "http://localhost:8080/home/myuser";
+  public apiUrl: string = "http://localhost:8080/myuser/profile";
 
   headers = new HttpHeaders().set('Content-Type', 'application/json');
 

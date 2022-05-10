@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomePageComponent } from './components/home-page/home-page.component';
@@ -28,6 +28,10 @@ import { ProfileBoatComponent } from './components/profile-boat/profile-boat.com
 import { NgImageSliderModule } from 'ng-image-slider';
 import { MatTableModule } from '@angular/material/table';
 import { MyUserProfileComponent } from './components/my-user-profile/my-user-profile.component';
+import { RegisterUserHomePageComponent } from './components/register-user-home-page/register-user-home-page.component';
+import { RegisterUserHistoryReservationComponent } from './components/register-user-history-reservation/register-user-history-reservation.component';
+import { AdminHomePageComponent } from './components/admin-home-page/admin-home-page.component';
+import { InterceptorServiceService } from './services/interceptor/interceptor-service.service';
 
 @NgModule({
   declarations: [
@@ -43,6 +47,9 @@ import { MyUserProfileComponent } from './components/my-user-profile/my-user-pro
     ProfileAdventureComponent,
     ProfileBoatComponent,
     MyUserProfileComponent,
+    RegisterUserHomePageComponent,
+    RegisterUserHistoryReservationComponent,
+    AdminHomePageComponent,
 
   ],
   imports: [
@@ -65,7 +72,11 @@ import { MyUserProfileComponent } from './components/my-user-profile/my-user-pro
     MatTableModule
 
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptorServiceService,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
