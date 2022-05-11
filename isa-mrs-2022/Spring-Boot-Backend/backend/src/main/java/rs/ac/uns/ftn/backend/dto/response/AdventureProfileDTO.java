@@ -40,7 +40,7 @@ public class AdventureProfileDTO {
 
     private double averageMark;
 
-    private Set<AdventureReservation> adventureReservations;
+    private Set<AdventureReservationDTO> adventureReservations;
 
     private Set<AdventureAction> adventureActions;
 

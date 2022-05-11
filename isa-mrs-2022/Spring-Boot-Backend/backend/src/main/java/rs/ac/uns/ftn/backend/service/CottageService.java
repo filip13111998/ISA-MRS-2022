@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
+import rs.ac.uns.ftn.backend.dto.response.CottageReservationDTO;
 import rs.ac.uns.ftn.backend.model.Cottage;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
@@ -97,7 +98,9 @@ public class CottageService {
         CottageProfileDTO cpdto = new CottageProfileDTO(
                     ct.getId(),ct.getName(),ct.getAddress(),ct.getLongitude(), ct.getLatitude(), ct.getDescription(),
                     ct.getNumberOfRoom(),ct.getNumberOfBedPerRoom(),ct.getRuleBehavior(), ct.getMoreInformation(), ct.getCottageImages(),
-                ct.getCottagePricelists(),ct.averageMarks(), ct.getCottageResevations() , ct.getCottageActions()
+                ct.getCottagePricelists(),ct.averageMarks(),
+                ct.getCottageResevations().stream().map(c-> new CottageReservationDTO(c.getId(),c.getReservationStart(),c.getReservationEnd(),c.getActive(),c.getPricelistItem())).collect(Collectors.toSet()) ,
+                ct.getCottageActions()
                 );
 
         return CompletableFuture.completedFuture(cpdto);
@@ -171,7 +174,7 @@ public class CottageService {
                                     c.getAddress(), Math.toIntExact(c.getNumberOfBedPerRoom()),c.averageMarks())
         ).collect(Collectors.toList());
 
-        listCottageDTO.stream().forEach(System.out::println);
+//        listCottageDTO.stream().forEach(System.out::println);
 
         PagedListHolder page = new PagedListHolder(listCottageDTO);
 

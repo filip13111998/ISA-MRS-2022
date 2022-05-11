@@ -20,10 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
-import rs.ac.uns.ftn.backend.dto.response.BoatProfileDTO;
-import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
-import rs.ac.uns.ftn.backend.dto.response.MyUserDTO;
+import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.Adventure;
 import rs.ac.uns.ftn.backend.model.Boat;
 import rs.ac.uns.ftn.backend.model.Cottage;
@@ -108,7 +105,9 @@ public class BoatService {
         BoatProfileDTO bpdto = new BoatProfileDTO(bt.getId(), bt.getName(),bt.getType(),bt.getLenght(),bt.getEngineNum(),bt.getEnginePower(),
                     bt.getMaxSpeed(),bt.getAddress(),bt.getLongitude(),bt.getLatitude(),bt.getCapacity(),bt.getDescription(),
                     bt.getNavigation(), bt.getRuleBehavior(),bt.getFishingEquipment(),bt.getMoreInformation(),bt.getBoatImages(),
-                    bt.getBoatPricelists(),bt.averageMarks(), bt.getBoatResevations() , bt.getBoatActions()
+                    bt.getBoatPricelists(),bt.averageMarks(),
+                    bt.getBoatResevations().stream().map(b-> new BoatReservationDTO(b.getId(),b.getReservationStart(),b.getReservationEnd(),b.getActive(),b.getPricelistItem())).collect(Collectors.toSet()) ,
+                    bt.getBoatActions()
                 );
 
 

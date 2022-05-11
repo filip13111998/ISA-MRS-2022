@@ -11,10 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.response.AdventureDTO;
-import rs.ac.uns.ftn.backend.dto.response.AdventureProfileDTO;
-import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
-import rs.ac.uns.ftn.backend.dto.response.InstructorDTO;
+import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.Adventure;
 import rs.ac.uns.ftn.backend.model.Boat;
 import rs.ac.uns.ftn.backend.repository.AdventureRepository;
@@ -100,7 +97,8 @@ public class AdventureService {
         AdventureProfileDTO apdto = new AdventureProfileDTO(ad.getId(),ad.getName(),ad.getAddress(),ad.getLongitude(),ad.getLatitude(),
                 ad.getDescription(),idto, ad.getMaxNumPerson() ,ad.getRuleBehavior() , ad.getMoreInformation(),
                 ad.getCancellationConditions(), ad.getAdventureImages(), ad.getAdventurePricelists(),ad.averageMarks(),
-                ad.getAdventureReservations() , ad.getAdventureActions()
+                ad.getAdventureReservations().stream().map(a-> new AdventureReservationDTO(a.getId(),a.getReservationStart(),a.getReservationEnd(),a.getActive(),a.getPricelistItem())).collect(Collectors.toSet()) ,
+                ad.getAdventureActions()
         );
 
         return CompletableFuture.completedFuture(apdto);

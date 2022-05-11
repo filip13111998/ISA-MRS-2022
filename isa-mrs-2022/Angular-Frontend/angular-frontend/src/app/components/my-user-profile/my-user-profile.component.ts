@@ -14,6 +14,8 @@ export class MyUserProfileComponent implements OnInit {
 
   tkn: any = "";
 
+
+
   profileForm = this.fb.group({
     email: [null],
     password: [null],
@@ -55,7 +57,6 @@ export class MyUserProfileComponent implements OnInit {
   }
 
   public getUser() {
-    console.log("USERNAME:" + this.username)
     this.mss.getMyUser(this.username).subscribe((mus: MyUserDTO) => {
       console.log(mus);
       this.myUser = mus;

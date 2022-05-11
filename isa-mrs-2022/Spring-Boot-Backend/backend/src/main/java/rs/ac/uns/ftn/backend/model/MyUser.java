@@ -54,4 +54,18 @@ public class MyUser extends User{
     @Fetch(FetchMode.JOIN)
     private Set<Adventure> adventures = new HashSet<>();
 
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<CottageResevation> cottageResevations = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<BoatResevation> boatResevations = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.JOIN)
+    private Set<AdventureReservation> adventureResevations = new HashSet<>();
+
+
 }

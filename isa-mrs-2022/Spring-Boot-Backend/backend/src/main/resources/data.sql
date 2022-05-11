@@ -2,17 +2,18 @@ set datestyle = dmy;
 
 --INSERT INTO USERS (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'user1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
 --INSERT INTO USERS (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'user2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07');
+--ROLE
+INSERT INTO ROLE (name) VALUES ('ROLE_USER');
+INSERT INTO ROLE (name) VALUES ('ROLE_ADMIN');
 
+--USERS
 INSERT INTO administrator (id,username, password, first_name, last_name, email, enabled, last_password_reset_date,name_admin) VALUES (nextval('cust_seq_user'),'admin1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07','Ogi admin');
 INSERT INTO administrator (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'admin2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07');
 
 INSERT INTO my_user (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'myus1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
 INSERT INTO my_user (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'myus2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'user2@example.com', true, '2017-10-01 18:57:58.508-07');
 
-
-INSERT INTO ROLE (name) VALUES ('ROLE_USER');
-INSERT INTO ROLE (name) VALUES ('ROLE_ADMIN');
-
+--USER ROLE
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 2);
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (2, 2);
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (3, 1); -- user-u dodeljujemo rolu USER
@@ -22,26 +23,17 @@ INSERT INTO USER_ROLE (user_id, role_id) VALUES (4, 1);
 --INSERT INTO USER_ROLE (user_id, role_id) VALUES (4, 2); -- user-u dodeljujemo rolu ADMIN
 
 
---BOAT OWNER
-INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Zarko' , 'vaskebonf22@gmail.com',false);
-INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Darko' , 'vaskebonf22@gmail.com',false);
-INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Slavko' , 'vaskebonf22@gmail.com',false);
+
+
+-----------------------------------------------------------------
+----------------------------------------------------------COTTAGE
+-----------------------------------------------------------------
 
 --COTTAGE OWNER
 INSERT INTO cottage_owner (name,email,delete_own_ctg) VALUES ('Peca' , 'vaskebonf22@gmail.com',false);
 INSERT INTO cottage_owner (name,email,delete_own_ctg) VALUES ('Zeka' , 'vaskebonf22@gmail.com',false);
 INSERT INTO cottage_owner (name,email,delete_own_ctg) VALUES ('Peka' , 'vaskebonf22@gmail.com',false);
 
-
---INSTRUCTOR
-INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 1' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 1',false);
-INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 2' ,'vaskebonf22@gmail.com', 'Rodjen sam tad i tad..','adr 2',false);
-INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 3' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 3',false);
-
---INSTRUCTOR MARK
-INSERT INTO instructor_mark (mark) VALUES (2);
-INSERT INTO instructor_mark (mark) VALUES (3);
-INSERT INTO instructor_mark (mark) VALUES (5);
 
 --COTTAGE
 INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('Brea Cottage','Wilson 4',23.3556,23.7777 , 'Description 2332',4,3,'rule behaviour','more informations',false);
@@ -58,6 +50,128 @@ INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,
 INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('D','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,3,'rule behaviour','more informations',false);
 
 
+--COTTAGE ACTION
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('01-05-2022' , '03-05-2022', '5'  , 4500 , 'some more information');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-06-2022' , '18-06-2022', '1'  , 5500 , 'some more information .');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('09-06-2022' , '22-06-2022', '5'  , 15500 , 'some more information ...');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '2'  , 4000 , 'some more information ......');
+
+
+--COTTAGE IMAGE
+INSERT INTO cottage_image ( name ) VALUES ( 'ads6.jpg');
+INSERT INTO cottage_image ( name ) VALUES ( 'ads2.jpg');
+INSERT INTO cottage_image ( name ) VALUES ( 'ads4.jpg');
+INSERT INTO cottage_image ( name ) VALUES ( 'ads7.jpg');
+
+
+--COTTAGE COTTAGE IMAGE
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,2);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,4);
+--INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (2,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (2,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (3,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (3,2);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (4,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (5,2);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,2);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (7,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (8,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (9,3);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (10,2);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (11,1);
+INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (12,1);
+
+--COTTAGE MARK
+INSERT INTO cottage_mark (mark) VALUES (4);
+INSERT INTO cottage_mark (mark) VALUES (4);
+INSERT INTO cottage_mark (mark) VALUES (2);
+INSERT INTO cottage_mark (mark) VALUES (5);
+INSERT INTO cottage_mark (mark) VALUES (2);
+INSERT INTO cottage_mark (mark) VALUES (4);
+INSERT INTO cottage_mark (mark) VALUES (3);
+INSERT INTO cottage_mark (mark) VALUES (5);
+
+
+--COTTAGE PRICELIST
+INSERT INTO cottage_pricelist (price,description) VALUES (3000,'2 osobe');
+INSERT INTO cottage_pricelist (price,description) VALUES (5000,'3 osobe');
+INSERT INTO cottage_pricelist (price,description) VALUES (6500,'6 osoba');
+INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
+
+--COTTAGE RESERVATION
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-05-2022','03-05-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2021','08-07-2021',true,1);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-03-2022','05-03-2022',true,1);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',true,2);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-04-2022','18-04-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-05-2022','08-05-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-05-2022','22-05-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-05-2022','25-05-2022',true,3);
+
+--COTTAGE COTTAGE ACTION
+INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
+
+--COTTAGE COTTAGE PRICELIST
+INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
+
+--COTTAGE - COTTAGE RESERVATION
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,1);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,2);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,6);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,8);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,10);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (2,3);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (2,4);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (2,5);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (3,7);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (3,9);
+INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (5,11);
+
+--COTTAGE MARKS
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (1,1);
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (3,2);
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (3,3);
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,4);
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,5);
+INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,6);
+
+
+--MY USER COTTAGES
+INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (2,4);
+
+--MY USER COTTAGE RESERVATION
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,1);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,2);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,5);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,7);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,8);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,9);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,10);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,11);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (4,3);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (4,4);
+INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (4,6);
+
+
+
+
+
+
+-----------------------------------------------------------------
+-------------------------------------------------------------BOAT
+-----------------------------------------------------------------
+--BOAT OWNER
+INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Zarko' , 'vaskebonf22@gmail.com',false);
+INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Darko' , 'vaskebonf22@gmail.com',false);
+INSERT INTO boat_owner (name,email,delete_own_boat) VALUES ('Slavko' , 'vaskebonf22@gmail.com',false);
 
 --BOAT
 INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,address,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 1','type1',9,2,200,230,'adr1',23.3333,54.2222,'capacity 1','description1','navitagtion1','rule_behaviour1','fishing_eqp1','more_info1',false);
@@ -72,6 +186,101 @@ INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,addres
 INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,address,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 10','type10',25,1,300,130,'adr10',23.3333,54.2222,'capacity 10','description10','navitagtion10','rule_behaviour10','fishing_eqp10','more_info10',false);
 INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,address,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 11','type11',6,2,200,230,'adr11',23.3333,54.2222,'capacity 11','description11','navitagtion11','rule_behaviour11','fishing_eqp11','more_info11',false);
 INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,address,longitude,latitude,capacity,description,navigation,rule_behaviour,fishing_equipment,more_information,delete_bt) VALUES ('baot 12','type12',11,2,100,530,'adr12',23.3333,54.2222,'capacity 12','description12','navitagtion12','rule_behaviour12','fishing_eqp12','more_info12',false);
+
+
+--BOAT ACTION
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-05-2022' , '13-05-2022', '3'  , 4500 , 'some more information');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('21-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('19-06-2022' , '21-06-2022', '3'  , 5500 , 'some more information ...');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2'  , 4000 , 'some more information ......');
+
+
+INSERT INTO boat_image ( name ) VALUES ('ads9.png');
+INSERT INTO boat_image ( name ) VALUES ('ads8.jpg');
+INSERT INTO boat_image ( name ) VALUES ('ads6.jpg');
+
+--BOAT MARK
+INSERT INTO boat_mark (mark) VALUES (1);
+INSERT INTO boat_mark (mark) VALUES (3);
+INSERT INTO boat_mark (mark) VALUES (1);
+INSERT INTO boat_mark (mark) VALUES (5);
+
+
+--BOAT PRICELIST
+INSERT INTO boat_pricelist (price,description) VALUES (5000,'3 osobe');
+INSERT INTO boat_pricelist (price,description) VALUES (4000,'2 osobe');
+INSERT INTO boat_pricelist (price,description) VALUES (6500,'4 osoba');
+INSERT INTO boat_pricelist (price,description) VALUES (14000,'9 osoba');
+
+--BOAT RESERVATION
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-05-2022','13-05-2022',true,1);
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','28-06-2022',true,3);
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','21-06-2022',true,4);
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,2);
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-06-2022','18-06-2022',true,2);
+
+
+
+--BOAT BOAT IMAGE
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,2);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,3);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (2,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (3,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (4,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (5,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (6,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (7,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (8,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (9,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (10,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (11,1);
+INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (12,1);
+
+--BOAT COMPLAINT
+INSERT INTO boat_complaint(description,my_user_id,boat_id) VALUES ('opsi zalbe' , 3,2);
+
+--BOAT OWNER COMPLAINT
+INSERT INTO boat_owner_complaint(description,my_user_id,boat_owner_id) VALUES ('opsi zalbe' , 3,1);
+
+
+--BOAT BOAT ACTION
+INSERT INTO boat_boat_actions(boat_id,boat_actions_id) VALUES (1,1);
+
+--BOAT BOAT PRICELIST
+INSERT INTO boat_boat_pricelists(boat_id,boat_pricelists_id) VALUES (1,2);
+
+--BOAT BOAT RESERVATION
+INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (1,1);
+INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (1,2);
+INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (2,3);
+INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (2,4);
+INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (2,5);
+--BOAT MARKS
+INSERT INTO boat_marks(boat_id,marks_id) VALUES (1,1);
+
+--MY USER BOATS
+INSERT INTO boat_my_users(boat_id,my_users_id) VALUES (2,3);
+
+--MY USER COTTAGE RESERVATION
+INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (3,1);
+INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (3,2);
+INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (3,4);
+INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (4,3);
+INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (3,5);
+
+-----------------------------------------------------------------
+--------------------------------------------------------ADVENTURE
+-----------------------------------------------------------------
+--INSTRUCTOR
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 1' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 1',false);
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 2' ,'vaskebonf22@gmail.com', 'Rodjen sam tad i tad..','adr 2',false);
+INSERT INTO instructor (name,email,description,address,delete_ins) VALUES ('Instructor 3' , 'vaskebonf22@gmail.com','Rodjen sam tad i tad..','adr 3',false);
+
+--INSTRUCTOR MARK
+INSERT INTO instructor_mark (mark) VALUES (2);
+INSERT INTO instructor_mark (mark) VALUES (3);
+INSERT INTO instructor_mark (mark) VALUES (5);
 
 
 --ADVENTURE
@@ -119,7 +328,7 @@ INSERT INTO adventure_mark (mark) VALUES (5);
 INSERT INTO adventure_pricelist (price,description) VALUES (5000,'3 osobe');
 INSERT INTO adventure_pricelist (price,description) VALUES (4000,'2 osobe');
 INSERT INTO adventure_pricelist (price,description) VALUES (2500,'1 osoba');
-INSERT INTO adventure_pricelist (price,description) VALUES (7000,'max 7 osoba');
+INSERT INTO adventure_pricelist (price,description) VALUES (7000,'7 osoba');
 
 
 --ADVENTURE RESERVATION
@@ -127,129 +336,15 @@ INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adve
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('10-05-2022','15-05-2022',true,1);
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('23-04-2022','25-04-2022',true,2);
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('09-05-2022','12-05-2022',true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('05-04-2022','08-04-2022',true,4);
+
 
 --ADVENTURE COMPLAINT
 INSERT INTO adventure_complaint(description,my_user_id,adventure_id) VALUES ('opsi zalbe' , 4,1);
 
 --INSTRUCTOR COMPLAINT
 INSERT INTO instructor_complaint(description,my_user_id,instructor_id) VALUES ('opsi zalbe' , 4,1);
-
-
--------------------------------------------------BOAT
-
---BOAT ACTION
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-05-2022' , '13-05-2022', '3'  , 4500 , 'some more information');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('21-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('19-06-2022' , '21-06-2022', '3'  , 5500 , 'some more information ...');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2'  , 4000 , 'some more information ......');
-
-
-INSERT INTO boat_image ( name ) VALUES ('ads9.png');
-INSERT INTO boat_image ( name ) VALUES ('ads8.jpg');
-INSERT INTO boat_image ( name ) VALUES ('ads6.jpg');
-
---BOAT MARK
-INSERT INTO boat_mark (mark) VALUES (1);
-INSERT INTO boat_mark (mark) VALUES (3);
-INSERT INTO boat_mark (mark) VALUES (1);
-INSERT INTO boat_mark (mark) VALUES (5);
-
-
---BOAT PRICELIST
-INSERT INTO boat_pricelist (price,description) VALUES (5000,'max 3 osobe');
-INSERT INTO boat_pricelist (price,description) VALUES (4000,'2 osobe');
-INSERT INTO boat_pricelist (price,description) VALUES (6500,'4 osoba');
-INSERT INTO boat_pricelist (price,description) VALUES (14000,'9 osoba');
-
---BOAT RESERVATION
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-05-2022','13-05-2022',true,1);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','28-06-2022',true,3);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','21-06-2022',true,4);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,2);
-
-
-
---BOAT BOAT IMAGE
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,2);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (1,3);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (2,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (3,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (4,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (5,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (6,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (7,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (8,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (9,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (10,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (11,1);
-INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (12,1);
-
---BOAT COMPLAINT
-INSERT INTO boat_complaint(description,my_user_id,boat_id) VALUES ('opsi zalbe' , 3,2);
-
---BOAT OWNER COMPLAINT
-INSERT INTO boat_owner_complaint(description,my_user_id,boat_owner_id) VALUES ('opsi zalbe' , 3,1);
-
--------------------------------------------------COTTAGE
-
---COTTAGE ACTION
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('01-05-2022' , '03-05-2022', '5'  , 4500 , 'some more information');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-06-2022' , '18-06-2022', '1'  , 5500 , 'some more information .');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('09-06-2022' , '22-06-2022', '5'  , 15500 , 'some more information ...');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '2'  , 4000 , 'some more information ......');
-
---COTTAGE IMAGE
-INSERT INTO cottage_image ( name ) VALUES ( 'ads6.jpg');
-INSERT INTO cottage_image ( name ) VALUES ( 'ads2.jpg');
-INSERT INTO cottage_image ( name ) VALUES ( 'ads4.jpg');
-INSERT INTO cottage_image ( name ) VALUES ( 'ads7.jpg');
---COTTAGE COTTAGE IMAGE
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,2);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,4);
---INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (1,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (2,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (2,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (3,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (3,2);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (4,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (5,2);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,2);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (6,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (7,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (8,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (9,3);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (10,2);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (11,1);
-INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (12,1);
-
---COTTAGE MARK
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (2);
-INSERT INTO cottage_mark (mark) VALUES (5);
-INSERT INTO cottage_mark (mark) VALUES (2);
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (3);
-INSERT INTO cottage_mark (mark) VALUES (5);
-
-
---COTTAGE PRICELIST
-INSERT INTO cottage_pricelist (price,description) VALUES (3000,'max 2 osobe');
-INSERT INTO cottage_pricelist (price,description) VALUES (5000,'3 osobe');
-INSERT INTO cottage_pricelist (price,description) VALUES (6500,'6 osoba');
-INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
-
---COTTAGE RESERVATION
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-05-2022','03-05-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
-
-
 
 --ADVENTURE ADVENTURE ACTION
 INSERT INTO adventure_adventure_actions(adventure_id,adventure_actions_id) VALUES (1,1);
@@ -259,40 +354,16 @@ INSERT INTO adventure_adventure_pricelists(adventure_id,adventure_pricelists_id)
 
 --ADVENTURE ADVENTURE RESERVATION
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (1,1);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (1,2);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (3,3);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (6,4);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (6,5);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (6,6);
+
 
 --ADVENTURE MARKS
 INSERT INTO adventure_marks(adventure_id,marks_id) VALUES (1,1);
 
-
---BOAT BOAT ACTION
-INSERT INTO boat_boat_actions(boat_id,boat_actions_id) VALUES (1,1);
-
---BOAT BOAT PRICELIST
-INSERT INTO boat_boat_pricelists(boat_id,boat_pricelists_id) VALUES (1,2);
-
---BOAT BOAT RESERVATION
-INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (1,2);
-
---BOAT MARKS
-INSERT INTO boat_marks(boat_id,marks_id) VALUES (1,1);
-
-
---COTTAGE COTTAGE ACTION
-INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
-
---COTTAGE COTTAGE PRICELIST
-INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
-
---COTTAGE COTTAGE RESERVATION
-INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,2);
-
---COTTAGE MARKS
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (1,1);
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (3,2);
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (3,3);
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,4);
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,5);
-INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,6);
 
 --INSTRUCTOR MARKS
 INSERT INTO instructor_marks(instructor_id,marks_id) VALUES (1,1);
@@ -301,8 +372,11 @@ INSERT INTO instructor_marks(instructor_id,marks_id) VALUES (1,1);
 --MY USER ADVENTURES
 INSERT INTO adventure_my_users(adventure_id,my_users_id) VALUES (1,4);
 
---MY USER BOATS
-INSERT INTO boat_my_users(boat_id,my_users_id) VALUES (2,3);
 
---MY USER COTTAGES
-INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (2,4);
+--MY USER COTTAGE RESERVATION
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (3,1);
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (3,2);
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (3,4);
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (3,6);
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (4,3);
+INSERT INTO my_user_adventure_resevations(my_user_id,adventure_resevations_id) values (4,5);

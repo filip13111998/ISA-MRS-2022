@@ -1,3 +1,6 @@
+import { AdventureReservationHistoryDTO } from './../../models/response/http-adventure-response/adventure-history-reservation';
+import { BoatReservationHistoryDTO } from './../../models/response/http-boat-response/boat-history-reservation';
+import { CottageReservationHistoryDTO } from './../../models/response/http-cottage-response/cottage-history-reservation';
 import { MyUserDTO } from './../../models/response/my-user/my-user';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
@@ -21,6 +24,18 @@ export class MyUserService {
   public editMyUser(myUser: any): Observable<Boolean> {
     return this.http.post<Boolean>(`${this.apiUrl}`, myUser, { headers: this.headers });
   }
+
+
+  public getCottageHistoryReservation(username: any, pageNum: any): Observable<CottageReservationHistoryDTO[]> {
+    return this.http.get<CottageReservationHistoryDTO[]>(`${this.apiUrl}/historyCottage/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+  public getBoatHistoryReservation(username: any, pageNum: any): Observable<BoatReservationHistoryDTO[]> {
+    return this.http.get<BoatReservationHistoryDTO[]>(`${this.apiUrl}/historyBoat/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+  public getAdventureHistoryReservation(username: any, pageNum: any): Observable<AdventureReservationHistoryDTO[]> {
+    return this.http.get<AdventureReservationHistoryDTO[]>(`${this.apiUrl}/historyAdventure/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+
 
 
   error(error: HttpErrorResponse) {

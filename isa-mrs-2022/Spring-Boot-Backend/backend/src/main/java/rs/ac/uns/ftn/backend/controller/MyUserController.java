@@ -5,8 +5,8 @@ import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
-import rs.ac.uns.ftn.backend.dto.response.MyUserDTO;
+import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.service.MyUserService;
 
 import java.util.List;
@@ -29,6 +29,24 @@ public class MyUserController {
     @PostMapping(produces = "application/json")
     public CompletableFuture<ResponseEntity<Boolean>> editOneUser(@RequestBody MyUserDTO mud) {
         return this.mus.editMyUser(mud).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/historyCottage/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<CottageReservationHistoryDTO>>> getAllCotagesHistoryReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllHistoryReservationCottage(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/historyBoat/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<BoatReservationHistoryDTO>>> getAllBoatsHistoryReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllHistoryReservationBoat(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/historyAdventure/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<AdventureReservationHistoryDTO>>> getAllAdventuresHistoryReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllHistoryReservationAdventure(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

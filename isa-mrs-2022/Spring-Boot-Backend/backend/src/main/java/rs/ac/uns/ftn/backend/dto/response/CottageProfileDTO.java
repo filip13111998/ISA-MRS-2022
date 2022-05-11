@@ -41,7 +41,7 @@ public class CottageProfileDTO {
 
     private double averageMark;
 
-    private Set<CottageResevation> cottageResevations;
+    private Set<CottageReservationDTO> cottageResevations;
 
     private Set<CottageAction> cottageActions;
 }

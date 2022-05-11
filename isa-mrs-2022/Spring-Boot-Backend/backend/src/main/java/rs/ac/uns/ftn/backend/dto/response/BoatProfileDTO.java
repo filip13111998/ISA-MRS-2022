@@ -50,7 +50,7 @@ public class BoatProfileDTO {
 
     private double averageMark;
 
-    private Set<BoatResevation> boatResevations;
+    private Set<BoatReservationDTO> boatResevations;
 
     private Set<BoatAction> boatActions;
 

@@ -23,6 +23,8 @@ export class RegisterUserHomePageComponent implements OnInit {
 
   menu_page: Number;
 
+
+
   constructor() {
     this.set_home_page();
     this.set_entity_type_cottage();

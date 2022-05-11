@@ -68,7 +68,7 @@ public class Adventure {
     private Set<AdventurePricelist> adventurePricelists = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
+//    @Fetch(FetchMode.JOIN)
     private Set<AdventureReservation> adventureReservations = new HashSet<>();
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
