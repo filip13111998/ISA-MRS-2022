@@ -119,6 +119,9 @@ export class CottagesHomePageComponent implements OnInit {
   }
 
   public goProfile(id: number): any {
+    if (localStorage.getItem('user_token') != null) {
+      return ['/loginProfileCottage', id];
+    }
     return ['/profileCottage', id];
   }
 

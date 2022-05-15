@@ -110,6 +110,9 @@ export class AdventuresHomePageComponent implements OnInit {
   }
 
   public goProfile(id: number): any {
+    if (localStorage.getItem('user_token') != null) {
+      return ['/loginProfileAdventure', id];
+    }
     return ['/profileAdventure', id];
   }
 

@@ -1,3 +1,6 @@
+import { LoginBoatProfileComponent } from './components/login-boat-profile/login-boat-profile.component';
+import { LoginAdventureProfileComponent } from './components/login-adventure-profile/login-adventure-profile.component';
+import { LoginCottageProfileComponent } from './components/login-cottage-profile/login-cottage-profile.component';
 import { AdminHomePageComponent } from './components/admin-home-page/admin-home-page.component';
 import { RegisterUserHomePageComponent } from './components/register-user-home-page/register-user-home-page.component';
 import { RegistrationComponent } from './components/registration/registration.component';
@@ -18,8 +21,11 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'profileCottage/:id', component: ProfileComponent },
+  { path: 'loginProfileCottage/:id', component: LoginCottageProfileComponent },
   { path: 'profileAdventure/:id', component: ProfileAdventureComponent },
+  { path: 'loginProfileAdventure/:id', component: LoginAdventureProfileComponent },
   { path: 'profileBoat/:id', component: ProfileBoatComponent },
+  { path: 'loginProfileBoat/:id', component: LoginBoatProfileComponent },
   // { path: 'register_home/:username', component: MyUserProfileComponent },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },  // Wildcard route for a 404 page
 ];

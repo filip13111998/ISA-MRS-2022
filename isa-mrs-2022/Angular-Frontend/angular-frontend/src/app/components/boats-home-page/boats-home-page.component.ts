@@ -178,6 +178,9 @@ export class BoatsHomePageComponent implements OnInit {
   }
 
   public goProfile(id: number): any {
+    if (localStorage.getItem('user_token') != null) {
+      return ['/loginProfileBoat', id];
+    }
     return ['/profileBoat', id];
   }
 

@@ -56,7 +56,7 @@
                 <ng-container matColumnDef="cottageID">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Cottage Profile </th>
                     <td mat-cell *matCellDef="let element"> <button class="btn btn-success"
-                            [routerLink]="['/profileCottage/'+ element.cottageID ]">Profile View
+                            [routerLink]="['/loginProfileCottage/'+ element.cottageID ]">Profile View
                             {{element.cottageID}}</button> </td>
                 </ng-container>
                 <ng-container matColumnDef="complaints">
@@ -115,7 +115,7 @@
                 <ng-container matColumnDef="boatID">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Boat Profile </th>
                     <td mat-cell *matCellDef="let element"> <button class="btn btn-success"
-                            [routerLink]="['/profileBoat/'+ element.boatID ]">Profile View
+                            [routerLink]="['/loginProfileBoat/'+ element.boatID ]">Profile View
                             {{element.cottageID}}</button> </td>
                 </ng-container>
                 <ng-container matColumnDef="complaints">
@@ -168,7 +168,7 @@
                 <ng-container matColumnDef="adventureID">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; Adventure Profile </th>
                     <td mat-cell *matCellDef="let element"> <button class="btn btn-success"
-                            [routerLink]="['/profileAdventure/'+ element.adventureID ]">Profile View
+                            [routerLink]="['/loginProfileAdventure/'+ element.adventureID ]">Profile View
                             {{element.cottageID}}</button> </td>
                 </ng-container>
                 <ng-container matColumnDef="complaints">

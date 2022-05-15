@@ -32,6 +32,12 @@ import { RegisterUserHomePageComponent } from './components/register-user-home-p
 import { RegisterUserHistoryReservationComponent } from './components/register-user-history-reservation/register-user-history-reservation.component';
 import { AdminHomePageComponent } from './components/admin-home-page/admin-home-page.component';
 import { InterceptorServiceService } from './services/interceptor/interceptor-service.service';
+import { LoginCottageProfileComponent } from './components/login-cottage-profile/login-cottage-profile.component';
+import { LoginBoatProfileComponent } from './components/login-boat-profile/login-boat-profile.component';
+import { LoginAdventureProfileComponent } from './components/login-adventure-profile/login-adventure-profile.component';
+import { RootAdventureProfileComponent } from './components/root-adventure-profile/root-adventure-profile.component';
+import { RootBoatProfileComponent } from './components/root-boat-profile/root-boat-profile.component';
+import { RootCottageProfileComponent } from './components/root-cottage-profile/root-cottage-profile.component';
 
 @NgModule({
   declarations: [
@@ -50,6 +56,12 @@ import { InterceptorServiceService } from './services/interceptor/interceptor-se
     RegisterUserHomePageComponent,
     RegisterUserHistoryReservationComponent,
     AdminHomePageComponent,
+    LoginCottageProfileComponent,
+    LoginBoatProfileComponent,
+    LoginAdventureProfileComponent,
+    RootAdventureProfileComponent,
+    RootBoatProfileComponent,
+    RootCottageProfileComponent,
 
   ],
   imports: [

@@ -1,0 +1,12 @@
+#map {
+    height: 25em;
+    width: 100%;
+}
+
+table {
+    width: 100%;
+}
+
+::ng-deep .nav-css nav {
+    background-color: #0BDA51;
+}
