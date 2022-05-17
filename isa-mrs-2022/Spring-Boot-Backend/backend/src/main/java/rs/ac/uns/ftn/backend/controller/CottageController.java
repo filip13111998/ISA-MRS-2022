@@ -7,6 +7,7 @@ import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
+import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.CottageService;
 
 import java.util.List;
@@ -49,6 +50,11 @@ public class CottageController {
     @GetMapping(value = "/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<CottageProfileDTO>> getOneCottage(@PathVariable Long id) {
         return  cs.getOneCottage(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/pricelist/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<CottagePricelist>>> getCottagePricelist(@PathVariable Long id) {
+        return  cs.getCottagePricelist(id).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

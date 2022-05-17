@@ -13,7 +13,9 @@ import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.Adventure;
+import rs.ac.uns.ftn.backend.model.AdventurePricelist;
 import rs.ac.uns.ftn.backend.model.Boat;
+import rs.ac.uns.ftn.backend.model.BoatPricelist;
 import rs.ac.uns.ftn.backend.repository.AdventureRepository;
 
 import java.util.ArrayList;
@@ -41,7 +43,7 @@ public class AdventureService {
     @Async
     public CompletableFuture<List<AdventureDTO>> getAllAdventures(Integer pageNum , Integer pageSize) {
 
-        log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
+        log.info("GET ALL ADVENTURE "+ Thread.currentThread().getName());
 
         Pageable singlePage = PageRequest.of(pageNum, pageSize);
 
@@ -104,7 +106,7 @@ public class AdventureService {
         return CompletableFuture.completedFuture(apdto);
 
     }
-
+    @Async
     public CompletableFuture<List<AdventureDTO>> getAllAdventuresSearchSort(AdventureSearchSortDTO assdto, Integer pageNum, Integer pageSize, String type, Boolean direction) {
         AdventureService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
 
@@ -181,5 +183,19 @@ public class AdventureService {
         }
 
         return true;
+    }
+
+    @Async
+    public CompletableFuture<List<AdventurePricelist>> getAdventurePricelist(Long id) {
+
+        log.info("GET COTTAGE PRICELIST WITH COTTAGE ID: " + id);
+
+        Optional<Adventure> ato = ar.findById(id);
+
+        Adventure at = ato.get();
+
+        List<AdventurePricelist> lista = new ArrayList<>(at.getAdventurePricelists());
+
+        return CompletableFuture.completedFuture(lista);
     }
 }

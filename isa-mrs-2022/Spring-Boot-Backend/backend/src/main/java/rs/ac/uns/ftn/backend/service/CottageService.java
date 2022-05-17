@@ -11,11 +11,13 @@ import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageReservationDTO;
 import rs.ac.uns.ftn.backend.model.Cottage;
+import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
 import java.time.format.DateTimeFormatter;
 import java.util.*;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.CompletionStage;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -217,5 +219,18 @@ public class CottageService {
         }
 
         return true;
+    }
+
+    public CompletableFuture<List<CottagePricelist>> getCottagePricelist(Long id) {
+
+        log.info("GET COTTAGE PRICELIST WITH COTTAGE ID: " + id);
+
+        Optional<Cottage> cto = cr.findById(id);
+
+        Cottage ct = cto.get();
+
+        List<CottagePricelist> lista = new ArrayList<>(ct.getCottagePricelists());
+
+        return CompletableFuture.completedFuture(lista);
     }
 }

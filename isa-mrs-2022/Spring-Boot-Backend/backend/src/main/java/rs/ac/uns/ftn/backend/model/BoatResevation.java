@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -13,6 +14,7 @@ import java.time.Period;
 @Data
 @Entity
 @Table(name = "boat_reservation")
+@Where(clause = "active=true")
 public class BoatResevation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

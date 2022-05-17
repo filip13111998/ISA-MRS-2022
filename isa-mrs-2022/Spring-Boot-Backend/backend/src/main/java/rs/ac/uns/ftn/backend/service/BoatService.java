@@ -21,9 +21,7 @@ import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
-import rs.ac.uns.ftn.backend.model.Adventure;
-import rs.ac.uns.ftn.backend.model.Boat;
-import rs.ac.uns.ftn.backend.model.Cottage;
+import rs.ac.uns.ftn.backend.model.*;
 import rs.ac.uns.ftn.backend.repository.BoatRepository;
 
 import java.util.ArrayList;
@@ -250,6 +248,19 @@ public class BoatService {
         }
 
         return true;
+    }
+
+    public CompletableFuture<List<BoatPricelist>> getBoatPricelist(Long id) {
+
+        log.info("GET COTTAGE PRICELIST WITH COTTAGE ID: " + id);
+
+        Optional<Boat> bto = br.findById(id);
+
+        Boat bt = bto.get();
+
+        List<BoatPricelist> lista = new ArrayList<>(bt.getBoatPricelists());
+
+        return CompletableFuture.completedFuture(lista);
     }
 
 }

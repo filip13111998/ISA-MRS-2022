@@ -8,6 +8,8 @@ import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
 //import rs.ac.uns.ftn.backend.model.Adventure;
+import rs.ac.uns.ftn.backend.model.AdventurePricelist;
+import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.AdventureService;
 import rs.ac.uns.ftn.backend.service.CottageService;
 
@@ -44,6 +46,11 @@ public class AdventureController {
     @GetMapping(value = "/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<AdventureProfileDTO>> getOneAdventure(@PathVariable Long id) {
         return  as.getOneAdventure(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/pricelist/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<AdventurePricelist>>> getAdventurePricelist(@PathVariable Long id) {
+        return  as.getAdventurePricelist(id).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
+import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.MyUserService;
 
 import java.util.List;
@@ -48,5 +49,6 @@ public class MyUserController {
 
         return  mus.getAllHistoryReservationAdventure(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
     }
+
 
 }

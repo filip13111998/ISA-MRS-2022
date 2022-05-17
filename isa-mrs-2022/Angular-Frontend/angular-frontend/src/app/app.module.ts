@@ -38,6 +38,15 @@ import { LoginAdventureProfileComponent } from './components/login-adventure-pro
 import { RootAdventureProfileComponent } from './components/root-adventure-profile/root-adventure-profile.component';
 import { RootBoatProfileComponent } from './components/root-boat-profile/root-boat-profile.component';
 import { RootCottageProfileComponent } from './components/root-cottage-profile/root-cottage-profile.component';
+import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
+import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+
+
+FullCalendarModule.registerPlugins([ // register FullCalendar plugins
+  dayGridPlugin,
+  interactionPlugin
+]);
 
 @NgModule({
   declarations: [
@@ -81,7 +90,8 @@ import { RootCottageProfileComponent } from './components/root-cottage-profile/r
     MatInputModule,
     MatFormFieldModule,
     NgImageSliderModule,
-    MatTableModule
+    MatTableModule,
+    FullCalendarModule // register FullCalendar with you app
 
   ],
   providers: [{

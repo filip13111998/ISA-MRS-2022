@@ -104,7 +104,7 @@ INSERT INTO cottage_pricelist (price,description) VALUES (6500,'6 osoba');
 INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
 
 --COTTAGE RESERVATION
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-05-2022','03-05-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('21-05-2022','23-05-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
@@ -121,6 +121,8 @@ INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
 
 --COTTAGE COTTAGE PRICELIST
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
+INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,3);
+INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,4);
 
 --COTTAGE - COTTAGE RESERVATION
 INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,1);
@@ -146,6 +148,8 @@ INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,6);
 
 --MY USER COTTAGES
 INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (2,4);
+INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (1,3);
+
 
 --MY USER COTTAGE RESERVATION
 INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,1);
@@ -193,6 +197,7 @@ INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more
 INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('21-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
 INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('19-06-2022' , '21-06-2022', '3'  , 5500 , 'some more information ...');
 INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2'  , 4000 , 'some more information ......');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('13-08-2022' , '16-08-2022', '2'  , 4000 , 'some more information ......');
 
 
 INSERT INTO boat_image ( name ) VALUES ('ads9.png');
@@ -246,9 +251,13 @@ INSERT INTO boat_owner_complaint(description,my_user_id,boat_owner_id) VALUES ('
 
 --BOAT BOAT ACTION
 INSERT INTO boat_boat_actions(boat_id,boat_actions_id) VALUES (1,1);
+INSERT INTO boat_boat_actions(boat_id,boat_actions_id) VALUES (1,2);
+INSERT INTO boat_boat_actions(boat_id,boat_actions_id) VALUES (1,5);
 
 --BOAT BOAT PRICELIST
 INSERT INTO boat_boat_pricelists(boat_id,boat_pricelists_id) VALUES (1,2);
+INSERT INTO boat_boat_pricelists(boat_id,boat_pricelists_id) VALUES (1,1);
+INSERT INTO boat_boat_pricelists(boat_id,boat_pricelists_id) VALUES (1,3);
 
 --BOAT BOAT RESERVATION
 INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (1,1);
@@ -293,9 +302,10 @@ INSERT INTO adventure (name,address,longitude,latitude,description,instructor_id
 
 --ADVENTURE ACTION
 INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-04-2022' , '18-04-2022', '5' , 'Novi Sad' , 4500 , 'some more information');
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '25-04-2022', '1' , 'Novi Sad' , 1500 , 'some more information .');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '27-04-2022', '1' , 'Novi Sad' , 1500 , 'some more information .');
 INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '25-04-2022', '5' , 'Beograd' , 5500 , 'some more information ...');
 INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2' , 'Nis' , 2000 , 'some more information ......');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('27-07-2022' , '28-07-2022', '2' , 'Nis' , 2000 , 'some more information ......');
 
 --ADVENTURE IMAGE
 INSERT INTO adventure_image ( name ) VALUES ('ads10.png');
@@ -338,6 +348,7 @@ INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adve
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,4);
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('09-05-2022','12-05-2022',true,4);
 INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('05-04-2022','08-04-2022',true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('07-07-2022','08-07-2022',true,4);
 
 
 --ADVENTURE COMPLAINT
@@ -348,13 +359,17 @@ INSERT INTO instructor_complaint(description,my_user_id,instructor_id) VALUES ('
 
 --ADVENTURE ADVENTURE ACTION
 INSERT INTO adventure_adventure_actions(adventure_id,adventure_actions_id) VALUES (1,1);
+INSERT INTO adventure_adventure_actions(adventure_id,adventure_actions_id) VALUES (1,2);
+INSERT INTO adventure_adventure_actions(adventure_id,adventure_actions_id) VALUES (1,5);
 
 --ADVENTURE ADVENTURE PRICELIST
 INSERT INTO adventure_adventure_pricelists(adventure_id,adventure_pricelists_id) VALUES (1,1);
+INSERT INTO adventure_adventure_pricelists(adventure_id,adventure_pricelists_id) VALUES (1,2);
 
 --ADVENTURE ADVENTURE RESERVATION
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (1,1);
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (1,2);
+INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (1,7);
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (3,3);
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (6,4);
 INSERT INTO adventure_adventure_reservations(adventure_id,adventure_reservations_id) VALUES (6,5);

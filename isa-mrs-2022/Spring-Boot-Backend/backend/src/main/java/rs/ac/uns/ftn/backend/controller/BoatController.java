@@ -11,6 +11,8 @@ import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.model.Boat;
+import rs.ac.uns.ftn.backend.model.BoatPricelist;
+import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.BoatService;
 
 import java.util.List;
@@ -46,6 +48,11 @@ public class BoatController {
     @GetMapping(value = "/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<BoatProfileDTO>> getOneBoat(@PathVariable Long id) {
         return  bs.getOneBoat(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/pricelist/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<BoatPricelist>>> getBoatPricelist(@PathVariable Long id) {
+        return  bs.getBoatPricelist(id).thenApplyAsync(ResponseEntity::ok);
     }
 
 }
