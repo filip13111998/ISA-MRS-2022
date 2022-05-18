@@ -1,3 +1,4 @@
+import { AdventurePricelistDTO } from './../../models/response/http-adventure-response/adventure-pricelist';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { AdventureProfileDTO } from 'src/app/models/response/http-adventure-response/adventure-profile';
@@ -6,6 +7,7 @@ import { AdventureserviceService } from 'src/app/services/adventureService/adven
 import * as moment from 'moment';
 import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
+import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
 
 @Component({
   selector: 'app-root-adventure-profile',
@@ -68,7 +70,9 @@ export class RootAdventureProfileComponent implements OnInit {
 
   }
 
+  typesPricelist: CottageComboBox[] = [];
 
+  pricelistId: number = 0;
 
   ngAfterViewInit() {
     this.mapInitializer();
@@ -88,15 +92,8 @@ export class RootAdventureProfileComponent implements OnInit {
       title: "Start"
     });
 
-    // const mark2 = new google.maps.Marker({
-    //   label: "TEST",
-    //   position: { lat: 37.37, lng: -122.03 },
-    //   map: this.map,
-    //   title: "TESTERSZ"
-    // });
-
     marker.setMap(this.map);
-    // mark2.setMap(this.map);
+
   }
 
 
@@ -106,9 +103,23 @@ export class RootAdventureProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getCottage();
   }
 
+
+  public setPricelist(event: any) {
+    this.pricelistId = Number(event);
+
+  }
+
+  public getPricelist() {
+    this.as.getPricelist(this.adventureProfile.id).subscribe((e: AdventurePricelistDTO[]) => {
+
+      e.forEach(element => {
+        this.typesPricelist.push({ value: `${element.id}`, viewValue: `${element.description} - ${element.price}` });
+      });
+
+    });
+  }
 
   public setSubscribeToggle() {
 
@@ -122,7 +133,7 @@ export class RootAdventureProfileComponent implements OnInit {
     dto.entityId = this.adventureProfile.id;
 
     this.ss.isSubAdventure(dto).subscribe((b: Boolean) => {
-      console.log("IS SUB COTT" + b)
+
       this.subscribe_toggle = b;
 
     });
@@ -153,7 +164,7 @@ export class RootAdventureProfileComponent implements OnInit {
 
     if (this.subscribe_toggle == false) {
       this.ss.subAdventure(dto).subscribe((b: Boolean) => {
-        console.log("SUBBB")
+
         this.subscribe_toggle = b;
 
       });
@@ -170,15 +181,13 @@ export class RootAdventureProfileComponent implements OnInit {
   public getAdventure() {
     var path = window.location.href;
     var id = path.split("/")[path.split("/").length - 1];
-    // console.log(window.location.href);
-    // console.log("IDDDD " + id);
+
     this.as.getOneAdventure(parseInt(id)).subscribe((apdto: AdventureProfileDTO) => {
-      console.log(apdto);
+
       this.adventureProfile = apdto;
-      console.log(this.adventureProfile.adventureImages.length + "BR SLIKA")
+
       for (let i = 0; i < this.adventureProfile.adventureImages.length; i++) {
-        console.log(i);
-        console.log(this.adventureProfile.adventureImages[i].name);
+
         this.imgCollection.push({
 
 
@@ -187,9 +196,10 @@ export class RootAdventureProfileComponent implements OnInit {
           title: `Cottage Picture ${i}`
         });
       }
-      console.log("AEEEE");
+
       this.imgCollection.forEach(e => console.log(e));
       this.setSubscribeToggle();
+      this.getPricelist();
     }
     );
 

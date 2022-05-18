@@ -2,6 +2,8 @@ import { DeleteCottageReservationDTO } from './../../models/response/entity-dele
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { CottageReservationCalendarDTO } from 'src/app/models/response/http-cottage-response/CottageReservationCalendarDTO';
+import { SaveCottageReservationDTO } from 'src/app/models/response/http-cottage-response/save-cottage-reservation-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +20,16 @@ export class CottageReservationService {
   public deleteCotage(dto: DeleteCottageReservationDTO): Observable<Boolean> {
 
     return this.http.post<Boolean>(`${this.apiUrl}/delete`, dto, { headers: this.headers });
+  }
+
+  public getAllCottageReservations(id: number): Observable<CottageReservationCalendarDTO> {
+
+    return this.http.get<CottageReservationCalendarDTO>(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
+  public saveCottageReservation(dto: SaveCottageReservationDTO): Observable<Boolean> {
+
+    return this.http.post<Boolean>(`${this.apiUrl}`, dto, { headers: this.headers });
   }
 
   // public getAllCotages(pageNum: number): Observable<CottageDTO[]> {

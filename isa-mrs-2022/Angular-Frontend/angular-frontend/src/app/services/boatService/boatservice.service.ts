@@ -1,3 +1,4 @@
+import { BoatPricelistDTO } from './../../models/response/http-boat-response/boat-pricelist';
 import { BoatProfileDTO } from './../../models/response/http-boat-response/boat-profile';
 import { BoatDTO } from './../../models/response/http-boat-response/boat-dto';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -27,6 +28,11 @@ export class BoatserviceService {
   public filterBoat(pageNum: number, sortType: String, sortDirection: Boolean, bs: any): Observable<BoatDTO[]> {
     return this.http.post<BoatDTO[]>(`${this.apiUrl}/sort/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, bs, { headers: this.headers });
   }
+
+  public getPricelist(id: number): Observable<BoatPricelistDTO[]> {
+    return this.http.get<BoatPricelistDTO[]>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
+  }
+
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

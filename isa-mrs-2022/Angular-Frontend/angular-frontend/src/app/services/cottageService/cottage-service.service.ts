@@ -31,8 +31,8 @@ export class CottageServiceService {
     return this.http.post<CottageDTO[]>(`${this.apiUrl}/sortBest/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, cs, { headers: this.headers });
   }
 
-  public getPricelist(id: number): Observable<CottagePricelistDTO> {
-    return this.http.get<CottagePricelistDTO>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
+  public getPricelist(id: number): Observable<CottagePricelistDTO[]> {
+    return this.http.get<CottagePricelistDTO[]>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
   }
 
 

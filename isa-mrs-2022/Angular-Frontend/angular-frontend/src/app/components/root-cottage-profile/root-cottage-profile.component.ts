@@ -1,3 +1,5 @@
+import { CottageReservationService } from 'src/app/services/cottage-reservation/cottage-reservation.service';
+import { CottagePricelistDTO } from './../../models/response/http-cottage-response/cottage-pricelist';
 import { SubscribeDTO } from './../../models/subscription/subscribe';
 import { SubscriptionService } from './../../services/subscription/subscription.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
@@ -6,6 +8,8 @@ import { CottageProfileDTO } from 'src/app/models/response/http-cottage-response
 import { Datum } from 'src/app/models/util/datum';
 import { CottageServiceService } from 'src/app/services/cottageService/cottage-service.service';
 import * as moment from 'moment';
+import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
+import { CottageReservationCalendarDTO } from 'src/app/models/response/http-cottage-response/CottageReservationCalendarDTO';
 
 @Component({
   selector: 'app-root-cottage-profile',
@@ -40,16 +44,16 @@ export class RootCottageProfileComponent implements OnInit {
 
   my_arr: any = [];
 
-  arr = [
+  arr: any = [
 
-    {
-      title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
-    },
-    { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
+    // {
+    //   title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
+    // },
+    // { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
 
-    { title: 'Rezervisano', date: '2022-05-03' },
-    // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
-    { title: 'Rezervisano', date: '2022-05-24' },
+    // { title: 'Rezervisano', date: '2022-05-03' },
+    // // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
+    // { title: 'Rezervisano', date: '2022-05-24' },
 
   ]
 
@@ -68,6 +72,13 @@ export class RootCottageProfileComponent implements OnInit {
 
   }
 
+  typesPricelist: CottageComboBox[] = [
+    // { value: 'all', viewValue: 'All' },
+    // { value: 'not_held', viewValue: 'Not Held' },
+
+  ];
+
+  pricelistId: number = 0;
 
   ngAfterViewInit() {
     this.mapInitializer();
@@ -100,13 +111,29 @@ export class RootCottageProfileComponent implements OnInit {
 
 
 
-  constructor(private cs: CottageServiceService, private ss: SubscriptionService) {
+  constructor(private cs: CottageServiceService, private ss: SubscriptionService, private rcs: CottageReservationService) {
     this.getCottage();
-    // this.setSubscribeToggle();
+
   }
 
   ngOnInit(): void {
 
+  }
+
+  public setPricelist(event: any) {
+    this.pricelistId = Number(event);
+
+  }
+
+  public getPricelist() {
+    this.cs.getPricelist(this.cottageProfile.id).subscribe((e: CottagePricelistDTO[]) => {
+
+
+      e.forEach(element => {
+        this.typesPricelist.push({ value: `${element.id}`, viewValue: `${element.description} - ${element.price}` });
+      });
+
+    });
   }
 
   public setSubscribeToggle() {
@@ -121,7 +148,7 @@ export class RootCottageProfileComponent implements OnInit {
     dto.entityId = this.cottageProfile.id;
 
     this.ss.isSubCotages(dto).subscribe((b: Boolean) => {
-      console.log("IS SUB COTT" + b)
+
       this.subscribe_toggle = b;
 
     });
@@ -152,7 +179,7 @@ export class RootCottageProfileComponent implements OnInit {
 
     if (this.subscribe_toggle == false) {
       this.ss.subCotages(dto).subscribe((b: Boolean) => {
-        console.log("SUBBB")
+
         this.subscribe_toggle = b;
 
       });
@@ -167,18 +194,43 @@ export class RootCottageProfileComponent implements OnInit {
     return this.subscribe_toggle = false;
   }
 
+
+  public getCalendarData() {
+    console.log("USO");
+    this.rcs.getAllCottageReservations(this.cottageProfile.id).subscribe((liste: CottageReservationCalendarDTO) => {
+      liste.cottageResevations.forEach(element => {
+        // console.log(element);
+        // console.log({ title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` });
+        this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Reservated', start: `${moment(element.reservationStart).format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).format('YYYY-MM-DD')}` });
+      });
+      liste.cottageActionsReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#F9D923', backgroundColor: "#F9D923", title: 'Action', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      liste.cottageActionsUnReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#187498', backgroundColor: "#187498", title: 'Action Un.', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      this.calendarOptions.events = this.arr;
+
+    });
+    // this.calendarOptions.events = this.arr;
+    // console.log("KALENDAR" + this.calendarOptions.events);
+  }
+
   public getCottage() {
     var path = window.location.href;
     var id = path.split("/")[path.split("/").length - 1];
-    // console.log(window.location.href);
-    // console.log("IDDDD " + id);
+
     this.cs.getOneCotages(parseInt(id)).subscribe((cpdto: CottageProfileDTO) => {
-      console.log(cpdto);
       this.cottageProfile = cpdto;
-      console.log(this.cottageProfile.cottageImages.length + "BR SLIKA")
+
       for (let i = 0; i < this.cottageProfile.cottageImages.length; i++) {
-        console.log(i);
-        console.log(this.cottageProfile.cottageImages[i].name);
+
         this.imgCollection.push({
 
 
@@ -187,9 +239,11 @@ export class RootCottageProfileComponent implements OnInit {
           title: `Cottage Picture ${i}`
         });
       }
-      console.log("AEEEE");
+
       this.imgCollection.forEach(e => console.log(e));
       this.setSubscribeToggle();
+      this.getPricelist();
+      this.getCalendarData();
     }
     );
 
@@ -239,9 +293,7 @@ export class RootCottageProfileComponent implements OnInit {
     this.calendarOptions.events = this.arr.concat(this.my_arr);
 
   }
-  // toggleWeekends() {
-  //   this.calendarOptions.weekends = !this.calendarOptions.weekends // toggle the boolean!
-  // }
+
 
 
   check(date1: any, date2: any, checkDate: any): Boolean {

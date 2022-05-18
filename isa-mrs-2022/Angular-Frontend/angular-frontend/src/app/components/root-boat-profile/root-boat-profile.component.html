@@ -28,31 +28,21 @@
             <!-- <div>KALENDAR</div> -->
             <full-calendar style=" width: 20em;" [options]="calendarOptions"></full-calendar>
             <i class="fa fa-money" aria-hidden="true"></i>
-            <div class="sort-container">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton"
-                        data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Reservation Type
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">3 osoba: 5000din <i style="color:yellowgreen;"
-                                class="fa-solid fa-money-bill-1-wave"></i></a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
-                <!-- <mat-form-field appearance="fill">
+            <div class="sort-container" style="margin-left: 3em;">
+
+                <mat-form-field appearance="fill">
                     <mat-label>Reservation Type</mat-label>
-                    <mat-select (selectionChange)="setSortType($event.value)">
-                        <mat-option *ngFor="let cottage of cottages" [value]="cottage.value">
-                            {{cottage.viewValue}}
+                    <mat-select (selectionChange)="setPricelist($event.value)">
+                        <mat-option *ngFor="let type of typesPricelist" [value]="type.value">
+                            {{type.viewValue}} RSD <i style="color:yellowgreen;"
+                                class="fa-solid fa-money-bill-1-wave"></i>
                         </mat-option>
                     </mat-select>
-                </mat-form-field> -->
+                </mat-form-field>
 
             </div>
             <div> <button class="btn btn-success" type="submit"
-                    style="width: 50%;margin-left: 15%;margin-bottom: 1em;margin-top: 3em;">Make
+                    style="width: 50%;margin-left: 15%;margin-bottom: 1em;margin-top: 2em;">Make
                     Reservation</button>
             </div>
         </div>

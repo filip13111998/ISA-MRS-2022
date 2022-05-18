@@ -24,5 +24,4 @@ public class SaveCottageReservationDTO {
 
     private Double price;
 
-//    private CottagePricelist cottagePricelist;
 }

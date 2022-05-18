@@ -52,8 +52,8 @@ INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,
 
 --COTTAGE ACTION
 INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('01-05-2022' , '03-05-2022', '5'  , 4500 , 'some more information');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-06-2022' , '18-06-2022', '1'  , 5500 , 'some more information .');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('09-06-2022' , '22-06-2022', '5'  , 15500 , 'some more information ...');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('23-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('10-07-2022' , '13-07-2022', '5'  , 15500 , 'some more information ...');
 INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '2'  , 4000 , 'some more information ......');
 
 
@@ -105,7 +105,7 @@ INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
 
 --COTTAGE RESERVATION
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('21-05-2022','23-05-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('08-06-2022','10-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2021','08-07-2021',true,1);
@@ -113,7 +113,7 @@ INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottag
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',true,2);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-06-2022','18-06-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-05-2022','08-05-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-05-2022','22-05-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-05-2022','21-05-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-05-2022','25-05-2022',true,3);
 
 --COTTAGE COTTAGE ACTION
@@ -125,6 +125,8 @@ INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,3);
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,3);
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,4);
+--INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (2,3);
+INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (3,1);
 
 --COTTAGE - COTTAGE RESERVATION
 INSERT INTO cottage_cottage_resevations(cottage_id,cottage_resevations_id) VALUES (1,1);

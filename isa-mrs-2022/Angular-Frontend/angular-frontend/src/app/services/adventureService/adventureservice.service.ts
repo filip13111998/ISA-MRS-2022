@@ -1,3 +1,4 @@
+import { AdventurePricelistDTO } from './../../models/response/http-adventure-response/adventure-pricelist';
 import { AdventureProfileDTO } from './../../models/response/http-adventure-response/adventure-profile';
 import { AdventureDTO } from './../../models/response/http-adventure-response/adventure-dto';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
@@ -27,6 +28,11 @@ export class AdventureserviceService {
   public filterAdventure(pageNum: number, sortType: String, sortDirection: Boolean, as: any): Observable<AdventureDTO[]> {
     return this.http.post<AdventureDTO[]>(`${this.apiUrl}/sort/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, as, { headers: this.headers });
   }
+
+  public getPricelist(id: number): Observable<AdventurePricelistDTO[]> {
+    return this.http.get<AdventurePricelistDTO[]>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
+  }
+
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

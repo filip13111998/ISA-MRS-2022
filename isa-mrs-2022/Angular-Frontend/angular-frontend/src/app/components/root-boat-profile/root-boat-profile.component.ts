@@ -1,3 +1,4 @@
+import { BoatPricelistDTO } from './../../models/response/http-boat-response/boat-pricelist';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { BoatProfileDTO } from 'src/app/models/response/http-boat-response/boat-profile';
@@ -6,6 +7,7 @@ import * as moment from 'moment';
 import { Datum } from 'src/app/models/util/datum';
 import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
+import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
 @Component({
   selector: 'app-root-boat-profile',
   templateUrl: './root-boat-profile.component.html',
@@ -67,6 +69,12 @@ export class RootBoatProfileComponent implements OnInit {
 
   }
 
+  //PRICELIST TWO VARIABLE
+  typesPricelist: CottageComboBox[] = [];
+
+  pricelistId: number = 0;
+
+
 
   ngAfterViewInit() {
     this.mapInitializer();
@@ -86,15 +94,9 @@ export class RootBoatProfileComponent implements OnInit {
       title: "Start"
     });
 
-    // const mark2 = new google.maps.Marker({
-    //   label: "TEST",
-    //   position: { lat: 37.37, lng: -122.03 },
-    //   map: this.map,
-    //   title: "TESTERSZ"
-    // });
 
     marker.setMap(this.map);
-    // mark2.setMap(this.map);
+
   }
 
 
@@ -104,9 +106,23 @@ export class RootBoatProfileComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // this.getCottage();
+
   }
 
+
+  public setPricelist(event: any) {
+    this.pricelistId = Number(event);
+
+  }
+
+  public getPricelist() {
+    this.bs.getPricelist(this.boatProfile.id).subscribe((e: BoatPricelistDTO[]) => {
+
+      e.forEach(element => {
+        this.typesPricelist.push({ value: `${element.id}`, viewValue: `${element.description} - ${element.price}` });
+      });
+    });
+  }
 
   public setSubscribeToggle() {
 
@@ -120,7 +136,6 @@ export class RootBoatProfileComponent implements OnInit {
     dto.entityId = this.boatProfile.id;
 
     this.ss.isSubBoat(dto).subscribe((b: Boolean) => {
-      console.log("IS SUB BOAT" + b)
       this.subscribe_toggle = b;
 
     });
@@ -168,28 +183,35 @@ export class RootBoatProfileComponent implements OnInit {
 
 
   public getBoat() {
+
     var path = window.location.href;
+
     var id = path.split("/")[path.split("/").length - 1];
-    // console.log(window.location.href);
-    // console.log("IDDDD " + id);
+
     this.bs.getOneBoat(parseInt(id)).subscribe((bpdto: BoatProfileDTO) => {
-      console.log(bpdto);
+
       this.boatProfile = bpdto;
-      console.log(this.boatProfile.boatImages.length + "BR SLIKA")
+
       for (let i = 0; i < this.boatProfile.boatImages.length; i++) {
-        console.log(i);
-        console.log(this.boatProfile.boatImages[i].name);
+
         this.imgCollection.push({
 
-
           image: `assets/${this.boatProfile.boatImages[i].name}`,
+
           thumbImage: `assets/${this.boatProfile.boatImages[i].name}`,
+
           title: `Cottage Picture ${i}`
+
         });
+
       }
-      console.log("AEEEE");
+
       this.imgCollection.forEach(e => console.log(e));
+
       this.setSubscribeToggle();
+
+      this.getPricelist();
+
     }
     );
 
@@ -301,10 +323,6 @@ export class RootBoatProfileComponent implements OnInit {
 
     });
 
-    // var start = sorted[0]['date'];
-    // var end = sorted[sorted.length - 1]['date'];
-    // console.log("START: " + sorted[0]['date']);
-    // console.log("END: " + sorted[sorted.length - 1]['date']);
 
     var counter = 1;
 
