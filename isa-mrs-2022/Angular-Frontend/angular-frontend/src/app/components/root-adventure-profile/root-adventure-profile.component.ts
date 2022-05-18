@@ -14,7 +14,7 @@ import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
 })
 export class RootAdventureProfileComponent implements OnInit {
 
-  subscribe_toggle: Boolean = true;
+  subscribe_toggle: Boolean = false;
 
 
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;

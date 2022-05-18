@@ -36,18 +36,7 @@ export class RegisterUserHomePageComponent implements OnInit {
   public set_home_page(): void {
     this.menu_page = 0;
   }
-  public set_history_page(): void {
-    this.menu_page = 1;
-  }
-  public set_profile_page(): void {
-    this.menu_page = 2;
-  }
-  public set_subscribe_entity(): void {
-    this.menu_page = 3;
-  }
-  public set_actions_page(): void {
-    this.menu_page = 4;
-  }
+
 
 
   public set_entity_type_cottage(): void {

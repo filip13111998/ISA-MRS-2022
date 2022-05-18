@@ -42,7 +42,8 @@ import { FullCalendarModule } from '@fullcalendar/angular'; // must go before pl
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
 import interactionPlugin from '@fullcalendar/interaction';
 import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
-import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component'; // a plugin!
+import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component';
+import { HomePageMenuComponent } from './components/home-page-menu/home-page-menu.component'; // a plugin!
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -75,6 +76,7 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RootCottageProfileComponent,
     MyUserActionsComponent,
     MyUserSubscribeEntityComponent,
+    HomePageMenuComponent,
 
   ],
   imports: [

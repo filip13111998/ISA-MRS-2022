@@ -1,3 +1,6 @@
+import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
+import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component';
+import { RegisterUserHistoryReservationComponent } from './components/register-user-history-reservation/register-user-history-reservation.component';
 import { LoginBoatProfileComponent } from './components/login-boat-profile/login-boat-profile.component';
 import { LoginAdventureProfileComponent } from './components/login-adventure-profile/login-adventure-profile.component';
 import { LoginCottageProfileComponent } from './components/login-cottage-profile/login-cottage-profile.component';
@@ -17,6 +20,10 @@ const routes: Routes = [
   // { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomePageComponent },
   { path: 'register_home', component: RegisterUserHomePageComponent },
+  { path: 'register_reservation', component: RegisterUserHistoryReservationComponent },
+  { path: 'register_profile', component: MyUserProfileComponent },
+  { path: 'register_subscribe', component: MyUserSubscribeEntityComponent },
+  { path: 'register_actions', component: MyUserActionsComponent },
   { path: 'admin_home', component: AdminHomePageComponent },
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
