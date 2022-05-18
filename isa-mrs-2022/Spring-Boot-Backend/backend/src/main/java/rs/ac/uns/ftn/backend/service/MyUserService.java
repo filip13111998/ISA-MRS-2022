@@ -21,6 +21,7 @@ import rs.ac.uns.ftn.backend.repository.BoatRepository;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 import rs.ac.uns.ftn.backend.repository.MyUserRepository;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -108,6 +109,30 @@ public class MyUserService {
 
     }
 
+    @Async
+    public CompletableFuture<List<CottageReservationHistoryDTO>> getAllNotHeldReservationCottage(String username , Integer pageNum ) {
+
+        MyUserService.log.info("GET ALL NOT HELD COTTAGES HISTORY RESERVATIONS BEST WAY "+ Thread.currentThread().getName());
+
+        MyUser mu = mur.findByUsername(username);
+        List<CottageReservationHistoryDTO> ctr = mu.getCottageResevations().stream().map(cr->
+
+                        new CottageReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
+                                cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findCottageId(cr.getId())))
+
+                .collect(Collectors.toList());
+        //not held ctr
+        List<CottageReservationHistoryDTO> nhctr = ctr.stream().filter(e->e.getReservationStart().isAfter(LocalDate.now())).collect(Collectors.toList());
+
+        PagedListHolder page = new PagedListHolder(nhctr);
+
+        page.setPageSize(5); // number of items per page
+        page.setPage(pageNum);      // set to first page
+
+        return CompletableFuture.completedFuture(page.getPageList());
+
+    }
+
     public Long findCottageId(Long cri){
         Optional<Cottage> id = crr.findAll().stream().filter(e-> findCottageId(e,cri) ).findFirst();
 
@@ -137,8 +162,36 @@ public class MyUserService {
 
                 .collect(Collectors.toList());
 
-
         PagedListHolder page = new PagedListHolder(btr);
+
+        page.setPageSize(5); // number of items per page
+        page.setPage(pageNum);      // set to first page
+
+        return CompletableFuture.completedFuture(page.getPageList());
+
+    }
+
+    @Async
+    public CompletableFuture<List<BoatReservationHistoryDTO>> getAllNotHeldReservationBoat(String username , Integer pageNum ) {
+
+        MyUserService.log.info("GET ALL BOATS HISTORY RESERVATIONS BEST WAY "+ Thread.currentThread().getName());
+
+
+        MyUser mu = mur.findByUsername(username);
+
+        List<BoatReservationHistoryDTO> btr = mu.getBoatResevations().stream().map(cr->
+
+                        new BoatReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
+                                cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findBoatId(cr.getId())))
+
+                .collect(Collectors.toList());
+
+        //not held ctr
+        List<BoatReservationHistoryDTO> nhbtr = btr.stream().filter(e->e.getReservationStart().isAfter(LocalDate.now())).collect(Collectors.toList());
+
+
+        PagedListHolder page = new PagedListHolder(nhbtr);
+
 
         page.setPageSize(5); // number of items per page
         page.setPage(pageNum);      // set to first page
@@ -179,6 +232,35 @@ public class MyUserService {
 
 
         PagedListHolder page = new PagedListHolder(atr);
+
+        page.setPageSize(5); // number of items per page
+        page.setPage(pageNum);      // set to first page
+
+        return CompletableFuture.completedFuture(page.getPageList());
+
+    }
+
+    @Async
+    public CompletableFuture<List<AdventureReservationHistoryDTO>> getAllNotHeldReservationAdventure(String username , Integer pageNum ) {
+
+        MyUserService.log.info("GET ALL ADVENTURES HISTORY RESERVATIONS BEST WAY "+ Thread.currentThread().getName());
+
+
+
+        MyUser mu = mur.findByUsername(username);
+        List<AdventureReservationHistoryDTO> atr = mu.getAdventureResevations().stream().map(ar->
+
+                        new AdventureReservationHistoryDTO(ar.getId(),ar.getReservationStart(),
+                                ar.getReservationEnd(),ar.getActive(),ar.getPricelistItem(),findAdventureId(ar.getId())))
+
+                .collect(Collectors.toList());
+
+
+        //not held ctr
+        List<AdventureReservationHistoryDTO> nhatr = atr.stream().filter(e->e.getReservationStart().isAfter(LocalDate.now())).collect(Collectors.toList());
+
+
+        PagedListHolder page = new PagedListHolder(nhatr);
 
         page.setPageSize(5); // number of items per page
         page.setPage(pageNum);      // set to first page

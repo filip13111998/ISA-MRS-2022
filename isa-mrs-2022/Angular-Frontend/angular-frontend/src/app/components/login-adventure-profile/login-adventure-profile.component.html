@@ -31,6 +31,17 @@
                         class="nav-item" style="border: 0;background-color: #0BDA51;color: white;" type="button"
                         (click)="set_profile_page()">My Profile</button></a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect><button
+                        class="nav-item" style="border: 0;background-color: #0BDA51;color: white;" type="button"
+                        (click)="set_subscribe_entity()">Subscribe Entity</button></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect><button
+                        class="nav-item" style="border: 0;background-color: #0BDA51;color: white;" type="button"
+                        (click)="set_actions_page()">Actions</button></a>
+            </li>
 
         </ul>
         <!-- Links -->
@@ -44,6 +55,7 @@
             </li>
 
         </ul>
+
     </links>
     <!-- Collapsible content -->
 

@@ -18,6 +18,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Slf4j
 @Transactional
 @Service
@@ -139,14 +141,20 @@ public class BoatReservationService {
 
 
         MyUser muo = mr.findByUsername(drdto.getMyUsername());
-
+        System.out.println(muo);
         Optional<BoatResevation> bt2 = muo.getBoatResevations().stream().filter(btt -> btt.getId().equals(drdto.getReservationId())).findFirst();
 
         BoatResevation btt2 = bt2.get();
+//        System.out.println(btt2);
+//        Period period = Period.between(LocalDate.now(),btt2.getReservationStart());
+//        System.out.println(period.getDays()+"DANI");
+//        System.out.println(LocalDate.now()+"NOW");
+//        System.out.println(btt2.getReservationStart()+"RES");
 
-        Period period = Period.between(LocalDate.now(),btt2.getReservationStart());
+//        System.out.println(daysBetween);
 
-        if(period.getDays()>3){
+        long daysBetween = DAYS.between(LocalDate.now(), btt2.getReservationStart());
+        if(daysBetween>3){
             muo.getBoatResevations().remove(btt2);
             btt2.setActive(false);
         }
@@ -154,7 +162,7 @@ public class BoatReservationService {
             return CompletableFuture.completedFuture(false);
         }
 
-        Optional<Boat> bto = br.findById(drdto.getBoateId());
+        Optional<Boat> bto = br.findById(drdto.getBoatId());
 
         Boat bt = bto.get();
 

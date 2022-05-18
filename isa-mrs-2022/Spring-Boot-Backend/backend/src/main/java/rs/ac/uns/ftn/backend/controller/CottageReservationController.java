@@ -34,7 +34,7 @@ public class CottageReservationController {
         return  crs.getCottageReservations(id).thenApplyAsync(ResponseEntity::ok);
     }
 
-    @DeleteMapping(produces = "application/json")
+    @PostMapping(value = "/delete",produces = "application/json")
     public CompletableFuture<ResponseEntity<Boolean>> deleteCottageReservation(@RequestBody DeleteCottageReservationDTO dcr) {
         return  crs.deleteReservation(dcr).thenApplyAsync(ResponseEntity::ok);
     }

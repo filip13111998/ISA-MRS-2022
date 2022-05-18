@@ -17,6 +17,8 @@ import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.stream.Collectors;
 
+import static java.time.temporal.ChronoUnit.DAYS;
+
 @Slf4j
 @Transactional
 @Service
@@ -152,9 +154,10 @@ public class AdventureReservationService {
 
         AdventureReservation att2 = at2.get();
 
-        Period period = Period.between(LocalDate.now(),att2.getReservationStart());
+//        Period period = Period.between(LocalDate.now(),att2.getReservationStart());
+        long daysBetween = DAYS.between(LocalDate.now(), att2.getReservationStart());
 
-        if(period.getDays()>3){
+        if(daysBetween>3){
             muo.getAdventureResevations().remove(att2);
             att2.setActive(false);
         }

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
 @Entity
 @Table(name = "adventure")
 public class Adventure {
@@ -75,9 +75,145 @@ public class Adventure {
     @Fetch(FetchMode.JOIN)
     private Set<AdventureAction> adventureActions = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<MyUser> myUsers = new HashSet<MyUser>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setInstructor(Instructor instructor) {
+        this.instructor = instructor;
+    }
+
+    public void setMaxNumPerson(Integer maxNumPerson) {
+        this.maxNumPerson = maxNumPerson;
+    }
+
+    public void setRuleBehavior(String ruleBehavior) {
+        this.ruleBehavior = ruleBehavior;
+    }
+
+    public void setMoreInformation(String moreInformation) {
+        this.moreInformation = moreInformation;
+    }
+
+    public void setCancellationConditions(String cancellationConditions) {
+        this.cancellationConditions = cancellationConditions;
+    }
+
+    public void setAdventureImages(Set<AdventureImage> adventureImages) {
+        this.adventureImages = adventureImages;
+    }
+
+    public void setMarks(Set<AdventureMark> marks) {
+        this.marks = marks;
+    }
+
+    public void setAdventurePricelists(Set<AdventurePricelist> adventurePricelists) {
+        this.adventurePricelists = adventurePricelists;
+    }
+
+    public void setAdventureReservations(Set<AdventureReservation> adventureReservations) {
+        this.adventureReservations = adventureReservations;
+    }
+
+    public void setAdventureActions(Set<AdventureAction> adventureActions) {
+        this.adventureActions = adventureActions;
+    }
+
+    public void setMyUsers(Set<MyUser> myUsers) {
+        this.myUsers = myUsers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Instructor getInstructor() {
+        return instructor;
+    }
+
+    public Integer getMaxNumPerson() {
+        return maxNumPerson;
+    }
+
+    public String getRuleBehavior() {
+        return ruleBehavior;
+    }
+
+    public String getMoreInformation() {
+        return moreInformation;
+    }
+
+    public String getCancellationConditions() {
+        return cancellationConditions;
+    }
+
+    public Set<AdventureImage> getAdventureImages() {
+        return adventureImages;
+    }
+
+    public Set<AdventureMark> getMarks() {
+        return marks;
+    }
+
+    public Set<AdventurePricelist> getAdventurePricelists() {
+        return adventurePricelists;
+    }
+
+    public Set<AdventureReservation> getAdventureReservations() {
+        return adventureReservations;
+    }
+
+    public Set<AdventureAction> getAdventureActions() {
+        return adventureActions;
+    }
+
+    public Set<MyUser> getMyUsers() {
+        return myUsers;
+    }
 
     public double averageMarks(){
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);

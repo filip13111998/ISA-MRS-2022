@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class DeleteBoatReservationDTO {
     private String myUsername;
 
-    private Long boateId;
+    private Long boatId;
 
     private Long reservationId;
 }

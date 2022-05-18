@@ -36,6 +36,16 @@ export class MyUserService {
     return this.http.get<AdventureReservationHistoryDTO[]>(`${this.apiUrl}/historyAdventure/${username}?pageNum=${pageNum}`, { headers: this.headers });
   }
 
+  public getCottageNotHeldReservation(username: any, pageNum: any): Observable<CottageReservationHistoryDTO[]> {
+    return this.http.get<CottageReservationHistoryDTO[]>(`${this.apiUrl}/notHeldCottage/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+  public getBoatNotHeldReservation(username: any, pageNum: any): Observable<BoatReservationHistoryDTO[]> {
+    return this.http.get<BoatReservationHistoryDTO[]>(`${this.apiUrl}/notHeldBoat/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+  public getAdventureNotHeldReservation(username: any, pageNum: any): Observable<AdventureReservationHistoryDTO[]> {
+    return this.http.get<AdventureReservationHistoryDTO[]>(`${this.apiUrl}/notHeldAdventure/${username}?pageNum=${pageNum}`, { headers: this.headers });
+  }
+
 
 
   error(error: HttpErrorResponse) {

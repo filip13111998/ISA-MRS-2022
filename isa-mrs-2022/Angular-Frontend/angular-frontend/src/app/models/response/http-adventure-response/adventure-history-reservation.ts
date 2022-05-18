@@ -10,5 +10,5 @@ export class AdventureReservationHistoryDTO {
 
     pricelistItem: AdventurePricelistDTO;
 
-    cottageID: number;
+    adventureID: number;
 }

@@ -1,3 +1,5 @@
+import { SubscribeDTO } from './../../models/subscription/subscribe';
+import { SubscriptionService } from './../../services/subscription/subscription.service';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { CalendarOptions } from '@fullcalendar/angular';
 import { CottageProfileDTO } from 'src/app/models/response/http-cottage-response/cottage-profile';
@@ -12,6 +14,7 @@ import * as moment from 'moment';
 })
 export class RootCottageProfileComponent implements OnInit {
 
+  subscribe_toggle: Boolean = true;
 
   @ViewChild('mapContainer', { static: false }) gmap: ElementRef;
 
@@ -31,6 +34,10 @@ export class RootCottageProfileComponent implements OnInit {
   godina: number = 2022;
   mesec: string = '05';
 
+  username: String;
+
+  tkn: any = "";
+
   my_arr: any = [];
 
   arr = [
@@ -38,7 +45,7 @@ export class RootCottageProfileComponent implements OnInit {
     {
       title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
     },
-    { title: 'Rezervisano', date: '2022-05-18' },
+    { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
 
     { title: 'Rezervisano', date: '2022-05-03' },
     // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
@@ -93,18 +100,72 @@ export class RootCottageProfileComponent implements OnInit {
 
 
 
-  constructor(private cs: CottageServiceService) {
+  constructor(private cs: CottageServiceService, private ss: SubscriptionService) {
     this.getCottage();
+    // this.setSubscribeToggle();
   }
 
   ngOnInit(): void {
-    // this.getCottage();
+
   }
 
+  public setSubscribeToggle() {
 
-  // public getimgs(): Array<object> {
-  //   return this.imgCollection;
-  // }
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+
+    var dto = new SubscribeDTO();
+
+    dto.username = this.username + "";
+
+    dto.entityId = this.cottageProfile.id;
+
+    this.ss.isSubCotages(dto).subscribe((b: Boolean) => {
+      console.log("IS SUB COTT" + b)
+      this.subscribe_toggle = b;
+
+    });
+  }
+
+  public sub_disable(): Boolean {
+
+    if (localStorage.getItem("user_token") == null) {
+
+      return true;
+
+    }
+
+    return false;
+
+  }
+
+  public subscrube_toggle(): Boolean {
+
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+
+    var dto = new SubscribeDTO();
+
+    dto.username = this.username + "";
+
+    dto.entityId = this.cottageProfile.id;
+
+    if (this.subscribe_toggle == false) {
+      this.ss.subCotages(dto).subscribe((b: Boolean) => {
+        console.log("SUBBB")
+        this.subscribe_toggle = b;
+
+      });
+      return this.subscribe_toggle = true;
+    }
+
+    this.ss.unsubCotages(dto).subscribe((b: Boolean) => {
+      this.subscribe_toggle = !b;
+
+    });
+
+    return this.subscribe_toggle = false;
+  }
 
   public getCottage() {
     var path = window.location.href;
@@ -128,6 +189,7 @@ export class RootCottageProfileComponent implements OnInit {
       }
       console.log("AEEEE");
       this.imgCollection.forEach(e => console.log(e));
+      this.setSubscribeToggle();
     }
     );
 

@@ -111,13 +111,15 @@ INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottag
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2021','08-07-2021',true,1);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-03-2022','05-03-2022',true,1);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',true,2);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-04-2022','18-04-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-06-2022','18-06-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-05-2022','08-05-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-05-2022','22-05-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-05-2022','25-05-2022',true,3);
 
 --COTTAGE COTTAGE ACTION
 INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
+INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,2);
+INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,3);
 
 --COTTAGE COTTAGE PRICELIST
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
@@ -147,9 +149,9 @@ INSERT INTO cottage_marks(cottage_id,marks_id) VALUES (11,6);
 
 
 --MY USER COTTAGES
-INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (2,4);
-INSERT INTO cottage_my_users(cottage_id,my_users_id) VALUES (1,3);
-
+INSERT INTO cottage_my_users(cottages_id,my_users_id) VALUES (2,4);
+INSERT INTO cottage_my_users(cottages_id,my_users_id) VALUES (1,3);
+INSERT INTO cottage_my_users(cottages_id,my_users_id) VALUES (2,3);
 
 --MY USER COTTAGE RESERVATION
 INSERT INTO my_user_cottage_resevations(my_user_id,cottage_resevations_id) values (3,1);
@@ -269,7 +271,7 @@ INSERT INTO boat_boat_resevations(boat_id,boat_resevations_id) VALUES (2,5);
 INSERT INTO boat_marks(boat_id,marks_id) VALUES (1,1);
 
 --MY USER BOATS
-INSERT INTO boat_my_users(boat_id,my_users_id) VALUES (2,3);
+INSERT INTO boat_my_users(boats_id,my_users_id) VALUES (2,3);
 
 --MY USER COTTAGE RESERVATION
 INSERT INTO my_user_boat_resevations(my_user_id,boat_resevations_id) values (3,1);
@@ -385,7 +387,7 @@ INSERT INTO instructor_marks(instructor_id,marks_id) VALUES (1,1);
 
 
 --MY USER ADVENTURES
-INSERT INTO adventure_my_users(adventure_id,my_users_id) VALUES (1,4);
+INSERT INTO adventure_my_users(adventures_id,my_users_id) VALUES (1,4);
 
 
 --MY USER COTTAGE RESERVATION

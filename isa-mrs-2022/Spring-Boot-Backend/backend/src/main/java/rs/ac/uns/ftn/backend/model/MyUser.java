@@ -15,7 +15,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
 @Entity
 //@Table(name = "my_user")
 public class MyUser extends User{
@@ -42,15 +42,15 @@ public class MyUser extends User{
     @Column(name = "delete_usr")
     private Boolean delete;
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
+    @ManyToMany(mappedBy="myUsers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+//    @Fetch(FetchMode.JOIN)
     private Set<Cottage> cottages = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy="myUsers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<Boat> boats = new HashSet<Boat>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy="myUsers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<Adventure> adventures = new HashSet<>();
 
@@ -67,5 +67,67 @@ public class MyUser extends User{
     @Fetch(FetchMode.JOIN)
     private Set<AdventureReservation> adventureResevations = new HashSet<>();
 
+    public void setNameUser(String nameUser) {
+        this.nameUser = nameUser;
+    }
 
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
+    }
+
+    public void setCottages(Set<Cottage> cottages) {
+        this.cottages = cottages;
+    }
+
+    public void setBoats(Set<Boat> boats) {
+        this.boats = boats;
+    }
+
+    public void setAdventures(Set<Adventure> adventures) {
+        this.adventures = adventures;
+    }
+
+    public void setCottageResevations(Set<CottageResevation> cottageResevations) {
+        this.cottageResevations = cottageResevations;
+    }
+
+    public void setBoatResevations(Set<BoatResevation> boatResevations) {
+        this.boatResevations = boatResevations;
+    }
+
+    public void setAdventureResevations(Set<AdventureReservation> adventureResevations) {
+        this.adventureResevations = adventureResevations;
+    }
+
+    public String getNameUser() {
+        return nameUser;
+    }
+
+    public Boolean getDelete() {
+        return delete;
+    }
+
+    public Set<Cottage> getCottages() {
+        return cottages;
+    }
+
+    public Set<Boat> getBoats() {
+        return boats;
+    }
+
+    public Set<Adventure> getAdventures() {
+        return adventures;
+    }
+
+    public Set<CottageResevation> getCottageResevations() {
+        return cottageResevations;
+    }
+
+    public Set<BoatResevation> getBoatResevations() {
+        return boatResevations;
+    }
+
+    public Set<AdventureReservation> getAdventureResevations() {
+        return adventureResevations;
+    }
 }

@@ -1,3 +1,4 @@
+import { CottagePricelistDTO } from './../../models/response/http-cottage-response/cottage-pricelist';
 import { CottageProfileDTO } from './../../models/response/http-cottage-response/cottage-profile';
 import { CottageSearchDTO } from './../../models/sort-filter-cottage/CottageSearchDTO';
 import { CottageDTO } from '../../models/response/http-cottage-response/cottage-dto';
@@ -28,6 +29,10 @@ export class CottageServiceService {
 
   public filterCottage(pageNum: number, sortType: String, sortDirection: Boolean, cs: any): Observable<CottageDTO[]> {
     return this.http.post<CottageDTO[]>(`${this.apiUrl}/sortBest/${sortType}/${sortDirection}/?pageNum=${pageNum}&pageSize=9`, cs, { headers: this.headers });
+  }
+
+  public getPricelist(id: number): Observable<CottagePricelistDTO> {
+    return this.http.get<CottagePricelistDTO>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
   }
 
 

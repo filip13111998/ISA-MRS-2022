@@ -17,7 +17,18 @@
                 style="font-size: 50px;"></i></button> </mat-grid-tile>
 
 </mat-grid-list>
+<div class="sort-container" style="margin-left: 81em;">
 
+    <mat-form-field appearance="fill">
+        <mat-label>Reservation Type</mat-label>
+        <mat-select (selectionChange)="setSortType($event.value)">
+            <mat-option *ngFor="let type of types" [value]="type.value">
+                {{type.viewValue}}
+            </mat-option>
+        </mat-select>
+    </mat-form-field>
+
+</div>
 <div>
     <div *ngIf="entity_type==0" [@fadeInOut]>
         <div class="container mt mat-elevation-z8"
@@ -67,7 +78,14 @@
 
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
-                    <td mat-cell *matCellDef="let element"> <button class="btn btn-danger">Mark</button> </td>
+                    <td mat-cell *matCellDef="let element"> <button class="btn btn-info">Mark</button> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cancel">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Cancle </th>
+                    <td mat-cell *matCellDef="let element"> <button (click)="delete_cottage(element.id)"
+                            [disabled]="checkCottageId(element.id)" class="btn btn-danger">Cancle</button>
+                    </td>
                 </ng-container>
 
 
@@ -126,7 +144,13 @@
 
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
-                    <td mat-cell *matCellDef="let element"> <button class="btn btn-danger">Mark</button> </td>
+                    <td mat-cell *matCellDef="let element"> <button class="btn btn-info">Mark</button> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cancel">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Cancle </th>
+                    <td mat-cell *matCellDef="let element"> <button (click)="delete_boat(element.id)"
+                            [disabled]="checkBoatId(element.id)" class="btn btn-danger">Cancle</button> </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsBoat"></tr>
@@ -179,7 +203,13 @@
 
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
-                    <td mat-cell *matCellDef="let element"> <button class="btn btn-danger">Mark</button> </td>
+                    <td mat-cell *matCellDef="let element"> <button class="btn btn-info">Mark</button> </td>
+                </ng-container>
+
+                <ng-container matColumnDef="cancel">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Cancle </th>
+                    <td mat-cell *matCellDef="let element"> <button (click)="delete_adventure(element.id)"
+                            [disabled]="checkAdventureId(element.id)" class="btn btn-danger">Cancle</button> </td>
                 </ng-container>
 
                 <tr mat-header-row *matHeaderRowDef="displayedColumnsAdventure"></tr>

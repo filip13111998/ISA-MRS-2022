@@ -50,5 +50,22 @@ public class MyUserController {
         return  mus.getAllHistoryReservationAdventure(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
     }
 
+    @GetMapping(value = "/notHeldCottage/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<CottageReservationHistoryDTO>>> getAllCotagesNotHeldReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllNotHeldReservationCottage(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/notHeldBoat/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<BoatReservationHistoryDTO>>> getAllBoatsNotHeldReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllNotHeldReservationBoat(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @GetMapping(value = "/notHeldAdventure/{username}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<List<AdventureReservationHistoryDTO>>> getAllAdventuresNotHeldReservation(@RequestParam Integer pageNum, @PathVariable String username ) {
+
+        return  mus.getAllNotHeldReservationAdventure(username,pageNum ).thenApplyAsync(ResponseEntity::ok);
+    }
 
 }

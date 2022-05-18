@@ -32,6 +32,18 @@
                         (click)="set_profile_page()">My Profile</button></a>
             </li>
 
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect><button
+                        class="nav-item" style="border: 0;background-color: #0BDA51;color: white;" type="button"
+                        (click)="set_subscribe_entity()">Subscribe Entity</button></a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect><button
+                        class="nav-item" style="border: 0;background-color: #0BDA51;color: white;" type="button"
+                        (click)="set_actions_page()">Actions</button></a>
+            </li>
+
 
             <!-- Dropdown -->
             <!-- <li class="nav-item dropdown" dropdown>
@@ -141,6 +153,14 @@
     <div *ngIf="menu_page==2" [@fadeInOut]>
 
         <app-my-user-profile></app-my-user-profile>
+    </div>
+    <div *ngIf="menu_page==3" [@fadeInOut]>
+
+        <app-my-user-subscribe-entity></app-my-user-subscribe-entity>
+    </div>
+    <div *ngIf="menu_page==4" [@fadeInOut]>
+        <app-my-user-actions></app-my-user-actions>
+
     </div>
 
 </div>

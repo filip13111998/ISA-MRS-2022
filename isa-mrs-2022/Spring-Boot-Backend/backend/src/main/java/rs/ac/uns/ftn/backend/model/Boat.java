@@ -16,7 +16,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
 @Entity
 @Table(name = "boat")
 //@JsonIgnoreProperties(value= {"boatImages","marks","boatPricelists","boatResevations","boatActions"})
@@ -95,10 +95,194 @@ public class Boat {
     @Fetch(FetchMode.JOIN)
     private Set<BoatAction> boatActions= new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @JoinTable(name = "my_user_boats", joinColumns = @JoinColumn(name = "boats_id"), inverseJoinColumns = @JoinColumn(name = "my_users_id"))
     @Fetch(FetchMode.JOIN)
     private Set<MyUser> myUsers = new HashSet<MyUser>();
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public void setLenght(Double lenght) {
+        this.lenght = lenght;
+    }
+
+    public void setEngineNum(Integer engineNum) {
+        this.engineNum = engineNum;
+    }
+
+    public void setEnginePower(Double enginePower) {
+        this.enginePower = enginePower;
+    }
+
+    public void setMaxSpeed(Double maxSpeed) {
+        this.maxSpeed = maxSpeed;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setCapacity(String capacity) {
+        this.capacity = capacity;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setNavigation(String navigation) {
+        this.navigation = navigation;
+    }
+
+    public void setRuleBehavior(String ruleBehavior) {
+        this.ruleBehavior = ruleBehavior;
+    }
+
+    public void setFishingEquipment(String fishingEquipment) {
+        this.fishingEquipment = fishingEquipment;
+    }
+
+    public void setMoreInformation(String moreInformation) {
+        this.moreInformation = moreInformation;
+    }
+
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
+    }
+
+    public void setBoatImages(Set<BoatImage> boatImages) {
+        this.boatImages = boatImages;
+    }
+
+    public void setMarks(Set<BoatMark> marks) {
+        this.marks = marks;
+    }
+
+    public void setBoatPricelists(Set<BoatPricelist> boatPricelists) {
+        this.boatPricelists = boatPricelists;
+    }
+
+    public void setBoatResevations(Set<BoatResevation> boatResevations) {
+        this.boatResevations = boatResevations;
+    }
+
+    public void setBoatActions(Set<BoatAction> boatActions) {
+        this.boatActions = boatActions;
+    }
+
+    public void setMyUsers(Set<MyUser> myUsers) {
+        this.myUsers = myUsers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public Double getLenght() {
+        return lenght;
+    }
+
+    public Integer getEngineNum() {
+        return engineNum;
+    }
+
+    public Double getEnginePower() {
+        return enginePower;
+    }
+
+    public Double getMaxSpeed() {
+        return maxSpeed;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public String getCapacity() {
+        return capacity;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public String getNavigation() {
+        return navigation;
+    }
+
+    public String getRuleBehavior() {
+        return ruleBehavior;
+    }
+
+    public String getFishingEquipment() {
+        return fishingEquipment;
+    }
+
+    public String getMoreInformation() {
+        return moreInformation;
+    }
+
+    public Boolean getDelete() {
+        return delete;
+    }
+
+    public Set<BoatImage> getBoatImages() {
+        return boatImages;
+    }
+
+    public Set<BoatMark> getMarks() {
+        return marks;
+    }
+
+    public Set<BoatPricelist> getBoatPricelists() {
+        return boatPricelists;
+    }
+
+    public Set<BoatResevation> getBoatResevations() {
+        return boatResevations;
+    }
+
+    public Set<BoatAction> getBoatActions() {
+        return boatActions;
+    }
+
+    public Set<MyUser> getMyUsers() {
+        return myUsers;
+    }
 
     public double averageMarks(){
         return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);

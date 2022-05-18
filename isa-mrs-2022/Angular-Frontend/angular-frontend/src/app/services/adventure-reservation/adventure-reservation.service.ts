@@ -1,0 +1,35 @@
+import { DeleteAdventureReservationDTO } from './../../models/response/entity-delete/adventure-delete';
+import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
+import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class AdventureReservationService {
+
+  public apiUrl: string = "http://localhost:8080/myuser/reservationAdventure";
+
+
+  headers = new HttpHeaders().set('Content-Type', 'application/json');
+
+  constructor(private http: HttpClient) { }
+
+  public deleteAdventure(dto: DeleteAdventureReservationDTO): Observable<Boolean> {
+
+    return this.http.post<Boolean>(`${this.apiUrl}/delete`, dto, { headers: this.headers });
+  }
+
+  error(error: HttpErrorResponse) {
+    let errorMessage = '';
+    if (error.error instanceof ErrorEvent) {
+      errorMessage = error.error.message;
+    } else {
+      errorMessage = `Error Code: ${error.status}\nMessage: ${error.message}`;
+    }
+    console.log(errorMessage);
+    return throwError(() => {
+      return errorMessage;
+    });
+  }
+}

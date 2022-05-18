@@ -34,8 +34,9 @@ public class AdventureReservationController {
         return  ars.getAdventureReservations(id).thenApplyAsync(ResponseEntity::ok);
     }
 
-    @DeleteMapping(produces = "application/json")
+    @PostMapping(value = "/delete",produces = "application/json")
     public CompletableFuture<ResponseEntity<Boolean>> deleteAdventureReservation(@RequestBody DeleteAdventureReservationDTO acr) {
+        System.out.println(acr + "GSAGSA");
         return  ars.deleteReservation(acr).thenApplyAsync(ResponseEntity::ok);
     }
 }

@@ -14,7 +14,7 @@ import java.util.Set;
 
 @NoArgsConstructor
 @AllArgsConstructor
-@Data
+//@Data
 @Entity
 @Table(name = "cottage")
 public class Cottage {
@@ -74,8 +74,7 @@ public class Cottage {
     @Fetch(FetchMode.JOIN)
     private Set<CottageAction> cottageActions = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @Fetch(FetchMode.JOIN)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Set<MyUser> myUsers = new HashSet<MyUser>();
 
     public double averageMarks(){
@@ -93,4 +92,139 @@ public class Cottage {
         return true;
     }
 
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public void setLongitude(Long longitude) {
+        this.longitude = longitude;
+    }
+
+    public void setLatitude(Long latitude) {
+        this.latitude = latitude;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setNumberOfRoom(Long numberOfRoom) {
+        this.numberOfRoom = numberOfRoom;
+    }
+
+    public void setNumberOfBedPerRoom(Long numberOfBedPerRoom) {
+        this.numberOfBedPerRoom = numberOfBedPerRoom;
+    }
+
+    public void setRuleBehavior(String ruleBehavior) {
+        this.ruleBehavior = ruleBehavior;
+    }
+
+    public void setMoreInformation(String moreInformation) {
+        this.moreInformation = moreInformation;
+    }
+
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
+    }
+
+    public void setCottageImages(Set<CottageImage> cottageImages) {
+        this.cottageImages = cottageImages;
+    }
+
+    public void setCottagePricelists(Set<CottagePricelist> cottagePricelists) {
+        this.cottagePricelists = cottagePricelists;
+    }
+
+    public void setMarks(Set<CottageMark> marks) {
+        this.marks = marks;
+    }
+
+    public void setCottageResevations(Set<CottageResevation> cottageResevations) {
+        this.cottageResevations = cottageResevations;
+    }
+
+    public void setCottageActions(Set<CottageAction> cottageActions) {
+        this.cottageActions = cottageActions;
+    }
+
+    public void setMyUsers(Set<MyUser> myUsers) {
+        this.myUsers = myUsers;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public Long getLongitude() {
+        return longitude;
+    }
+
+    public Long getLatitude() {
+        return latitude;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public Long getNumberOfRoom() {
+        return numberOfRoom;
+    }
+
+    public Long getNumberOfBedPerRoom() {
+        return numberOfBedPerRoom;
+    }
+
+    public String getRuleBehavior() {
+        return ruleBehavior;
+    }
+
+    public String getMoreInformation() {
+        return moreInformation;
+    }
+
+    public Boolean getDelete() {
+        return delete;
+    }
+
+    public Set<CottageImage> getCottageImages() {
+        return cottageImages;
+    }
+
+    public Set<CottagePricelist> getCottagePricelists() {
+        return cottagePricelists;
+    }
+
+    public Set<CottageMark> getMarks() {
+        return marks;
+    }
+
+    public Set<CottageResevation> getCottageResevations() {
+        return cottageResevations;
+    }
+
+    public Set<CottageAction> getCottageActions() {
+        return cottageActions;
+    }
+
+    public Set<MyUser> getMyUsers() {
+        return myUsers;
+    }
 }

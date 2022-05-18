@@ -10,5 +10,5 @@ export class BoatReservationHistoryDTO {
 
     pricelistItem: BoatPricelistDTO;
 
-    cottageID: number;
+    boatID: number;
 }

@@ -35,8 +35,9 @@ public class BoatReservationController {
         return  brs.getBoatReservations(id).thenApplyAsync(ResponseEntity::ok);
     }
 
-    @DeleteMapping(produces = "application/json")
-    public CompletableFuture<ResponseEntity<Boolean>> deleteCottageReservation(@RequestBody DeleteBoatReservationDTO dbr) {
+    @PostMapping(value = "/delete",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> deleteBoatReservation(@RequestBody DeleteBoatReservationDTO dbr) {
+        System.out.println(dbr + "GSAGSA");
         return  brs.deleteReservation(dbr).thenApplyAsync(ResponseEntity::ok);
     }
 }

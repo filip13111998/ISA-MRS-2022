@@ -40,7 +40,9 @@ import { RootBoatProfileComponent } from './components/root-boat-profile/root-bo
 import { RootCottageProfileComponent } from './components/root-cottage-profile/root-cottage-profile.component';
 import { FullCalendarModule } from '@fullcalendar/angular'; // must go before plugins
 import dayGridPlugin from '@fullcalendar/daygrid'; // a plugin!
-import interactionPlugin from '@fullcalendar/interaction'; // a plugin!
+import interactionPlugin from '@fullcalendar/interaction';
+import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
+import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component'; // a plugin!
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -71,6 +73,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     RootAdventureProfileComponent,
     RootBoatProfileComponent,
     RootCottageProfileComponent,
+    MyUserActionsComponent,
+    MyUserSubscribeEntityComponent,
 
   ],
   imports: [

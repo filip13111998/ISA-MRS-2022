@@ -14,6 +14,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 })
 export class CottagesHomePageComponent implements OnInit {
 
+
   cottages: CottageComboBox[] = [
     { value: 'name', viewValue: 'Name' },
     { value: 'address', viewValue: 'Address' },
@@ -117,6 +118,8 @@ export class CottagesHomePageComponent implements OnInit {
     );
 
   }
+
+
 
   public goProfile(id: number): any {
     if (localStorage.getItem('user_token') != null) {
