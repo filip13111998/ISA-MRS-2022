@@ -2,6 +2,8 @@ import { DeleteBoatReservationDTO } from './../../models/response/entity-delete/
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { BoatReservationCalendarDTO } from 'src/app/models/response/http-boat-response/BoatReservationCalendarDTO';
+import { SaveBoatReservationDTO } from 'src/app/models/response/http-boat-response/SaveBoatReservationDTO';
 
 @Injectable({
   providedIn: 'root'
@@ -16,10 +18,17 @@ export class BoatReservationService {
   constructor(private http: HttpClient) { }
 
   public deleteBoat(dto: DeleteBoatReservationDTO): Observable<Boolean> {
-    console.log(dto.myUsername);
-    console.log(dto.reservationId);
-    console.log(dto.boatId + "IDDD");
     return this.http.post<Boolean>(`${this.apiUrl}/delete`, dto, { headers: this.headers });
+  }
+
+  public getAllBoatReservations(id: number): Observable<BoatReservationCalendarDTO> {
+
+    return this.http.get<BoatReservationCalendarDTO>(`${this.apiUrl}/${id}`, { headers: this.headers });
+  }
+
+  public saveBoatReservation(dto: SaveBoatReservationDTO): Observable<Boolean> {
+
+    return this.http.post<Boolean>(`${this.apiUrl}`, dto, { headers: this.headers });
   }
 
   error(error: HttpErrorResponse) {

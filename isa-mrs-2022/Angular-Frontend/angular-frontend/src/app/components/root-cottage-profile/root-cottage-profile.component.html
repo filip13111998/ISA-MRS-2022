@@ -13,20 +13,20 @@
             <div *ngIf="!subscribe_toggle">
                 <div> <button [disabled]="sub_disable()" (click)="subscrube_toggle()" class="btn btn-danger"
                         type="submit"
-                        style="width: 50%;margin-left: 30%;margin-bottom: 1em;margin-top: -7em;">SUBSCRIBE<i
+                        style="width: 50%;margin-left: 50%;margin-bottom: 2em;margin-top: 2em;">SUBSCRIBE<i
                             style="margin-left: 1em;" class="fa fa-rocket" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
             <div *ngIf="subscribe_toggle">
                 <div> <button (click)="subscrube_toggle()" class="btn btn-info" type="submit"
-                        style="width: 50%;margin-left: 30%;margin-bottom: 1em;margin-top: -7em;">UNSUBSCRIBE<i
+                        style="width: 50%;margin-left: 50%;margin-bottom: 2em;margin-top: 2em;">UNSUBSCRIBE<i
                             style="margin-left: 1em;" class="fas fa-bell" aria-hidden="true"></i>
                     </button>
                 </div>
             </div>
             <!-- <div>KALENDAR</div> -->
-            <full-calendar style=" width: 20em;" [options]="calendarOptions"></full-calendar>
+            <full-calendar style=" width: 25em;" [options]="calendarOptions"></full-calendar>
             <!-- <i class="fa fa-money" aria-hidden="true"></i> -->
             <div class="sort-container" style="margin-left: 3em;margin-top: 1em;">
 

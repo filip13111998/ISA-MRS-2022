@@ -8,6 +8,8 @@ import * as moment from 'moment';
 import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
 import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
+import { AdventureReservationService } from 'src/app/services/adventure-reservation/adventure-reservation.service';
+import { AdventureReservationCalendarDTO } from 'src/app/models/response/http-adventure-response/AdventureReservationCalendarDTO';
 
 @Component({
   selector: 'app-root-adventure-profile',
@@ -42,16 +44,16 @@ export class RootAdventureProfileComponent implements OnInit {
 
   my_arr: any = [];
 
-  arr = [
+  arr: any = [
 
-    {
-      title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
-    },
-    { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
+    // {
+    //   title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
+    // },
+    // { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
 
-    { title: 'Rezervisano', date: '2022-05-03' },
-    // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
-    { title: 'Rezervisano', date: '2022-05-24' },
+    // { title: 'Rezervisano', date: '2022-05-03' },
+    // // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
+    // { title: 'Rezervisano', date: '2022-05-24' },
 
   ]
 
@@ -98,7 +100,7 @@ export class RootAdventureProfileComponent implements OnInit {
 
 
 
-  constructor(private as: AdventureserviceService, private ss: SubscriptionService) {
+  constructor(private as: AdventureserviceService, private ss: SubscriptionService, private ras: AdventureReservationService) {
     this.getAdventure();
   }
 
@@ -178,6 +180,38 @@ export class RootAdventureProfileComponent implements OnInit {
 
     return this.subscribe_toggle = false;
   }
+
+
+  public getCalendarData() {
+
+    this.ras.getAllAdventureReservations(this.adventureProfile.id).subscribe((liste: AdventureReservationCalendarDTO) => {
+      liste.adventureResevations.forEach(element => {
+        // console.log(element);
+        // console.log({ title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` });
+        this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Reservated', start: `${moment(element.reservationStart).format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).format('YYYY-MM-DD')}` });
+      });
+      liste.adventureActionsReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#F9D923', backgroundColor: "#F9D923", title: 'Action', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      liste.adventureActionsUnReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#187498', backgroundColor: "#187498", title: 'Action Un.', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      this.calendarOptions.events = this.arr;
+
+    });
+    // this.calendarOptions.events = this.arr;
+    // console.log("KALENDAR" + this.calendarOptions.events);
+  }
+
+
+
+
   public getAdventure() {
     var path = window.location.href;
     var id = path.split("/")[path.split("/").length - 1];
@@ -198,8 +232,13 @@ export class RootAdventureProfileComponent implements OnInit {
       }
 
       this.imgCollection.forEach(e => console.log(e));
+
       this.setSubscribeToggle();
+
       this.getPricelist();
+
+      this.getCalendarData();
+
     }
     );
 
@@ -213,9 +252,11 @@ export class RootAdventureProfileComponent implements OnInit {
       if (message['start'] != undefined && message['end'] != undefined) {
 
         var ret_val: Boolean = this.check(message['start'], message['end'], arg.dateStr);
-
+        // console.log("START" + message['start']);
+        // console.log("END" + message['end']);
+        // console.log("MY" + arg.dateStr);
         if (ret_val) {
-
+          // console.log("USOO");
           return;
 
         }
@@ -244,7 +285,7 @@ export class RootAdventureProfileComponent implements OnInit {
 
     }
 
-    this.my_arr = [...this.my_arr, { title: 'Rezervisano', date: arg.dateStr }];
+    this.my_arr = [...this.my_arr, { borderColor: '#36AE7C', backgroundColor: "#36AE7C", title: 'Rezervisano', date: arg.dateStr }];
 
     this.calendarOptions.events = this.arr.concat(this.my_arr);
 
@@ -256,43 +297,42 @@ export class RootAdventureProfileComponent implements OnInit {
 
   check(date1: any, date2: any, checkDate: any): Boolean {
 
-    var dateFrom: any = date1;
-
-    var dateTo: any = date2;
-
-    var dateCheck: any = checkDate;
-
     var d1;
 
     var d2;
 
     var c;
 
-    if (dateFrom != undefined) {
+    if (date1 != undefined) {
 
-      d1 = dateFrom.split("-");
-
-    }
-
-    if (dateTo != undefined) {
-
-      d2 = dateTo.split("-");
+      d1 = date1.split("-");
 
     }
 
-    if (dateCheck != undefined) {
+    if (date2 != undefined) {
 
-      c = dateCheck.split("-");
+      d2 = date2.split("-");
 
     }
 
-    var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+    if (checkDate != undefined) {
 
-    var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+      c = checkDate.split("-");
 
-    var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
+    }
 
-    if (from <= check && check < to) {
+    var m1 = moment(d1).subtract(1, 'M').format('YYYY-MM-DD');
+    var m2 = moment(d2).subtract(1, 'M').format('YYYY-MM-DD');
+    var cc = moment(c).subtract(1, 'M').format('YYYY-MM-DD');
+    console.log(cc);
+    console.log(m1);
+    console.log(m2);
+    if (cc < moment().add(3, 'days').format('YYYY-MM-DD')) {
+      console.log("OPS");
+      return true;
+    }
+    if (m1 <= cc && cc < m2) {
+
       return true;
 
     }
@@ -300,6 +340,18 @@ export class RootAdventureProfileComponent implements OnInit {
     else {
       return false;
     }
+    // if (from <= check && check < to) {
+    //   console.log("from" + d1);
+    //   console.log("from" + to);
+    //   console.log("from" + check);
+    //   console.log("USOO JEDNOM");
+    //   return true;
+
+    // }
+
+    // else {
+    //   return false;
+    // }
 
   }
 

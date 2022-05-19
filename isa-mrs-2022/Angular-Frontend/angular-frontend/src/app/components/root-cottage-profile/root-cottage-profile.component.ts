@@ -196,7 +196,7 @@ export class RootCottageProfileComponent implements OnInit {
 
 
   public getCalendarData() {
-    console.log("USO");
+
     this.rcs.getAllCottageReservations(this.cottageProfile.id).subscribe((liste: CottageReservationCalendarDTO) => {
       liste.cottageResevations.forEach(element => {
         // console.log(element);
@@ -288,7 +288,7 @@ export class RootCottageProfileComponent implements OnInit {
 
     }
 
-    this.my_arr = [...this.my_arr, { title: 'Rezervisano', date: arg.dateStr }];
+    this.my_arr = [...this.my_arr, { borderColor: '#36AE7C', backgroundColor: "#36AE7C", title: 'Rezervisano', date: arg.dateStr }];
 
     this.calendarOptions.events = this.arr.concat(this.my_arr);
 
@@ -297,44 +297,40 @@ export class RootCottageProfileComponent implements OnInit {
 
 
   check(date1: any, date2: any, checkDate: any): Boolean {
-
-    var dateFrom: any = date1;
-
-    var dateTo: any = date2;
-
-    var dateCheck: any = checkDate;
-
     var d1;
 
     var d2;
 
     var c;
 
-    if (dateFrom != undefined) {
+    if (date1 != undefined) {
 
-      d1 = dateFrom.split("-");
-
-    }
-
-    if (dateTo != undefined) {
-
-      d2 = dateTo.split("-");
+      d1 = date1.split("-");
 
     }
 
-    if (dateCheck != undefined) {
+    if (date2 != undefined) {
 
-      c = dateCheck.split("-");
+      d2 = date2.split("-");
 
     }
 
-    var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+    if (checkDate != undefined) {
 
-    var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+      c = checkDate.split("-");
 
-    var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
+    }
 
-    if (from <= check && check < to) {
+    var m1 = moment(d1).subtract(1, 'M').format('YYYY-MM-DD');
+    var m2 = moment(d2).subtract(1, 'M').format('YYYY-MM-DD');
+    var cc = moment(c).subtract(1, 'M').format('YYYY-MM-DD');
+
+    if (cc < moment().add(3, 'days').format('YYYY-MM-DD')) {
+      return true;
+    }
+
+    if (m1 <= cc && cc < m2) {
+
       return true;
 
     }

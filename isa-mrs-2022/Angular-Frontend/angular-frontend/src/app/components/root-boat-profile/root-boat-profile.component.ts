@@ -8,6 +8,8 @@ import { Datum } from 'src/app/models/util/datum';
 import { SubscriptionService } from 'src/app/services/subscription/subscription.service';
 import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
 import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
+import { BoatReservationService } from 'src/app/services/boat-reservation/boat-reservation.service';
+import { BoatReservationCalendarDTO } from 'src/app/models/response/http-boat-response/BoatReservationCalendarDTO';
 @Component({
   selector: 'app-root-boat-profile',
   templateUrl: './root-boat-profile.component.html',
@@ -41,16 +43,16 @@ export class RootBoatProfileComponent implements OnInit {
 
   my_arr: any = [];
 
-  arr = [
+  arr: any = [
 
-    {
-      title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
-    },
-    { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
+    // {
+    //   title: 'Rezervisano', start: '2022-05-11', end: '2022-05-14'
+    // },
+    // { title: 'Rezervisano', start: '2022-05-18', end: '2022-05-20' },
 
-    { title: 'Rezervisano', date: '2022-05-03' },
-    // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
-    { title: 'Rezervisano', date: '2022-05-24' },
+    // { title: 'Rezervisano', date: '2022-05-03' },
+    // // { title: 'Rezervisano', date: `${this.godina}-${this.mesec}-${this.dan}` },
+    // { title: 'Rezervisano', date: '2022-05-24' },
 
   ]
 
@@ -101,7 +103,7 @@ export class RootBoatProfileComponent implements OnInit {
 
 
 
-  constructor(private bs: BoatserviceService, private ss: SubscriptionService) {
+  constructor(private bs: BoatserviceService, private ss: SubscriptionService, private rbs: BoatReservationService) {
     this.getBoat();
   }
 
@@ -180,7 +182,32 @@ export class RootBoatProfileComponent implements OnInit {
     return this.subscribe_toggle = false;
   }
 
+  public getCalendarData() {
 
+    this.rbs.getAllBoatReservations(this.boatProfile.id).subscribe((liste: BoatReservationCalendarDTO) => {
+      liste.boatResevations.forEach(element => {
+        // console.log(element);
+        // console.log({ title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` });
+        this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Reservated', start: `${moment(element.reservationStart).format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).format('YYYY-MM-DD')}` });
+      });
+      liste.boatActionsReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#F9D923', backgroundColor: "#F9D923", title: 'Action', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      liste.boatActionsUnReservated.forEach(element => {
+        this.arr = [...this.arr, { borderColor: '#187498', backgroundColor: "#187498", title: 'Action Un.', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+
+        // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
+      });
+      this.calendarOptions.events = this.arr;
+
+    });
+    // this.calendarOptions.events = this.arr;
+    // console.log("KALENDAR" + this.calendarOptions.events);
+  }
 
   public getBoat() {
 
@@ -212,6 +239,7 @@ export class RootBoatProfileComponent implements OnInit {
 
       this.getPricelist();
 
+      this.getCalendarData();
     }
     );
 
@@ -256,7 +284,7 @@ export class RootBoatProfileComponent implements OnInit {
 
     }
 
-    this.my_arr = [...this.my_arr, { title: 'Rezervisano', date: arg.dateStr }];
+    this.my_arr = [...this.my_arr, { borderColor: '#36AE7C', backgroundColor: "#36AE7C", title: 'Rezervisano', date: arg.dateStr }];
 
     this.calendarOptions.events = this.arr.concat(this.my_arr);
 
@@ -268,43 +296,41 @@ export class RootBoatProfileComponent implements OnInit {
 
   check(date1: any, date2: any, checkDate: any): Boolean {
 
-    var dateFrom: any = date1;
-
-    var dateTo: any = date2;
-
-    var dateCheck: any = checkDate;
-
     var d1;
 
     var d2;
 
     var c;
 
-    if (dateFrom != undefined) {
+    if (date1 != undefined) {
 
-      d1 = dateFrom.split("-");
-
-    }
-
-    if (dateTo != undefined) {
-
-      d2 = dateTo.split("-");
+      d1 = date1.split("-");
 
     }
 
-    if (dateCheck != undefined) {
+    if (date2 != undefined) {
 
-      c = dateCheck.split("-");
+      d2 = date2.split("-");
 
     }
 
-    var from = new Date(d1[2], parseInt(d1[1]) - 1, d1[0]);  // -1 because months are from 0 to 11
+    if (checkDate != undefined) {
 
-    var to = new Date(d2[2], parseInt(d2[1]) - 1, d2[0]);
+      c = checkDate.split("-");
 
-    var check = new Date(c[2], parseInt(c[1]) - 1, c[0]);
+    }
 
-    if (from <= check && check < to) {
+    var m1 = moment(d1).subtract(1, 'M').format('YYYY-MM-DD');
+    var m2 = moment(d2).subtract(1, 'M').format('YYYY-MM-DD');
+    var cc = moment(c).subtract(1, 'M').format('YYYY-MM-DD');
+    // console.log("MOMENT " + moment().format('YYYY-MM-DD') + "VS " + cc);
+    // console.log("MOMENT " + m1 + "VS " + m2);
+    if (cc < moment().add(3, 'days').format('YYYY-MM-DD')) {
+      return true;
+    }
+
+    if (m1 <= cc && cc < m2) {
+
       return true;
 
     }
@@ -312,7 +338,6 @@ export class RootBoatProfileComponent implements OnInit {
     else {
       return false;
     }
-
   }
 
   makeReservation() {
