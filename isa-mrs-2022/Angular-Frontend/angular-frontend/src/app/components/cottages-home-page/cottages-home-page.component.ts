@@ -26,7 +26,9 @@ export class CottagesHomePageComponent implements OnInit {
     name: [null],
     address: [null],
     numberOfRoom: [null],
-    averageMark: [null]
+    averageMark: [null],
+    start: [null],
+    end: [null]
   })
 
   cttList: CottageDTO[] = [];

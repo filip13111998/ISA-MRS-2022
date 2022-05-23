@@ -23,7 +23,9 @@ export class AdventuresHomePageComponent implements OnInit {
     address: [null],
     averageMark: [null],
     maxNumPersonFrom: [null],
-    maxNumPersonTo: [null]
+    maxNumPersonTo: [null],
+    start: [null],
+    end: [null]
   })
 
 

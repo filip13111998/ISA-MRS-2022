@@ -34,7 +34,9 @@ export class BoatsHomePageComponent implements OnInit {
     enginePowerTo: [null],
     maxSpeedFrom: [null],
     maxSpeedTo: [null],
-    averageMark: [null]
+    averageMark: [null],
+    start: [null],
+    end: [null]
   })
 
 

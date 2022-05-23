@@ -49,7 +49,7 @@ public class BoatService {
     @Async
     public CompletableFuture<List<BoatDTO>> getAllBoats(Integer pageNum , Integer pageSize) {
 
-        log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
+        log.info("GET ALL BOATS "+ Thread.currentThread().getName());
 
         Pageable singlePage = PageRequest.of(pageNum, pageSize);
 
@@ -67,7 +67,7 @@ public class BoatService {
     @Async
     public CompletableFuture<List<BoatDTO>> getAllBoats(Integer pageNum , Integer pageSize , String sortType , Boolean direction) {
 
-        log.info("GET ALL COTTAGES "+ Thread.currentThread().getName());
+        log.info("GET ALL BOATs "+ Thread.currentThread().getName());
 
         if(!possibleType.contains(sortType)){
             return CompletableFuture.completedFuture(new ArrayList<>());
@@ -96,9 +96,13 @@ public class BoatService {
     @Async
     public CompletableFuture<BoatProfileDTO> getOneBoat(Long id){
 
+        System.out.println("USO BRE");
+
         Optional<Boat> bto = br.findById(id);
 
         Boat bt = bto.get();
+
+
 
         BoatProfileDTO bpdto = new BoatProfileDTO(bt.getId(), bt.getName(),bt.getType(),bt.getLenght(),bt.getEngineNum(),bt.getEnginePower(),
                     bt.getMaxSpeed(),bt.getAddress(),bt.getLongitude(),bt.getLatitude(),bt.getCapacity(),bt.getDescription(),
@@ -108,6 +112,7 @@ public class BoatService {
                     bt.getBoatActions()
                 );
 
+        System.out.println(bpdto.getAddress() + " " + bpdto.getCapacity());
 
         return CompletableFuture.completedFuture(bpdto);
 
@@ -118,7 +123,7 @@ public class BoatService {
     @Async
     public CompletableFuture<List<BoatDTO>> getAllBoatSearchSort(BoatSearchSortDTO bssdto, Integer pageNum , Integer pageSize, String sortType , Boolean direction) {
 
-        BoatService.log.info("GET ALL COTTAGES BEST WAY "+ Thread.currentThread().getName());
+        BoatService.log.info("GET ALL BOATS BEST WAY "+ Thread.currentThread().getName());
 
         System.out.println(bssdto);
 
@@ -156,6 +161,19 @@ public class BoatService {
 
 
     public Boolean checkBoat(Boat b, BoatSearchSortDTO bs){
+
+        if(bs.getStart() != null && bs.getEnd()!= null){
+            boolean date_ret=true;
+//            System.out.println("USOO");
+            for(BoatResevation br: b.getBoatResevations()){
+                if(!(bs.getStart().isAfter(br.getReservationEnd()) || bs.getEnd().isBefore(br.getReservationStart()))){
+                    date_ret=false;
+                }
+            }
+            if(date_ret == false){
+                return date_ret;
+            }
+        }
 
         if(bs.getAddress() != null){
             if(!b.getAddress().equals(bs.getAddress())){
@@ -252,7 +270,7 @@ public class BoatService {
 
     public CompletableFuture<List<BoatPricelist>> getBoatPricelist(Long id) {
 
-        log.info("GET COTTAGE PRICELIST WITH COTTAGE ID: " + id);
+        log.info("GET BOAT PRICELIST WITH COTTAGE ID: " + id);
 
         Optional<Boat> bto = br.findById(id);
 

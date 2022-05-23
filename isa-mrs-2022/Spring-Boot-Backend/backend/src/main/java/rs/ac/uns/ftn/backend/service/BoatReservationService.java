@@ -32,12 +32,14 @@ public class BoatReservationService {
 
     private BoatPricelistRepository bpr;
 
+    private BoatActionRepository bar;
 
-    public BoatReservationService(BoatRepository br, MyUserRepository mr,BoatReservationRepository brr,BoatPricelistRepository bpr){
+    public BoatReservationService(BoatActionRepository bar,BoatRepository br, MyUserRepository mr,BoatReservationRepository brr,BoatPricelistRepository bpr){
         this.br = br;
         this.mr = mr;
         this.brr = brr;
         this.bpr=bpr;
+        this.bar=bar;
     }
 
     @Async
@@ -65,6 +67,8 @@ public class BoatReservationService {
 //        crc.setCottageActions(lista);
         SimpleActionDTO temp= new SimpleActionDTO();
         Boolean cmp= true;
+
+
         for(SimpleActionDTO sac : lista){
             for(BoatResevation botres : bt.getBoatResevations()){
 
@@ -102,7 +106,22 @@ public class BoatReservationService {
     @Async
     public CompletableFuture<Boolean> saveReservation(SaveBoatReservationDTO srdto) {
 
-        log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
+        log.info("SAVE BOAT RESERVATION WITH USERNAME: " + srdto.getMyUsername());
+
+        List<BoatAction> bal = bar.findAll();
+
+        Optional<BoatAction> ba = bal.stream().filter(e->e.getStartAction().equals(srdto.getStart())).findFirst();
+
+        Optional<Boat> bot = br.findById(srdto.getBoatId());
+
+//        System.out.println("USO");
+//        System.out.println(srdto.getStart());
+
+        if (!ba.isEmpty()){
+//            System.out.println("USO");
+            bot.get().getBoatActions().remove(ba.get());
+            bar.delete(ba.get());
+        }
 
 
         BoatResevation botr = new BoatResevation();

@@ -24,4 +24,8 @@ export class BoatSearchSortDTO {
 
     averageMark: number;
 
+    start: Date;
+
+    end: Date;
+
 }

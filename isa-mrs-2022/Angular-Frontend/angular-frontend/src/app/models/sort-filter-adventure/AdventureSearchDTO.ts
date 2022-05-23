@@ -10,4 +10,8 @@ export class AdventureSearchSortDTO {
 
     averageMark: number;
 
+    start: Date;
+
+    end: Date;
+
 }

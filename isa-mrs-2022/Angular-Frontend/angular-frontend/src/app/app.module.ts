@@ -44,6 +44,8 @@ import interactionPlugin from '@fullcalendar/interaction';
 import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
 import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component';
 import { HomePageMenuComponent } from './components/home-page-menu/home-page-menu.component'; // a plugin!
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -97,8 +99,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatFormFieldModule,
     NgImageSliderModule,
     MatTableModule,
-    FullCalendarModule // register FullCalendar with you app
-
+    FullCalendarModule, // register FullCalendar with you app
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

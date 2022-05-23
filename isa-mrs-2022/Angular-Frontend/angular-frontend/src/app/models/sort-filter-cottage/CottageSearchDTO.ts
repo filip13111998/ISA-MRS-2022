@@ -8,4 +8,8 @@ export class CottageSearchDTO {
 
     averageMark: number;
 
+    start: Date;
+
+    end: Date;
+
 }

@@ -32,12 +32,14 @@ public class AdventureReservationService {
 
     private AdventurePricelistRepository apr;
 
+    private AdventureActionRepository aar;
 
-    public AdventureReservationService(AdventureRepository ar, MyUserRepository mr,AdventureReservationRepository arr,AdventurePricelistRepository apr){
+    public AdventureReservationService(AdventureActionRepository aar,AdventureRepository ar, MyUserRepository mr,AdventureReservationRepository arr,AdventurePricelistRepository apr){
         this.ar = ar;
         this.mr = mr;
         this.arr = arr;
         this.apr=apr;
+        this.aar = aar;
     }
 
     @Async
@@ -111,6 +113,21 @@ public class AdventureReservationService {
     public CompletableFuture<Boolean> saveReservation(SaveAdventureReservationDTO srdto) {
 
         log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
+
+        List<AdventureAction> aal = aar.findAll();
+
+        Optional<AdventureAction> aa = aal.stream().filter(e->e.getStartAction().equals(srdto.getStart())).findFirst();
+
+        Optional<Adventure> aot = ar.findById(srdto.getAdventureId());
+
+//        System.out.println("USO");
+//        System.out.println(srdto.getStart());
+
+        if (!aa.isEmpty()){
+//            System.out.println("USO");
+            aot.get().getAdventureActions().remove(aa.get());
+            aar.delete(aa.get());
+        }
 
 
         AdventureReservation aotr = new AdventureReservation();

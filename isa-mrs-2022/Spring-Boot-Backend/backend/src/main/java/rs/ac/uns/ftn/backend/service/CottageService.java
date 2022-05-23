@@ -12,6 +12,7 @@ import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageReservationDTO;
 import rs.ac.uns.ftn.backend.model.Cottage;
 import rs.ac.uns.ftn.backend.model.CottagePricelist;
+import rs.ac.uns.ftn.backend.model.CottageResevation;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
 import java.time.format.DateTimeFormatter;
@@ -158,7 +159,7 @@ public class CottageService {
             return CompletableFuture.completedFuture(new ArrayList<>());
         }
 
-        System.out.println(sortType);
+//        System.out.println(sortType);
         List<CottageDTO> listCottageDTO = new ArrayList<>();
         Stream<Cottage> stream;
         if(direction){
@@ -189,6 +190,20 @@ public class CottageService {
 
 
     public Boolean checkCottage(Cottage c,CottageSearchSortDTO sc){
+
+        if(sc.getStart() != null && sc.getEnd()!= null){
+            boolean date_ret=true;
+//            System.out.println("USOO");
+            for(CottageResevation cr: c.getCottageResevations()){
+                if(!(sc.getStart().isAfter(cr.getReservationEnd()) || sc.getEnd().isBefore(cr.getReservationStart()))){
+                    date_ret=false;
+                }
+            }
+            if(date_ret == false){
+                return date_ret;
+            }
+        }
+
 
         if(sc.getAddress() != null){
             if(!c.getAddress().equals(sc.getAddress())){

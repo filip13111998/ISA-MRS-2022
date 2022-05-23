@@ -37,12 +37,15 @@ public class CottageReservationService {
 
     private CottagePricelistRepository cpr;
 
+    private CottageActionRepository car;
 
-    public CottageReservationService(CottageRepository cr, MyUserRepository mr,CottageReservationRepository crr,CottagePricelistRepository cpr){
+
+    public CottageReservationService( CottageActionRepository car,CottageRepository cr, MyUserRepository mr,CottageReservationRepository crr,CottagePricelistRepository cpr){
         this.cr = cr;
         this.mr = mr;
         this.crr = crr;
         this.cpr=cpr;
+        this.car = car;
     }
 
     @Async
@@ -110,6 +113,24 @@ public class CottageReservationService {
         log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
 
 
+//        srdto.setEnd(srdto.getEnd().plusDays(1));
+
+        List<CottageAction> cal = car.findAll();
+
+        Optional<CottageAction> ca = cal.stream().filter(e->e.getStartAction().equals(srdto.getStart())).findFirst();
+
+        Optional<Cottage> cto = cr.findById(srdto.getCottageId());
+
+        System.out.println("USO");
+        System.out.println(srdto.getStart());
+
+        if (!ca.isEmpty()){
+            System.out.println("USO");
+            cto.get().getCottageActions().remove(ca.get());
+            car.delete(ca.get());
+        }
+
+
         CottageResevation cotr = new CottageResevation();
 
         cotr.setActive(true);
@@ -124,7 +145,7 @@ public class CottageReservationService {
 
         muo.getCottageResevations().add(cotr);
 
-        Optional<Cottage> cto = cr.findById(srdto.getCottageId());
+
 
         Cottage ct = cto.get();
 

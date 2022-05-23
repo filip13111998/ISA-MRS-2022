@@ -10,6 +10,7 @@ import { SubscribeDTO } from 'src/app/models/subscription/subscribe';
 import { CottageComboBox } from 'src/app/models/combo-home-page/cottage-combo-box';
 import { BoatReservationService } from 'src/app/services/boat-reservation/boat-reservation.service';
 import { BoatReservationCalendarDTO } from 'src/app/models/response/http-boat-response/BoatReservationCalendarDTO';
+import { SaveBoatReservationDTO } from 'src/app/models/response/http-boat-response/SaveBoatReservationDTO';
 @Component({
   selector: 'app-root-boat-profile',
   templateUrl: './root-boat-profile.component.html',
@@ -27,7 +28,7 @@ export class RootBoatProfileComponent implements OnInit {
 
   // coordinates = new google.maps.LatLng(this.lat, this.lng);
 
-  displayedColumns: string[] = ['id', 'maxPeopleNum', 'description', 'price', 'startAction', 'endAction'];
+  displayedColumns: string[] = ['id', 'maxPeopleNum', 'description', 'price', 'startAction', 'endAction', 'fast'];
 
   imgCollection: Array<object> = [];
 
@@ -76,7 +77,7 @@ export class RootBoatProfileComponent implements OnInit {
 
   pricelistId: number = 0;
 
-
+  pricelistList: BoatPricelistDTO[];
 
   ngAfterViewInit() {
     this.mapInitializer();
@@ -119,7 +120,7 @@ export class RootBoatProfileComponent implements OnInit {
 
   public getPricelist() {
     this.bs.getPricelist(this.boatProfile.id).subscribe((e: BoatPricelistDTO[]) => {
-
+      this.pricelistList = e;
       e.forEach(element => {
         this.typesPricelist.push({ value: `${element.id}`, viewValue: `${element.description} - ${element.price}` });
       });
@@ -129,6 +130,9 @@ export class RootBoatProfileComponent implements OnInit {
   public setSubscribeToggle() {
 
     this.tkn = localStorage.getItem('user_token');
+    if (this.tkn == null) {
+      return;
+    }
     this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
 
     var dto = new SubscribeDTO();
@@ -188,17 +192,17 @@ export class RootBoatProfileComponent implements OnInit {
       liste.boatResevations.forEach(element => {
         // console.log(element);
         // console.log({ title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` });
-        this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+        this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).add(1, 'days').subtract(1, 'months').format('YYYY-MM-DD')}` }];
 
         // this.arr.push({ title: 'Reservated', start: `${moment(element.reservationStart).format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).format('YYYY-MM-DD')}` });
       });
       liste.boatActionsReservated.forEach(element => {
-        this.arr = [...this.arr, { borderColor: '#F9D923', backgroundColor: "#F9D923", title: 'Action', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+        this.arr = [...this.arr, { borderColor: '#F9D923', backgroundColor: "#F9D923", title: 'Action', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).add(1, 'days').subtract(1, 'months').format('YYYY-MM-DD')}` }];
 
         // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
       });
       liste.boatActionsUnReservated.forEach(element => {
-        this.arr = [...this.arr, { borderColor: '#187498', backgroundColor: "#187498", title: 'Action Un.', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).subtract(1, 'months').format('YYYY-MM-DD')}` }];
+        this.arr = [...this.arr, { borderColor: '#187498', backgroundColor: "#187498", title: 'Action Un.', start: `${moment(element.startAction).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.endAction).add(1, 'days').subtract(1, 'months').format('YYYY-MM-DD')}` }];
 
         // this.arr.push({ title: 'Action', start: element.startAction, end: element.endAction });
       });
@@ -342,12 +346,24 @@ export class RootBoatProfileComponent implements OnInit {
 
   makeReservation() {
 
+    var path = window.location.href;
+    var id = path.split("/")[path.split("/").length - 1];
+
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+
+
+
+    var pl = this.pricelistList.filter(e => e.id == this.pricelistId)[0];
+
     const sorted = this.my_arr.sort((a: any, b: any) => {
 
       return +new Date(a['date']) - +new Date(b['date'])
 
     });
 
+    var start = sorted[0]['date'];
+    var end = sorted[sorted.length - 1]['date'];
 
     var counter = 1;
 
@@ -355,6 +371,18 @@ export class RootBoatProfileComponent implements OnInit {
 
       if (counter == this.my_arr.length) {
         //dobro je ako prodje ovde jer nije naso a stigo do kraja
+        var sctg = new SaveBoatReservationDTO();
+        sctg.boatId = Number(id);
+        sctg.myUsername = this.username + "";
+        sctg.start = start;
+        sctg.end = end;
+        sctg.description = pl.description + "";
+        sctg.price = pl.price;
+
+        //dobro je ako prodje ovde jer nije naso a stigo do kraja
+        this.rbs.saveBoatReservation(sctg).subscribe((bol: Boolean) => {
+          console.log("Uspesna rezervacija?" + bol);
+        });
       }
       else {
 
@@ -378,4 +406,50 @@ export class RootBoatProfileComponent implements OnInit {
 
   }
 
+  makeFastReservation(price: number, desc: string, start: Date, end: Date) {
+
+    console.log("FAST START");
+    var path = window.location.href;
+    var id = path.split("/")[path.split("/").length - 1];
+
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+
+    var sctg = new SaveBoatReservationDTO();
+    sctg.boatId = Number(id);
+    sctg.myUsername = this.username + "";
+    // console.log("DATE start:" + moment(start).subtract(1, "month").format('YYYY-MM-DD'));
+    sctg.start = new Date(moment(start).subtract(1, "month").format('YYYY-MM-DD'));
+    sctg.end = new Date(moment(end).subtract(1, "month").format('YYYY-MM-DD'));
+    sctg.description = desc + "";
+    sctg.price = price;
+    console.log(sctg);
+    //dobro je ako prodje ovde jer nije naso a stigo do kraja
+    this.rbs.saveBoatReservation(sctg).subscribe((bol: Boolean) => {
+      console.log("Uspesna rezervacija?" + bol);
+    });
+
+
+    // console.log("Price" + price);
+    // // console.log("Desc" + desc);
+    // console.log("Start" + moment(start).subtract(1, "month").format('YYYY-MM-DD'));
+
+
+  }
+
+  public fast_action_disable(start: any): Boolean {
+
+    if (localStorage.getItem("user_token") == null) {
+
+      return true;
+
+    }
+
+    if (moment(start) < moment()) {
+      return true;
+    }
+
+    return false;
+
+  }
 }

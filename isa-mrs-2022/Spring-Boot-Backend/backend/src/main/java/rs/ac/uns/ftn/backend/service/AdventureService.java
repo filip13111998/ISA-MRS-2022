@@ -12,10 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
-import rs.ac.uns.ftn.backend.model.Adventure;
-import rs.ac.uns.ftn.backend.model.AdventurePricelist;
-import rs.ac.uns.ftn.backend.model.Boat;
-import rs.ac.uns.ftn.backend.model.BoatPricelist;
+import rs.ac.uns.ftn.backend.model.*;
 import rs.ac.uns.ftn.backend.repository.AdventureRepository;
 
 import java.util.ArrayList;
@@ -144,6 +141,20 @@ public class AdventureService {
 
 
     public Boolean checkAdventure(Adventure a, AdventureSearchSortDTO as){
+
+        if(as.getStart() != null && as.getEnd()!= null){
+            boolean date_ret=true;
+//            System.out.println("USOO");
+            for(AdventureReservation ar: a.getAdventureReservations()){
+                if(!(as.getStart().isAfter(ar.getReservationEnd()) || as.getEnd().isBefore(ar.getReservationStart()))){
+                    date_ret=false;
+                }
+            }
+            if(date_ret == false){
+                return date_ret;
+            }
+        }
+
 
         if(as.getAddress() != null){
             if(!a.getAddress().equals(as.getAddress())){

@@ -1,4 +1,4 @@
-<div class="search-bar form-group container">
+<div style="margin-left: 12.5%;" class="search-bar form-group container">
     <form [formGroup]="profileForm" (ngSubmit)="filterBoat()">
         <div class="row" style="width: 80%;margin-left: 10%;">
 
@@ -50,6 +50,24 @@
             </div>
             <!-- <p>Form Status: {{ profileForm.status }}</p> -->
             <p></p>
+            <p></p>
+
+            <div class="col col-example" style="margin-left: 35%;">
+                <mat-form-field appearance="fill">
+                    <mat-label>Enter a date range</mat-label>
+                    <mat-date-range-input [rangePicker]="picker">
+                        <input matStartDate formControlName="start" placeholder="Start date">
+                        <input matEndDate formControlName="end" placeholder="End date">
+                    </mat-date-range-input>
+                    <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-date-range-picker #picker></mat-date-range-picker>
+
+                    <mat-error *ngIf="true">Invalid start date
+                    </mat-error>
+                    <mat-error *ngIf="true">Invalid end date</mat-error>
+                </mat-form-field>
+            </div>
             <p></p>
             <button class="btn btn-primary" type="submit" style="width: 40%;margin-left: 30%;">Search</button>
         </div>

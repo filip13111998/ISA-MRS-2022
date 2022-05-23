@@ -50,11 +50,12 @@ INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,
 INSERT INTO cottage (name,address,longitude,latitude,description,number_of_room,number_of_bed_per_room,rule_behaviour,more_information,delete_ctg) VALUES ('D','Wilson 51',23.3556,23.7777 , 'Description 2wqee',4,3,'rule behaviour','more informations',false);
 
 
---COTTAGE ACTION
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('01-05-2022' , '03-05-2022', '5'  , 4500 , 'some more information');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('23-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('10-07-2022' , '13-07-2022', '5'  , 15500 , 'some more information ...');
-INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '2'  , 4000 , 'some more information ......');
+--COTTAGE ACTION '01-08-2022' '03-08-2022'
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('01-08-2022' , '03-08-2022', '3 osobe'  , 4500 , 'some more information');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('23-06-2022' , '28-06-2022', '9 osoba'  , 5500 , 'some more information .');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('10-07-2022' , '13-07-2022', '9 osoba'  , 15500 , 'some more information ...');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-07-2022' , '08-07-2022', '6 osoba'  , 4000 , 'some more information ......');
+INSERT INTO cottage_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('04-01-2022' , '08-01-2022', '6 osoba'  , 4000 , 'some more information ......');
 
 
 --COTTAGE IMAGE
@@ -104,7 +105,7 @@ INSERT INTO cottage_pricelist (price,description) VALUES (6500,'6 osoba');
 INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
 
 --COTTAGE RESERVATION
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('21-05-2022','23-05-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('10-09-2022','13-09-2022',true,4);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('08-06-2022','10-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
@@ -112,15 +113,16 @@ INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottag
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-03-2022','05-03-2022',true,1);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',true,2);
 INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-06-2022','18-06-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-05-2022','08-05-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-05-2022','21-05-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-05-2022','25-05-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-08-2022','08-08-2022',true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-08-2022','21-08-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-09-2022','25-09-2022',true,3);
 
 --COTTAGE COTTAGE ACTION
 INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
 INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,2);
 INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,3);
-
+INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,4);
+INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,5);
 --COTTAGE COTTAGE PRICELIST
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,2);
 INSERT INTO cottage_cottage_pricelists(cottage_id,cottage_pricelists_id) VALUES (1,3);
@@ -197,11 +199,11 @@ INSERT INTO boat (name,type_boat,lenght,engine_num,engine_power,max_speed,addres
 
 
 --BOAT ACTION
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-05-2022' , '13-05-2022', '3'  , 4500 , 'some more information');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('21-06-2022' , '28-06-2022', '1'  , 5500 , 'some more information .');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('19-06-2022' , '21-06-2022', '3'  , 5500 , 'some more information ...');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2'  , 4000 , 'some more information ......');
-INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('13-08-2022' , '16-08-2022', '2'  , 4000 , 'some more information ......');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('14-05-2022' , '18-05-2022', '3 osobe'  , 4500 , 'some more information');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('11-06-2022' , '18-06-2022', '2 osobe'  , 5500 , 'some more information .');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('17-06-2022' , '20-06-2022', '3 osobe'  , 5500 , 'some more information ...');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2 osobe'  , 4000 , 'some more information ......');
+INSERT INTO boat_action ( action_start, action_end, max_people_num,  price, more_information ) VALUES ('13-08-2022' , '16-08-2022', '2 osobe'  , 4000 , 'some more information ......');
 
 
 INSERT INTO boat_image ( name ) VALUES ('ads9.png');
@@ -224,7 +226,7 @@ INSERT INTO boat_pricelist (price,description) VALUES (14000,'9 osoba');
 --BOAT RESERVATION
 INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-05-2022','13-05-2022',true,1);
 INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','28-06-2022',true,3);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','21-06-2022',true,4);
+INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-06-2022','12-06-2022',true,4);
 INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,2);
 INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-06-2022','18-06-2022',true,2);
 
@@ -305,11 +307,11 @@ INSERT INTO adventure (name,address,longitude,latitude,description,instructor_id
 INSERT INTO adventure (name,address,longitude,latitude,description,instructor_id , max_num , rule_behaviour,more_information,cancellation_conditions) VALUES ('dan na reci 4' , 'Beograd' , 88.554 ,84.4521,'opsi neki',1,15,'pravila ponasanja','more information','uslovi otkaza');
 
 --ADVENTURE ACTION
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-04-2022' , '18-04-2022', '5' , 'Novi Sad' , 4500 , 'some more information');
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '27-04-2022', '1' , 'Novi Sad' , 1500 , 'some more information .');
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '25-04-2022', '5' , 'Beograd' , 5500 , 'some more information ...');
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2' , 'Nis' , 2000 , 'some more information ......');
-INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('27-07-2022' , '28-07-2022', '2' , 'Nis' , 2000 , 'some more information ......');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-04-2022' , '18-04-2022', '7 osoba' , 'Novi Sad' , 4500 , 'some more information');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '27-04-2022', '1 osoba' , 'Novi Sad' , 1500 , 'some more information .');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('23-04-2022' , '25-04-2022', '7 osoba' , 'Beograd' , 5500 , 'some more information ...');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('15-07-2022' , '18-07-2022', '2 osobe' , 'Nis' , 2000 , 'some more information ......');
+INSERT INTO adventure_action ( action_start, action_end, max_people_num, place, price, more_information ) VALUES ('27-07-2022' , '28-07-2022', '2 osobe' , 'Nis' , 2000 , 'some more information ......');
 
 --ADVENTURE IMAGE
 INSERT INTO adventure_image ( name ) VALUES ('ads10.png');

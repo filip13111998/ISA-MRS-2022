@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
@@ -18,5 +19,9 @@ public class CottageSearchSortDTO {
     private Long numberOfRoom;
 
     private Double averageMark;
+
+    private LocalDate start;
+
+    private LocalDate end;
 
 }
