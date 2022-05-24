@@ -7,8 +7,8 @@ INSERT INTO ROLE (name) VALUES ('ROLE_USER');
 INSERT INTO ROLE (name) VALUES ('ROLE_ADMIN');
 
 --USERS
-INSERT INTO administrator (id,username, password, first_name, last_name, email, enabled, last_password_reset_date,name_admin) VALUES (nextval('cust_seq_user'),'admin1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07','Ogi admin');
-INSERT INTO administrator (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'admin2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07');
+INSERT INTO administrator (id,activate_acc,username, password, first_name, last_name, email, enabled, last_password_reset_date,name_admin) VALUES (nextval('cust_seq_user'),true,'admin1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07','Ogi admin');
+INSERT INTO administrator (id,activate_acc,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),false,'admin2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07');
 
 INSERT INTO my_user (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'myus1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
 INSERT INTO my_user (id,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),'myus2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'user2@example.com', true, '2017-10-01 18:57:58.508-07');

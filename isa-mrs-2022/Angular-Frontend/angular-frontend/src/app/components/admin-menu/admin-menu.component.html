@@ -1,0 +1,87 @@
+<!-- <p>register-user-home-page works!</p> -->
+
+<!--Navbar-->
+<mdb-navbar SideClass="navbar navbar-expand-lg navbar-dark" class="nav-css" [containerInside]="false">
+
+    <!-- Navbar brand -->
+    <mdb-navbar-brand><a class="navbar-brand" style="color: white;"><b>ADMIN</b></a></mdb-navbar-brand>
+
+    <!-- Collapsible content -->
+    <links>
+
+        <!-- Links -->
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <a class="nav-link waves-light" mdbWavesEffect>ISA-MRS-2022<span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect>Home</a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect>Delete Users
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','register_home']" mdbWavesEffect>Delete Entity
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link waves-light" [routerLink]="['/','myUser','myus1']" mdbWavesEffect>Profile</a>
+            </li>
+
+
+            <!-- Dropdown -->
+            <!-- <li class="nav-item dropdown" dropdown>
+                <a dropdownToggle mdbWavesEffect type="button" class="nav-link dropdown-toggle waves-light"
+                    mdbWavesEffect>
+                    Basic dropdown<span class="caret"></span></a>
+                <div *dropdownMenu class="dropdown-menu dropdown dropdown-primary" role="menu">
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Action</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Another action</a>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Something else here</a>
+                    <div class="divider dropdown-divider"></div>
+                    <a class="dropdown-item waves-light" mdbWavesEffect href="#">Separated link</a>
+                </div>
+            </li> -->
+
+        </ul>
+        <!-- Links -->
+
+        <ul class="navbar-nav ml-auto nav-flex-icons">
+            <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/','admin_login']">
+                    <!-- <mdb-icon fab icon="google-plus"></mdb-icon> -->
+                    <!-- <i class="fa fa-sign-in fa-xl" aria-hidden="true" style="margin-right: 0.5em;"></i> -->
+                    <button class="nav-item" style="border: 0;background-color: #FFA900;;color: white;" type="button"
+                        (click)="logout()"><i class="fa fa-sign-out  fa-xl" aria-hidden="true"></i></button>
+                </a>
+            </li>
+            <!-- <li class="nav-item">
+                <a class="nav-link" [routerLink]="['/','registration']">
+
+                    <i class="fa-solid fa-user-plus fa-xl"></i>
+                </a>
+            </li> -->
+
+            <!-- <li class="nav-item">
+                <a class="nav-link">
+                    <div class="btn-group" mdbDropdown>
+                        <mdb-icon fas icon="user" mdbDropdownToggle></mdb-icon>
+                        <div class="dropdown-menu dropdown-menu-right dropdown-primary">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                            <div class="divider dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Separated link</a>
+                        </div>
+                    </div>
+                </a>
+            </li> -->
+        </ul>
+    </links>
+    <!-- Collapsible content -->
+
+</mdb-navbar>

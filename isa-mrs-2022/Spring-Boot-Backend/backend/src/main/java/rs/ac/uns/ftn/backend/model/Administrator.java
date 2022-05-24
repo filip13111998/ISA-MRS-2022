@@ -26,6 +26,9 @@ public class Administrator extends User{
 //    @Column(name = "active")
 //    private Boolean active;
 
+    @Column(name = "activate_acc")
+    private Boolean activateAccount;
+
     @Column(name = "delete_adm")
     private Boolean delete;
 

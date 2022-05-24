@@ -13,8 +13,6 @@ export class AdminHomePageComponent implements OnInit {
   }
 
 
-  public logout() {
-    localStorage.clear();
-  }
+
 
 }

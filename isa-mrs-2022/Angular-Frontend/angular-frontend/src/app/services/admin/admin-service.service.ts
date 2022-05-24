@@ -1,14 +1,16 @@
-import { Token } from './../../models/response/login/login-token';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
+import { AdminLoginDTO } from 'src/app/models/response/admin-login/adminLogin';
+import { Token } from 'src/app/models/response/login/login-token';
 
 @Injectable({
   providedIn: 'root'
 })
-export class LoginService {
+export class AdminServiceService {
+
   //User
-  public apiUrl: string = "http://localhost:8080/auth/login";
+  public apiUrl: string = "http://localhost:8080/admin";
 
 
 
@@ -17,8 +19,12 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
 
-  public login(token: any): Observable<Token> {
-    return this.http.post<Token>(`${this.apiUrl}`, token, { headers: this.headers });
+  public check(username: String): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/acc_active/${username}`, { headers: this.headers });
+  }
+
+  public newPassword(dto: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/new_pass`, dto, { headers: this.headers });
   }
 
 
@@ -34,5 +40,4 @@ export class LoginService {
       return errorMessage;
     });
   }
-
 }

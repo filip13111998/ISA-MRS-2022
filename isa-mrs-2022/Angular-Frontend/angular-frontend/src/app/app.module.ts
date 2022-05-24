@@ -46,6 +46,10 @@ import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-e
 import { HomePageMenuComponent } from './components/home-page-menu/home-page-menu.component'; // a plugin!
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
+import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
+import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
+
 
 
 FullCalendarModule.registerPlugins([ // register FullCalendar plugins
@@ -79,6 +83,10 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MyUserActionsComponent,
     MyUserSubscribeEntityComponent,
     HomePageMenuComponent,
+    AdminMenuComponent,
+    AdminLoginComponent,
+    AdminNewPassComponent,
+
 
   ],
   imports: [

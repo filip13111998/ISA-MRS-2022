@@ -1,0 +1,20 @@
+<img src="assets/password4.png" style="width: 10%;height: 20%; margin-left: 45%;margin-top: 3em;" />
+<form [formGroup]="loginForm" (ngSubmit)="login()" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 3em;">
+
+
+
+    <p class="h4 mb-4" style="color:#FFA900;">New Password</p>
+    <!-- Email -->
+    <input formControlName="password1" type="password" id="defaultLoginFormEmail" class="form-control mb-4"
+        placeholder="Password">
+    <!-- Password -->
+    <input formControlName="password2" type="password" id="defaultLoginFormPassword" class="form-control mb-4"
+        placeholder="Confirm Password">
+
+    <!-- Sign in button -->
+    <button mdbBtn color="warning" type="submit">Save Password</button>
+
+
+</form>
+<!-- Default form login -->

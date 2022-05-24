@@ -1,3 +1,5 @@
+import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
+import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
 import { MyUserSubscribeEntityComponent } from './components/my-user-subscribe-entity/my-user-subscribe-entity.component';
 import { RegisterUserHistoryReservationComponent } from './components/register-user-history-reservation/register-user-history-reservation.component';
@@ -24,7 +26,11 @@ const routes: Routes = [
   { path: 'register_profile', component: MyUserProfileComponent },
   { path: 'register_subscribe', component: MyUserSubscribeEntityComponent },
   { path: 'register_actions', component: MyUserActionsComponent },
+
   { path: 'admin_home', component: AdminHomePageComponent },
+  { path: 'admin_login', component: AdminLoginComponent },
+  { path: 'admin_new_pass', component: AdminNewPassComponent },
+
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'profileCottage/:id', component: ProfileComponent },
