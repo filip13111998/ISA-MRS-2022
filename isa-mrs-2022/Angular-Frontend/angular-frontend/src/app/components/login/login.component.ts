@@ -3,6 +3,7 @@ import { Token } from './../../models/response/login/login-token';
 import { LoginService } from './../../services/login-service/login.service';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { ValidationAccountTokenDTO } from 'src/app/models/register/IsValid';
 
 @Component({
   selector: 'app-login',
@@ -29,23 +30,51 @@ export class LoginComponent implements OnInit {
     this.ls.login(this.loginForm.value).subscribe((tkn: Token) => {
       // console.log(tkn);
       // console.log(JSON.parse(atob(tkn.accessToken.split('.')[1]))['roles']);
+
       localStorage.setItem('user_token', tkn.accessToken)
 
-      let my_roles = JSON.parse(atob(tkn.accessToken.split('.')[1]))['roles'].split(',');
-      if (my_roles.includes('ROLE_ADMIN')) {
-        this.router.navigate(['/', 'admin_home']);
-        // console.log("IMA I ADMIN")
+      var mytkn = localStorage.getItem('user_token');
+      var myUsername = "";
+      if (mytkn != null) {
+        myUsername = JSON.parse(atob(mytkn.split('.')[1]))['sub'];
       }
-      if (my_roles.includes('ROLE_USER')) {
-        this.router.navigate(['/', 'register_home']);
-        // console.log("IMA I USER")
-      }
+
+
+      // var millisecondsToWait = 500;
+      // setTimeout(() => {
+
+      // }, millisecondsToWait);
+
+
+      this.ls.isValid(myUsername).subscribe((vat: ValidationAccountTokenDTO) => {
+        console.log("USOO");
+        console.log(vat.activate);
+        if (!(vat.activate == false)) {
+          let my_roles = JSON.parse(atob(tkn.accessToken.split('.')[1]))['roles'].split(',');
+          if (my_roles.includes('ROLE_ADMIN')) {
+            this.router.navigate(['/', 'admin_home']);
+            // console.log("IMA I ADMIN")
+          }
+          if (my_roles.includes('ROLE_USER')) {
+            this.router.navigate(['/', 'register_home']);
+            // console.log("IMA I USER")
+          }
+        }
+        else {
+          this.router.navigate(['/', 'validate']);
+        }
+
+      });
+
+
       // console.log(JSON.parse(atob(tkn.token.split('.')[1])));
-      this.token = tkn;
+      // this.token = tkn;
       // this.router.navigate(['/', 'register_home']);
     }
     );
 
   }
+
+
 
 }

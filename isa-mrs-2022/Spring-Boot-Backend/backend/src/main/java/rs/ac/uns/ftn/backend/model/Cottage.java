@@ -54,6 +54,9 @@ public class Cottage {
     @Column(name = "delete_ctg")
     private Boolean delete;
 
+    @Version
+    private Integer version;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<CottageImage> cottageImages =new HashSet<>();

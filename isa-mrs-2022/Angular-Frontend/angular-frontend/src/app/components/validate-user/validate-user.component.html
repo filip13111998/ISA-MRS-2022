@@ -1,0 +1,16 @@
+<img src="assets/val2.png" style="width: 10%;height: 20%; margin-left: 45%;margin-top: 5em;" />
+<form [formGroup]="validateForm" (ngSubmit)="activate()" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 5em;">
+
+
+
+    <p class="h4 mb-4" style="color:#00C851;" color="success">Enter Token:</p>
+    <!-- Token -->
+    <input formControlName="token" type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Token">
+
+
+    <!-- Sign in button -->
+    <button mdbBtn color="success" type="submit">Activate Account</button>
+
+
+</form>

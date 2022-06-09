@@ -150,6 +150,8 @@ public class AdventureReservationService {
 
         at.getAdventureReservations().add(aotr);
 
+        arr.save(aotr);
+
         ar.save(at);
 
 //        crr.save(cotr);

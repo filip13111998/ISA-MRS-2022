@@ -14,4 +14,14 @@ export class MyUserDTO {
     lastName: String;
 
     roles: Role[];
+
+    point: number;
+
+    phoneNumber: String;
+
+    adresa: String;
+
+    grad: String;
+
+    drzava: String;
 }

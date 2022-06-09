@@ -144,6 +144,8 @@ public class BoatReservationService {
 
         bt.getBoatResevations().add(botr);
 
+        brr.save(botr);
+
         br.save(bt);
 
 //        crr.save(cotr);

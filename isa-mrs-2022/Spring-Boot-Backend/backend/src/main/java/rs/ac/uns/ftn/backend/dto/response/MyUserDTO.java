@@ -29,4 +29,14 @@ public class MyUserDTO {
 
     private List<Role> roles;
 
+    private Long point;
+
+    private String phoneNumber;
+
+   private String adresa;
+
+   private String grad;
+
+   private String drzava;
+
 }

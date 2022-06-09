@@ -49,6 +49,8 @@ import { MatNativeDateModule, MatRippleModule } from '@angular/material/core';
 import { AdminMenuComponent } from './components/admin-menu/admin-menu.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
+import { AdminDeleteEntityComponent } from './components/admin-delete-entity/admin-delete-entity.component';
+import { ValidateUserComponent } from './components/validate-user/validate-user.component';
 
 
 
@@ -86,6 +88,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AdminMenuComponent,
     AdminLoginComponent,
     AdminNewPassComponent,
+    AdminDeleteEntityComponent,
+    ValidateUserComponent,
 
 
   ],

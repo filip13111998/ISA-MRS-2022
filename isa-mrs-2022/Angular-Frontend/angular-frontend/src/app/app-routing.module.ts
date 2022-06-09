@@ -1,3 +1,5 @@
+import { ValidateUserComponent } from './components/validate-user/validate-user.component';
+import { AdminDeleteEntityComponent } from './components/admin-delete-entity/admin-delete-entity.component';
 import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
 import { AdminLoginComponent } from './components/admin-login/admin-login.component';
 import { MyUserActionsComponent } from './components/my-user-actions/my-user-actions.component';
@@ -27,12 +29,18 @@ const routes: Routes = [
   { path: 'register_subscribe', component: MyUserSubscribeEntityComponent },
   { path: 'register_actions', component: MyUserActionsComponent },
 
+
+
   { path: 'admin_home', component: AdminHomePageComponent },
   { path: 'admin_login', component: AdminLoginComponent },
   { path: 'admin_new_pass', component: AdminNewPassComponent },
+  { path: 'delete_entity', component: AdminDeleteEntityComponent },
 
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
+  { path: 'validate', component: ValidateUserComponent },
+  { path: 'validate/:username', component: ValidateUserComponent },
+
   { path: 'profileCottage/:id', component: ProfileComponent },
   { path: 'loginProfileCottage/:id', component: LoginCottageProfileComponent },
   { path: 'profileAdventure/:id', component: ProfileAdventureComponent },

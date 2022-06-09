@@ -121,11 +121,11 @@ public class CottageReservationService {
 
         Optional<Cottage> cto = cr.findById(srdto.getCottageId());
 
-        System.out.println("USO");
+
         System.out.println(srdto.getStart());
 
         if (!ca.isEmpty()){
-            System.out.println("USO");
+
             cto.get().getCottageActions().remove(ca.get());
             car.delete(ca.get());
         }
@@ -145,15 +145,19 @@ public class CottageReservationService {
 
         muo.getCottageResevations().add(cotr);
 
-
+        System.out.println("COTR ID " + cotr.getId());
 
         Cottage ct = cto.get();
 
         ct.getCottageResevations().add(cotr);
 
+        System.out.println("COTR ID " + cotr.getId());
+
+        crr.save(cotr);
+
         cr.save(ct);
 
-//        crr.save(cotr);
+
 
         mr.save(muo);
 

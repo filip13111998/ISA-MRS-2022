@@ -24,8 +24,26 @@ public class MyUser extends User{
 //    @Column(name = "id")
 //    private Long id;
 
-    @Column(name = "name_user")
-    private String nameUser;
+//    @Column(name = "name_user")
+//    private String nameUser;
+
+    @Column(name = "point")
+    private Long point;
+
+    @Column(name = "phone_number")
+    private String phoneNumber;
+
+    @Column(name = "adresa")
+    private String adresa;
+
+    @Column(name = "grad")
+    private String grad;
+
+    @Column(name = "drzava")
+    private String drzava;
+
+    @Column(name = "register_token")
+    private String registerToken;
 
 //    @Column(name = "email")
 //    private String email;
@@ -39,8 +57,8 @@ public class MyUser extends User{
 //    @Column(name = "active")
 //    private Boolean active;
 
-    @Column(name = "delete_usr")
-    private Boolean delete;
+    @Column(name = "activate_usr")
+    private Boolean activate;
 
     @ManyToMany(mappedBy="myUsers",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 //    @Fetch(FetchMode.JOIN)
@@ -67,12 +85,29 @@ public class MyUser extends User{
     @Fetch(FetchMode.JOIN)
     private Set<AdventureReservation> adventureResevations = new HashSet<>();
 
-    public void setNameUser(String nameUser) {
-        this.nameUser = nameUser;
+//    public void setNameUser(String nameUser) {
+//        this.nameUser = nameUser;
+//    }
+
+//    public void setDelete(Boolean delete) {
+//        this.delete = delete;
+//    }
+
+
+    public String getRegisterToken() {
+        return registerToken;
     }
 
-    public void setDelete(Boolean delete) {
-        this.delete = delete;
+    public void setRegisterToken(String registerToken) {
+        this.registerToken = registerToken;
+    }
+
+    public Boolean getActivate() {
+        return activate;
+    }
+
+    public void setActivate(Boolean activate) {
+        this.activate = activate;
     }
 
     public void setCottages(Set<Cottage> cottages) {
@@ -99,13 +134,13 @@ public class MyUser extends User{
         this.adventureResevations = adventureResevations;
     }
 
-    public String getNameUser() {
-        return nameUser;
-    }
+//    public String getNameUser() {
+//        return nameUser;
+//    }
 
-    public Boolean getDelete() {
-        return delete;
-    }
+//    public Boolean getDelete() {
+//        return delete;
+//    }
 
     public Set<Cottage> getCottages() {
         return cottages;
@@ -129,5 +164,45 @@ public class MyUser extends User{
 
     public Set<AdventureReservation> getAdventureResevations() {
         return adventureResevations;
+    }
+
+    public void setPoint(Long point) {
+        this.point = point;
+    }
+
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAdresa(String adresa) {
+        this.adresa = adresa;
+    }
+
+    public void setGrad(String grad) {
+        this.grad = grad;
+    }
+
+    public void setDrzava(String drzava) {
+        this.drzava = drzava;
+    }
+
+    public Long getPoint() {
+        return point;
+    }
+
+    public String getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public String getAdresa() {
+        return adresa;
+    }
+
+    public String getGrad() {
+        return grad;
+    }
+
+    public String getDrzava() {
+        return drzava;
     }
 }

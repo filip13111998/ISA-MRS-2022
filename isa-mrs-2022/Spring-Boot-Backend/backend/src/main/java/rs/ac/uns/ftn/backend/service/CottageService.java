@@ -61,7 +61,6 @@ public class CottageService {
         CottageService.log.info("GET ALL COTTAGES SORTED"+ Thread.currentThread().getName());
 
 
-
         if(!possibleType.contains(sortType)){
             return CompletableFuture.completedFuture(new ArrayList<>());
         }

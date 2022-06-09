@@ -10,7 +10,7 @@
 
     <p class="h4 mb-4" style="color:#00C851;" color="success">Profile: {{myUser.username}}</p>
     <!-- Email -->
-    <input [(ngModel)]="myUser.email" formControlName="email" type="text" id="defaultLoginFormEmail"
+    <input [(ngModel)]="myUser.email" readonly formControlName="email" type="text" id="defaultLoginFormEmail"
         class="form-control mb-4" placeholder="E-mail">
     <!-- Password -->
     <input [(ngModel)]="myUser.password" formControlName="password" type="password" id="defaultLoginFormPassword"
@@ -25,6 +25,23 @@
     <!-- Last Name -->
     <input [(ngModel)]="myUser.lastName" formControlName="lastName" type="text" id="defaultLoginFormLast"
         class="form-control mb-4" placeholder="Last Name">
+
+    <input [(ngModel)]="myUser.point" readonly formControlName="point" type="text" id="defaultLoginFormLast"
+        class="form-control mb-4" placeholder="Point">
+
+    <input [(ngModel)]="myUser.phoneNumber" formControlName="phoneNumber" type="text" id="defaultLoginFormLast"
+        class="form-control mb-4" placeholder="Phone Number">
+
+    <input [(ngModel)]="myUser.adresa" formControlName="adresa" type="text" id="defaultLoginFormLast"
+        class="form-control mb-4" placeholder="Adress">
+
+    <input [(ngModel)]="myUser.grad" formControlName="grad" type="text" id="defaultLoginFormLast"
+        class="form-control mb-4" placeholder="City">
+
+    <input [(ngModel)]="myUser.drzava" formControlName="drzava" type="text" id="defaultLoginFormLast"
+        class="form-control mb-4" placeholder="County">
+
+
     <div>
         <label style="float:left ;margin-top: 1.3em;color: red;">Do yoy want to delete account?</label>
         <button mdbBtn color="red" type="button" style="float:right ;" (click)="deleteAccount()">Delete</button>
