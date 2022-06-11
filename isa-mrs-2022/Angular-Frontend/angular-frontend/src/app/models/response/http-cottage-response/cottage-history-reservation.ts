@@ -8,6 +8,8 @@ export class CottageReservationHistoryDTO {
 
     active: boolean;
 
+    price: number;
+
     pricelistItem: CottagePricelistDTO;
 
     cottageID: number;

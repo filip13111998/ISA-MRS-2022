@@ -18,6 +18,8 @@ public class AdventureReservationHistoryDTO {
 
     private LocalDate reservationEnd;
 
+    private Long price;
+
     private Boolean active;
 
     private AdventurePricelist pricelistItem;

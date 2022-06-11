@@ -31,6 +31,10 @@ public class MyUserDTO {
 
     private Long point;
 
+    private Long penaltyPoint;
+
+    private String userCategory;
+
     private String phoneNumber;
 
    private String adresa;

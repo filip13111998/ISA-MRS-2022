@@ -17,12 +17,10 @@ import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.*;
 import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.*;
-import rs.ac.uns.ftn.backend.repository.BoatRepository;
+import rs.ac.uns.ftn.backend.repository.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,6 +35,12 @@ import java.util.stream.Stream;
 @Slf4j
 @Service
 public class BoatService {
+
+    @Autowired
+    private BoatComplaintRepository bcr;
+
+    @Autowired
+    private BoatMarkRepository bmr;
 
     private BoatRepository br;
 
@@ -280,5 +284,46 @@ public class BoatService {
 
         return CompletableFuture.completedFuture(lista);
     }
+
+    @Async
+    public CompletableFuture<Boolean> addMark(BoatMarkDTO dto) {
+
+        log.info("ADD MARK BOAT WITH ID: " + dto.getEntityID());
+
+
+
+        BoatMark cm = new BoatMark();
+
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setMark(dto.getMark());
+        cm.setEnable(false);
+
+        bmr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+    }
+
+    @Async
+    public CompletableFuture<Boolean> addComplaint(BoatComplaintDTO dto) {
+
+        log.info("ADD MARK BOAT WITH ID: " + dto.getEntityID());
+
+        BoatComplaint cm = new BoatComplaint();
+
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setDescription(dto.getDescription());
+        cm.setEnable(false);
+
+        bcr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
+
 
 }

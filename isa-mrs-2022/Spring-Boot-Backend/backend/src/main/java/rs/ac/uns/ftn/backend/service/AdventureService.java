@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,11 +10,10 @@ import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.*;
 import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.*;
-import rs.ac.uns.ftn.backend.repository.AdventureRepository;
+import rs.ac.uns.ftn.backend.repository.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +28,12 @@ import java.util.stream.Stream;
 @Transactional
 @Service
 public class AdventureService {
+
+    @Autowired
+    private AdventureComplaintRepository acr;
+
+    @Autowired
+    private AdventureMarkRepository amr;
 
     private AdventureRepository ar;
 
@@ -209,4 +215,45 @@ public class AdventureService {
 
         return CompletableFuture.completedFuture(lista);
     }
+
+    @Async
+    public CompletableFuture<Boolean> addMark(AdventureMarkDTO dto) {
+
+        log.info("ADD MARK ADVENTURE WITH ID: " + dto.getEntityID());
+
+
+
+        AdventureMark cm = new AdventureMark();
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setMark(dto.getMark());
+        cm.setEnable(false);
+
+        amr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+    }
+
+    @Async
+    public CompletableFuture<Boolean> addComplaint(AdventureComplaintDTO dto) {
+
+        log.info("ADD MARK ADVENTURE WITH ID: " + dto.getEntityID());
+
+        AdventureComplaint cm = new AdventureComplaint();
+
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setDescription(dto.getDescription());
+        cm.setEnable(false);
+
+        acr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
+
+
 }

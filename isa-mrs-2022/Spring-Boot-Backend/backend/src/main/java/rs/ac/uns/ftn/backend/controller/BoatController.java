@@ -5,7 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.*;
 import rs.ac.uns.ftn.backend.dto.response.AdventureDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatProfileDTO;
@@ -53,6 +53,16 @@ public class BoatController {
     @GetMapping(value = "/pricelist/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<List<BoatPricelist>>> getBoatPricelist(@PathVariable Long id) {
         return  bs.getBoatPricelist(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/mark",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addMark(@RequestBody BoatMarkDTO dto) {
+        return  bs.addMark(dto).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/complaint",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addComplaint(@RequestBody BoatComplaintDTO dto) {
+        return  bs.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

@@ -35,6 +35,12 @@ export class CottageServiceService {
     return this.http.get<CottagePricelistDTO[]>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
   }
 
+  public addMark(cs: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/mark`, cs, { headers: this.headers });
+  }
+  public addComplaint(cs: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/complaint`, cs, { headers: this.headers });
+  }
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

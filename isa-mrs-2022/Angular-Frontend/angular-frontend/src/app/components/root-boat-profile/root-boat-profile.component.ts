@@ -438,14 +438,17 @@ export class RootBoatProfileComponent implements OnInit {
   }
 
   public fast_action_disable(start: any): Boolean {
+    console.log("TU SAM" + moment(start).subtract(1, 'month').format('MMMM Do YYYY, h:mm:ss a') + "ha");
 
+    console.log("OP    " + moment().format('MMMM Do YYYY, h:mm:ss a') + "op");
     if (localStorage.getItem("user_token") == null) {
-
+      console.log("USO");
       return true;
 
     }
 
-    if (moment(start) < moment()) {
+    if (moment(start).subtract(1, 'M') < moment()) {
+      console.log("USO222");
       return true;
     }
 

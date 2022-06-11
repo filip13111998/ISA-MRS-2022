@@ -25,6 +25,9 @@ export class MyUserService {
     return this.http.post<Boolean>(`${this.apiUrl}`, myUser, { headers: this.headers });
   }
 
+  public deleteMyUser(myUser: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/delete`, myUser, { headers: this.headers });
+  }
 
   public getCottageHistoryReservation(username: any, pageNum: any): Observable<CottageReservationHistoryDTO[]> {
     return this.http.get<CottageReservationHistoryDTO[]>(`${this.apiUrl}/historyCottage/${username}?pageNum=${pageNum}`, { headers: this.headers });

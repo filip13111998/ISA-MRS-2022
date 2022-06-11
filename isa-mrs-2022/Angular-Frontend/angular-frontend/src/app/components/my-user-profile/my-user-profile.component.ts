@@ -6,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { LoginComponent } from '../login/login.component';
 import { Token } from 'src/app/models/response/login/login-token';
+import { DeleteRequestDTO } from 'src/app/models/response/my-user/my-user-delete';
+
+
 
 @Component({
   selector: 'app-my-user-profile',
@@ -19,6 +22,8 @@ export class MyUserProfileComponent implements OnInit {
   tkn: any = "";
 
 
+  // reason: any;
+  displayStyle = "none";
 
   profileForm = this.fb.group({
     email: [null],
@@ -26,12 +31,21 @@ export class MyUserProfileComponent implements OnInit {
     password2: [null],
     firstName: [null],
     lastName: [null],
+    userCategory: [null],
     point: [null],
+    penaltyPoint: [null],
     phoneNumber: [null],
     adresa: [null],
     grad: [null],
     drzava: [null],
   })
+
+  deleteForm = this.fb.group({
+
+    reason: [null],
+  })
+
+  reason: any;
 
   myUser: MyUserDTO = new MyUserDTO;
 
@@ -45,6 +59,10 @@ export class MyUserProfileComponent implements OnInit {
     this.getUser();
     // this.profileForm.get("email")?.disable;
   }
+
+
+
+
 
   public editUser() {
 
@@ -92,7 +110,38 @@ export class MyUserProfileComponent implements OnInit {
 
   }
 
+
+
+  openPopup() {
+    this.displayStyle = "block";
+  }
+  closePopup() {
+    this.displayStyle = "none";
+  }
+
+
+
   public deleteAccount() {
+    // $('#myModal').on('shown.bs.modal', function () {
+    //   $('#myInput').trigger('focus')
+    // })
+    this.displayStyle = "none";
+
+    this.tkn = localStorage.getItem('user_token');
+    this.username = JSON.parse(atob(this.tkn.split('.')[1]))['sub'];
+
+    var dlt = new DeleteRequestDTO();
+    dlt.username = this.username;
+    dlt.description = this.reason;
+    console.log(this.reason + "OPC");
+    this.mss.deleteMyUser(dlt).subscribe((b: Boolean) => {
+      if (b) {
+        console.log("NALOG OBRISAN");
+        localStorage.clear();
+        this.router.navigate(['/', 'login']);
+      }
+
+    });
     console.log("DELETE");
   }
 

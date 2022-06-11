@@ -17,6 +17,8 @@ public class CottageReservationHistoryDTO {
 
     private LocalDate reservationEnd;
 
+    private Long price;
+
     private Boolean active;
 
     private CottagePricelist pricelistItem;

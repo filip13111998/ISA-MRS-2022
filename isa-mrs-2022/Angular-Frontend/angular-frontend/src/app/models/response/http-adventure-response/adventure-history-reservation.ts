@@ -6,6 +6,8 @@ export class AdventureReservationHistoryDTO {
 
     reservationEnd: Date;
 
+    price: number;
+
     active: boolean;
 
     pricelistItem: AdventurePricelistDTO;

@@ -12,6 +12,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import org.springframework.transaction.annotation.Transactional;
+import rs.ac.uns.ftn.backend.dto.request.DeleteRequestDTO;
 import rs.ac.uns.ftn.backend.dto.request.RegisterUserDTO;
 import rs.ac.uns.ftn.backend.dto.request.ValidationAccountTokenDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
@@ -53,6 +54,9 @@ public class MyUserService {
 
     @Autowired
     private RoleRepository rr;
+
+    @Autowired
+    private DeleteRequestRepository drr;
 
     @Async
     public CompletableFuture<Boolean> registerUser(RegisterUserDTO rudto) {
@@ -128,6 +132,8 @@ public class MyUserService {
 
         mur.save(mu);
 
+
+
         return CompletableFuture.completedFuture(true);
 
     }
@@ -141,12 +147,46 @@ public class MyUserService {
 
         MyUserDTO mudto = new MyUserDTO(
                 mu.getId(),mu.getEmail(),mu.getUsername(),mu.getPassword(),mu.getFirstName(),mu.getLastName(),mu.getRoles()
-                ,mu.getPoint(),mu.getPhoneNumber(),mu.getAdresa(),mu.getGrad(),mu.getDrzava()
+                ,mu.getPoint(),mu.getPenaltyPoint(),checkCategory(mu.getPoint()),mu.getPhoneNumber(),mu.getAdresa(),mu.getGrad(),mu.getDrzava()
             );
 
         return CompletableFuture.completedFuture(mudto);
 
     }
+
+    @Async
+    public CompletableFuture<Boolean> deleteMyUser(DeleteRequestDTO delus) {
+
+        log.info("GET ONE USER WITH EMAIL: " + delus.getUsername());
+
+        MyUser mu = mur.findByUsername(delus.getUsername());
+
+        mu.setDeactivate(false);
+
+        mur.save(mu);
+
+        DeleteRequest dr = new DeleteRequest();
+//        log.info("DESCRIPTION ISSSSSS: " + delus.getDescription());
+        dr.setMyUser(mu);
+        dr.setDescription(delus.getDescription());
+
+        drr.save(dr);
+
+        return CompletableFuture.completedFuture(true);
+
+    }
+
+    public String checkCategory(Long point){
+
+        if(point> LoyalityProgram.goldPoints){
+            return "GOLD";
+        }
+        else if(point> LoyalityProgram.silverPoints){
+            return "SILVER";
+        }
+        return "REGULAR";
+    }
+
 
     @Async
     public CompletableFuture<Boolean> editMyUser(MyUserDTO mud) {
@@ -190,14 +230,14 @@ public class MyUserService {
         List<CottageReservationHistoryDTO> ctr = mu.getCottageResevations().stream().map(cr->
 
                         new CottageReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
-                        cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findCottageId(cr.getId())))
+                        cr.getReservationEnd(),cr.getPrice(),cr.getActive(),cr.getPricelistItem(),findCottageId(cr.getId())))
 
                 .collect(Collectors.toList());
 
         System.out.println("KRAJJJJ "+mu.getCottageResevations().size());
         PagedListHolder page = new PagedListHolder(ctr);
 
-        page.setPageSize(5); // number of items per page
+        page.setPageSize(20); // number of items per page
         page.setPage(pageNum);      // set to first page
 
         return CompletableFuture.completedFuture(page.getPageList());
@@ -213,7 +253,7 @@ public class MyUserService {
         List<CottageReservationHistoryDTO> ctr = mu.getCottageResevations().stream().map(cr->
 
                         new CottageReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
-                                cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findCottageId(cr.getId())))
+                                cr.getReservationEnd(),cr.getPrice(),cr.getActive(),cr.getPricelistItem(),findCottageId(cr.getId())))
 
                 .collect(Collectors.toList());
         //not held ctr
@@ -253,7 +293,7 @@ public class MyUserService {
         List<BoatReservationHistoryDTO> btr = mu.getBoatResevations().stream().map(cr->
 
                         new BoatReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
-                                cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findBoatId(cr.getId())))
+                                cr.getReservationEnd(),cr.getPrice(),cr.getActive(),cr.getPricelistItem(),findBoatId(cr.getId())))
 
                 .collect(Collectors.toList());
 
@@ -277,7 +317,7 @@ public class MyUserService {
         List<BoatReservationHistoryDTO> btr = mu.getBoatResevations().stream().map(cr->
 
                         new BoatReservationHistoryDTO(cr.getId(),cr.getReservationStart(),
-                                cr.getReservationEnd(),cr.getActive(),cr.getPricelistItem(),findBoatId(cr.getId())))
+                                cr.getReservationEnd(),cr.getPrice(),cr.getActive(),cr.getPricelistItem(),findBoatId(cr.getId())))
 
                 .collect(Collectors.toList());
 
@@ -288,7 +328,7 @@ public class MyUserService {
         PagedListHolder page = new PagedListHolder(nhbtr);
 
 
-        page.setPageSize(5); // number of items per page
+        page.setPageSize(20); // number of items per page
         page.setPage(pageNum);      // set to first page
 
         return CompletableFuture.completedFuture(page.getPageList());
@@ -321,14 +361,14 @@ public class MyUserService {
         List<AdventureReservationHistoryDTO> atr = mu.getAdventureResevations().stream().map(ar->
 
                         new AdventureReservationHistoryDTO(ar.getId(),ar.getReservationStart(),
-                                ar.getReservationEnd(),ar.getActive(),ar.getPricelistItem(),findAdventureId(ar.getId())))
+                                ar.getReservationEnd(), ar.getPrice(),ar.getActive(),ar.getPricelistItem(),findAdventureId(ar.getId())))
 
                 .collect(Collectors.toList());
 
 
         PagedListHolder page = new PagedListHolder(atr);
 
-        page.setPageSize(5); // number of items per page
+        page.setPageSize(20); // number of items per page
         page.setPage(pageNum);      // set to first page
 
         return CompletableFuture.completedFuture(page.getPageList());
@@ -346,7 +386,7 @@ public class MyUserService {
         List<AdventureReservationHistoryDTO> atr = mu.getAdventureResevations().stream().map(ar->
 
                         new AdventureReservationHistoryDTO(ar.getId(),ar.getReservationStart(),
-                                ar.getReservationEnd(),ar.getActive(),ar.getPricelistItem(),findAdventureId(ar.getId())))
+                                ar.getReservationEnd(),ar.getPrice(),ar.getActive(),ar.getPricelistItem(),findAdventureId(ar.getId())))
 
                 .collect(Collectors.toList());
 

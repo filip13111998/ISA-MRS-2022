@@ -19,6 +19,7 @@ public class BoatReservationDTO {
 
     private LocalDate reservationEnd;
 
+
     private Boolean active;
 
     private BoatPricelist pricelistItem;

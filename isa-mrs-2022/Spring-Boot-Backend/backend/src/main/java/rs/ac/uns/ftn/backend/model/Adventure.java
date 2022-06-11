@@ -10,7 +10,9 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -70,6 +72,8 @@ public class Adventure {
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
 //    @Fetch(FetchMode.JOIN)
     private Set<AdventureReservation> adventureReservations = new HashSet<>();
+
+
 
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
@@ -216,7 +220,10 @@ public class Adventure {
     }
 
     public double averageMarks(){
-        return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
+
+        List<AdventureMark> lsita = marks.stream().filter(m-> m.getEnable()).collect(Collectors.toList());
+
+        return lsita.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
     }
 
     public String getInstructorDescription(){

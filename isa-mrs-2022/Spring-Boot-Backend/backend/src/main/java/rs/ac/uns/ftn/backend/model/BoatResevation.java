@@ -29,15 +29,18 @@ public class BoatResevation {
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "price")
+    private Long price;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "boat_pricelist_id")
     private BoatPricelist pricelistItem;
 
     //Racuna ukupnu cenu rezervacije kao broj dana pomnozen sa cenom jednog dana
-    public Double getPrice(){
-        Period period = Period.between(this.getReservationEnd(), this.getReservationStart());
-        return period.getDays() * this.getPricelistItem().getPrice() ;
-    }
+//    public Double getPrice(){
+//        Period period = Period.between(this.getReservationEnd(), this.getReservationStart());
+//        return period.getDays() * this.getPricelistItem().getPrice() ;
+//    }
 
     //Proveravakoliko dana je ostalo do pocetka rezervacije...ako je iznad 3 onda moze da je otkaze
     public Boolean reservationDeactivated(){

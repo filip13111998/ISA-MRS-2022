@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import rs.ac.uns.ftn.backend.repository.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
@@ -33,6 +35,9 @@ public class BoatReservationService {
     private BoatPricelistRepository bpr;
 
     private BoatActionRepository bar;
+
+    @Autowired
+    private EmailSenderService service;
 
     public BoatReservationService(BoatActionRepository bar,BoatRepository br, MyUserRepository mr,BoatReservationRepository brr,BoatPricelistRepository bpr){
         this.br = br;
@@ -123,6 +128,7 @@ public class BoatReservationService {
             bar.delete(ba.get());
         }
 
+        MyUser muo = mr.findByUsername(srdto.getMyUsername());
 
         BoatResevation botr = new BoatResevation();
 
@@ -134,7 +140,14 @@ public class BoatReservationService {
 
         botr.setPricelistItem(getPricelist(srdto.getDescription()));
 
-        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+        muo.setPoint(muo.getPoint()+5);
+
+
+        Double procenat =  (double)(100- LoyalityProgram.getPercent(muo.getPoint()))/100;
+
+        Long myPrice = Math.round(( Math.round(srdto.getPrice()))*(srdto.getStart().until(srdto.getEnd(), ChronoUnit.DAYS)+1)*procenat);
+
+        botr.setPrice(myPrice);
 
         muo.getBoatResevations().add(botr);
 
@@ -146,11 +159,16 @@ public class BoatReservationService {
 
         brr.save(botr);
 
-        br.save(bt);
+//        br.save(bt);
 
 //        crr.save(cotr);
 
         mr.save(muo);
+
+        service.sendSimpleEmail("jeremy.cartwright96@ethereal.email",
+                "You are make succesfull boat reservation" ,
+                "Boat reservation for user: " + muo.getUsername()
+        );
 
         return CompletableFuture.completedFuture(true);
     }

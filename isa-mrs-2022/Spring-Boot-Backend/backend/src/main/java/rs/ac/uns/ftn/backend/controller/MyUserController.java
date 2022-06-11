@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.DeleteRequestDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
 import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.MyUserService;
@@ -30,6 +31,11 @@ public class MyUserController {
     @PostMapping(produces = "application/json")
     public CompletableFuture<ResponseEntity<Boolean>> editOneUser(@RequestBody MyUserDTO mud) {
         return this.mus.editMyUser(mud).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/delete",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> deleteOneUser(@RequestBody DeleteRequestDTO del) {
+        return this.mus.deleteMyUser(del).thenApplyAsync(ResponseEntity::ok);
     }
 
     @GetMapping(value = "/historyCottage/{username}",produces = "application/json")

@@ -22,6 +22,8 @@ public class CottageReservationDTO {
 
     private LocalDate reservationEnd;
 
+
+
     private Boolean active;
 
     private CottagePricelist pricelistItem;

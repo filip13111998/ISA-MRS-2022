@@ -10,8 +10,8 @@ INSERT INTO ROLE (name) VALUES ('ROLE_ADMIN');
 INSERT INTO administrator (id,activate_acc,username, password, first_name, last_name, email, enabled, last_password_reset_date,name_admin) VALUES (nextval('cust_seq_user'),true,'admin1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07','Ogi admin');
 INSERT INTO administrator (id,activate_acc,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),false,'admin2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'admin@example.com', true, '2017-10-01 18:57:58.508-07');
 
-INSERT INTO my_user (id,point,phone_number,adresa,grad,drzava,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),2,'045-322-111','Proleterska 21','Novi Sad','Srbija','myus1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
-INSERT INTO my_user (id,point,phone_number,adresa,grad,drzava,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),1,'999-999-999','Ustanicka BB','Novi Sad','Srbija','myus2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'user2@example.com', true, '2017-10-01 18:57:58.508-07');
+INSERT INTO my_user (id,deactivate,penalty_point,point,phone_number,adresa,grad,drzava,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),true,2,0,'045-322-111','Proleterska 21','Novi Sad','Srbija','myus1', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Marko', 'Markovic', 'user@example.com', true, '2017-10-01 21:58:58.508-07');
+INSERT INTO my_user (id,deactivate,penalty_point,point,phone_number,adresa,grad,drzava,username, password, first_name, last_name, email, enabled, last_password_reset_date) VALUES (nextval('cust_seq_user'),true,1,0,'999-999-999','Ustanicka BB','Novi Sad','Srbija','myus2', '$2a$04$Vbug2lwwJGrvUXTj6z7ff.97IzVBkrJ1XfApfGNl.Z695zqcnPYra', 'Nikola', 'Nikolic', 'user2@example.com', true, '2017-10-01 18:57:58.508-07');
 
 --USER ROLE
 INSERT INTO USER_ROLE (user_id, role_id) VALUES (1, 2);
@@ -88,14 +88,14 @@ INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (11,1)
 INSERT INTO cottage_cottage_images(cottage_id , cottage_images_id) VALUES (12,1);
 
 --COTTAGE MARK
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (2);
-INSERT INTO cottage_mark (mark) VALUES (5);
-INSERT INTO cottage_mark (mark) VALUES (2);
-INSERT INTO cottage_mark (mark) VALUES (4);
-INSERT INTO cottage_mark (mark) VALUES (3);
-INSERT INTO cottage_mark (mark) VALUES (5);
+INSERT INTO cottage_mark (mark,enable) VALUES (4,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (4,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (2,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (5,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (2,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (4,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (3,true);
+INSERT INTO cottage_mark (mark,enable) VALUES (5,true);
 
 
 --COTTAGE PRICELIST
@@ -105,17 +105,17 @@ INSERT INTO cottage_pricelist (price,description) VALUES (6500,'6 osoba');
 INSERT INTO cottage_pricelist (price,description) VALUES (14000,'9 osoba');
 
 --COTTAGE RESERVATION
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('10-09-2022','13-09-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('08-06-2022','10-06-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-07-2021','08-07-2021',true,1);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('01-03-2022','05-03-2022',true,1);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',true,2);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('12-06-2022','18-06-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('04-08-2022','08-08-2022',true,4);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('14-08-2022','21-08-2022',true,3);
-INSERT INTO cottage_reservation (reservation_start,reservation_end,active,cottage_pricelist_id) VALUES ('23-09-2022','25-09-2022',true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('10-09-2022','13-09-2022',8000,true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('08-06-2022','10-06-2022',18000,true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('11-06-2022','18-06-2022',6500,true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('04-07-2022','08-07-2022',4000,true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('04-07-2021','08-07-2021',12500,true,1);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('01-03-2022','05-03-2022',12500,true,1);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('07-03-2022','08-03-2022',1500,true,2);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('12-06-2022','18-06-2022',7000,true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('04-08-2022','08-08-2022',1200,true,4);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('14-08-2022','21-08-2022',5000,true,3);
+INSERT INTO cottage_reservation (reservation_start,reservation_end,price,active,cottage_pricelist_id) VALUES ('23-09-2022','25-09-2022',20000,true,3);
 
 --COTTAGE COTTAGE ACTION
 INSERT INTO cottage_cottage_actions(cottage_id,cottage_actions_id) VALUES (1,1);
@@ -211,10 +211,10 @@ INSERT INTO boat_image ( name ) VALUES ('ads8.jpg');
 INSERT INTO boat_image ( name ) VALUES ('ads6.jpg');
 
 --BOAT MARK
-INSERT INTO boat_mark (mark) VALUES (1);
-INSERT INTO boat_mark (mark) VALUES (3);
-INSERT INTO boat_mark (mark) VALUES (1);
-INSERT INTO boat_mark (mark) VALUES (5);
+INSERT INTO boat_mark (enable,mark) VALUES (true,1);
+INSERT INTO boat_mark (enable,mark) VALUES (true,3);
+INSERT INTO boat_mark (enable,mark) VALUES (true,1);
+INSERT INTO boat_mark (enable,mark) VALUES (true,5);
 
 
 --BOAT PRICELIST
@@ -224,11 +224,11 @@ INSERT INTO boat_pricelist (price,description) VALUES (6500,'4 osoba');
 INSERT INTO boat_pricelist (price,description) VALUES (14000,'9 osoba');
 
 --BOAT RESERVATION
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-05-2022','13-05-2022',true,1);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('21-06-2022','28-06-2022',true,3);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('11-06-2022','12-06-2022',true,4);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,2);
-INSERT INTO boat_reservation (reservation_start,reservation_end,active,boat_pricelist_id) VALUES ('15-06-2022','18-06-2022',true,2);
+INSERT INTO boat_reservation (reservation_start,reservation_end,price,active,boat_pricelist_id) VALUES ('11-05-2022','13-05-2022',4000,true,1);
+INSERT INTO boat_reservation (reservation_start,reservation_end,price,active,boat_pricelist_id) VALUES ('21-06-2022','28-06-2022',6000,true,3);
+INSERT INTO boat_reservation (reservation_start,reservation_end,price,active,boat_pricelist_id) VALUES ('11-06-2022','12-06-2022',4500,true,4);
+INSERT INTO boat_reservation (reservation_start,reservation_end,price,active,boat_pricelist_id) VALUES ('15-07-2022','18-07-2022',11000,true,2);
+INSERT INTO boat_reservation (reservation_start,reservation_end,price,active,boat_pricelist_id) VALUES ('15-06-2022','18-06-2022',12000,true,2);
 
 
 
@@ -249,8 +249,8 @@ INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (11,1);
 INSERT INTO boat_boat_images(boat_id , boat_images_id) VALUES (12,1);
 
 --BOAT COMPLAINT
-INSERT INTO boat_complaint(description,my_user_id,boat_id) VALUES ('opsi zalbe' , 3,2);
-
+--INSERT INTO boat_complaint(enable,description,my_user_id,boat_id) VALUES (true,'opsi zalbe' , 3,2);
+INSERT INTO boat_complaint(enable,description) VALUES (true,'opsi zalbe');
 --BOAT OWNER COMPLAINT
 INSERT INTO boat_owner_complaint(description,my_user_id,boat_owner_id) VALUES ('opsi zalbe' , 3,1);
 
@@ -335,10 +335,10 @@ INSERT INTO adventure_adventure_images(adventure_id , adventure_images_id) VALUE
 INSERT INTO adventure_adventure_images(adventure_id , adventure_images_id) VALUES (6,1);
 
 --ADVENTURE MARK
-INSERT INTO adventure_mark (mark) VALUES (2);
-INSERT INTO adventure_mark (mark) VALUES (3);
-INSERT INTO adventure_mark (mark) VALUES (2);
-INSERT INTO adventure_mark (mark) VALUES (5);
+INSERT INTO adventure_mark (enable,mark) VALUES (true,2);
+INSERT INTO adventure_mark (enable,mark) VALUES (true,3);
+INSERT INTO adventure_mark (enable,mark) VALUES (true,2);
+INSERT INTO adventure_mark (enable,mark) VALUES (true,5);
 
 --ADVENTURE PRICELIST
 INSERT INTO adventure_pricelist (price,description) VALUES (5000,'3 osobe');
@@ -348,18 +348,18 @@ INSERT INTO adventure_pricelist (price,description) VALUES (7000,'7 osoba');
 
 
 --ADVENTURE RESERVATION
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('15-04-2022','18-04-2022',true,1);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('10-05-2022','15-05-2022',true,1);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('23-04-2022','25-04-2022',true,2);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('15-07-2022','18-07-2022',true,4);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('09-05-2022','12-05-2022',true,4);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('05-04-2022','08-04-2022',true,4);
-INSERT INTO adventure_reservation (reservation_start,reservation_end,active,adventure_pricelist_id) VALUES ('07-07-2022','08-07-2022',true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('15-04-2022','18-04-2022',2000,true,1);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('10-05-2022','15-05-2022',3800,true,1);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('23-04-2022','25-04-2022',5000,true,2);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('15-07-2022','18-07-2022',2300,true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('09-05-2022','12-05-2022',2000,true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('05-04-2022','08-04-2022',6000,true,4);
+INSERT INTO adventure_reservation (reservation_start,reservation_end,price,active,adventure_pricelist_id) VALUES ('07-07-2022','08-07-2022',4000,true,4);
 
 
 --ADVENTURE COMPLAINT
-INSERT INTO adventure_complaint(description,my_user_id,adventure_id) VALUES ('opsi zalbe' , 4,1);
-
+--INSERT INTO adventure_complaint(enable,description,my_user_id,adventure_id) VALUES (true,'opsi zalbe' , 4,1);
+INSERT INTO adventure_complaint(enable,description) VALUES (true,'opsi zalbe');
 --INSTRUCTOR COMPLAINT
 INSERT INTO instructor_complaint(description,my_user_id,instructor_id) VALUES ('opsi zalbe' , 4,1);
 

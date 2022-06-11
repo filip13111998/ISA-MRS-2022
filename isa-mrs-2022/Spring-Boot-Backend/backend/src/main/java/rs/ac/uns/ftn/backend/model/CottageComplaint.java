@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,12 +21,20 @@ public class CottageComplaint {
     @Column(name = "description")
     private String description;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "my_user_id")
-    private MyUser myUser;
+    @Column(name = "enable")
+    private Boolean enable;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cottage_id")
-    private Cottage cottage;
+    @Column(name = "date")
+    private LocalDate date;
+
+    @Column(name = "entity")
+    private Long entity;
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "my_user_id")
+//    private MyUser myUser;
+//
+//    @OneToOne(fetch = FetchType.LAZY)
+//    @JoinColumn(name = "cottage_id")
+//    private Cottage cottage;
 
 }

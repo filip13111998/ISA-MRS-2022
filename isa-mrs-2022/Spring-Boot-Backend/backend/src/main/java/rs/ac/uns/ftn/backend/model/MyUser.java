@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.util.HashSet;
@@ -18,6 +19,7 @@ import java.util.Set;
 //@Data
 @Entity
 //@Table(name = "my_user")
+
 public class MyUser extends User{
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -29,6 +31,9 @@ public class MyUser extends User{
 
     @Column(name = "point")
     private Long point;
+
+    @Column(name = "penalty_point")
+    private Long penaltyPoint;
 
     @Column(name = "phone_number")
     private String phoneNumber;
@@ -44,6 +49,9 @@ public class MyUser extends User{
 
     @Column(name = "register_token")
     private String registerToken;
+
+//    @Column(name = "deactivate")
+//    private Boolean deactivate;
 
 //    @Column(name = "email")
 //    private String email;
@@ -94,6 +102,14 @@ public class MyUser extends User{
 //    }
 
 
+//    public Boolean getDeactivate() {
+//        return deactivate;
+//    }
+//
+//    public void setDeactivate(Boolean deactivate) {
+//        this.deactivate = deactivate;
+//    }
+
     public String getRegisterToken() {
         return registerToken;
     }
@@ -134,6 +150,13 @@ public class MyUser extends User{
         this.adventureResevations = adventureResevations;
     }
 
+    public void setPenaltyPoint(Long penaltyPoint) {
+        this.penaltyPoint = penaltyPoint;
+    }
+
+    public Long getPenaltyPoint() {
+        return penaltyPoint;
+    }
 //    public String getNameUser() {
 //        return nameUser;
 //    }

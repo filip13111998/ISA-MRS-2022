@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -15,6 +16,7 @@ import rs.ac.uns.ftn.backend.repository.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -39,6 +41,8 @@ public class CottageReservationService {
 
     private CottageActionRepository car;
 
+    @Autowired
+    private EmailSenderService service;
 
     public CottageReservationService( CottageActionRepository car,CottageRepository cr, MyUserRepository mr,CottageReservationRepository crr,CottagePricelistRepository cpr){
         this.cr = cr;
@@ -130,6 +134,7 @@ public class CottageReservationService {
             car.delete(ca.get());
         }
 
+        MyUser muo = mr.findByUsername(srdto.getMyUsername());
 
         CottageResevation cotr = new CottageResevation();
 
@@ -141,28 +146,46 @@ public class CottageReservationService {
 
         cotr.setPricelistItem(getPricelist(srdto.getDescription()));
 
-        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+        muo.setPoint(muo.getPoint()+5);
+
+        Double procenat =  (double)(100- LoyalityProgram.getPercent(muo.getPoint()))/100;
+
+        Long myPrice = Math.round(( Math.round(srdto.getPrice()))*(srdto.getStart().until(srdto.getEnd(), ChronoUnit.DAYS)+1)*procenat);
+
+        cotr.setPrice(myPrice);
+
+
+
 
         muo.getCottageResevations().add(cotr);
 
-        System.out.println("COTR ID " + cotr.getId());
+//        System.out.println("COTR ID " + cotr.getId());
 
         Cottage ct = cto.get();
 
         ct.getCottageResevations().add(cotr);
 
-        System.out.println("COTR ID " + cotr.getId());
+
+
+//        System.out.println("COTR ID " + cotr.getId());
 
         crr.save(cotr);
 
-        cr.save(ct);
+//        cr.save(ct);
 
 
 
         mr.save(muo);
 
+        service.sendSimpleEmail("jeremy.cartwright96@ethereal.email",
+                "You are make succesfull cottage reservation" ,
+                "Cottage reservation for user: " + muo.getUsername()
+        );
+
         return CompletableFuture.completedFuture(true);
     }
+
+
 
     @Async
     public CompletableFuture<Boolean> deleteReservation(DeleteCottageReservationDTO drdto) {
@@ -171,6 +194,8 @@ public class CottageReservationService {
 
 
         MyUser muo = mr.findByUsername(drdto.getMyUsername());
+
+        muo.setPoint(muo.getPoint()-5);
 
         Optional<CottageResevation> ct2 = muo.getCottageResevations().stream().filter(ctt -> ctt.getId().equals(drdto.getReservationId())).findFirst();
 

@@ -10,7 +10,9 @@ import org.hibernate.annotations.FetchMode;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -73,6 +75,8 @@ public class Cottage {
 //    @Fetch(FetchMode.JOIN)
     private Set<CottageResevation> cottageResevations = new HashSet<>();
 
+
+
     @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<CottageAction> cottageActions = new HashSet<>();
@@ -81,7 +85,10 @@ public class Cottage {
     private Set<MyUser> myUsers = new HashSet<MyUser>();
 
     public double averageMarks(){
-        return marks.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
+
+        List<CottageMark> lsita = marks.stream().filter(m-> m.getEnable()).collect(Collectors.toList());
+
+        return lsita.stream().mapToDouble(l->l.getMark()).average().orElse(0.0);
     }
 
     //public Integer sumBedNumer(){ return Integer.parseInt(String.valueOf(numberOfRoom))*Integer.parseInt(String.valueOf(numberOfBedPerRoom));}
@@ -94,6 +101,17 @@ public class Cottage {
         }
         return true;
     }
+
+    public Integer getVersion() {
+        return version;
+    }
+
+
+
+    public void setVersion(Integer version) {
+        this.version = version;
+    }
+
 
     public void setId(Long id) {
         this.id = id;

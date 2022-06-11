@@ -4,10 +4,10 @@ package rs.ac.uns.ftn.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import rs.ac.uns.ftn.backend.dto.request.AdventureSearchSortDTO;
-import rs.ac.uns.ftn.backend.dto.request.BoatSearchSortDTO;
+import rs.ac.uns.ftn.backend.dto.request.*;
 import rs.ac.uns.ftn.backend.dto.response.*;
 //import rs.ac.uns.ftn.backend.model.Adventure;
+import rs.ac.uns.ftn.backend.model.AdventureComplaint;
 import rs.ac.uns.ftn.backend.model.AdventurePricelist;
 import rs.ac.uns.ftn.backend.model.CottagePricelist;
 import rs.ac.uns.ftn.backend.service.AdventureService;
@@ -51,6 +51,16 @@ public class AdventureController {
     @GetMapping(value = "/pricelist/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<List<AdventurePricelist>>> getAdventurePricelist(@PathVariable Long id) {
         return  as.getAdventurePricelist(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/mark",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addMark(@RequestBody AdventureMarkDTO dto) {
+        return  as.addMark(dto).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/complaint",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addComplaint(@RequestBody AdventureComplaintDTO dto) {
+        return  as.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

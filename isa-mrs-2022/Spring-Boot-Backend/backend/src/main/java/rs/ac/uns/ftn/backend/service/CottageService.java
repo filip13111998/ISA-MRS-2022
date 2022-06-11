@@ -1,18 +1,21 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import rs.ac.uns.ftn.backend.dto.request.CottageComplaintDTO;
+import rs.ac.uns.ftn.backend.dto.request.CottageMarkDTO;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageReservationDTO;
-import rs.ac.uns.ftn.backend.model.Cottage;
-import rs.ac.uns.ftn.backend.model.CottagePricelist;
-import rs.ac.uns.ftn.backend.model.CottageResevation;
+import rs.ac.uns.ftn.backend.model.*;
+import rs.ac.uns.ftn.backend.repository.CottageComplaintRepository;
+import rs.ac.uns.ftn.backend.repository.CottageMarkRepository;
 import rs.ac.uns.ftn.backend.repository.CottageRepository;
 
 import java.time.format.DateTimeFormatter;
@@ -27,6 +30,14 @@ import java.util.stream.Stream;
 @Service
 public class CottageService {
 
+
+    @Autowired
+    private CottageComplaintRepository ccr;
+
+    @Autowired
+    private CottageMarkRepository cmr;
+
+
     CottageRepository cr;
 
     private List<String> possibleType = Arrays.asList("name","address", "numberOfRoom","numberOfBedPerRoom");
@@ -34,6 +45,9 @@ public class CottageService {
     public CottageService(CottageRepository cr2){
         cr = cr2;
     }
+
+
+
 
     @Async
     public CompletableFuture<List<CottageDTO>> getAllCottages(Integer pageNum , Integer pageSize) {
@@ -247,4 +261,43 @@ public class CottageService {
 
         return CompletableFuture.completedFuture(lista);
     }
+
+    @Async
+    public CompletableFuture<Boolean> addMark(CottageMarkDTO dto) {
+
+        log.info("ADD MARK COTTAGE WITH ID: " + dto.getEntityID());
+
+
+
+        CottageMark cm = new CottageMark();
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setMark(dto.getMark());
+        cm.setEnable(false);
+
+        cmr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+    }
+
+    @Async
+    public CompletableFuture<Boolean> addComplaint(CottageComplaintDTO dto) {
+
+        log.info("ADD MARK COTTAGE WITH ID: " + dto.getEntityID());
+
+        CottageComplaint cm = new CottageComplaint();
+        cm.setEntity(dto.getEntityID());
+        cm.setDate(dto.getDate());
+        cm.setDescription(dto.getDescription());
+        cm.setEnable(false);
+
+        ccr.save(cm);
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
+
 }

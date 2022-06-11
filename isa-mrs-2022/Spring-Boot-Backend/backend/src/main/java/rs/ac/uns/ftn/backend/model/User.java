@@ -2,6 +2,7 @@ package rs.ac.uns.ftn.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.apache.tomcat.util.buf.StringUtils;
+import org.hibernate.annotations.Where;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 @Entity
 @Table(name="USERS")
 @Inheritance(strategy = InheritanceType.TABLE_PER_CLASS)
+@Where(clause = "enabled=true")
 public class User implements UserDetails {
 
 	private static final long serialVersionUID = 1L;
@@ -47,6 +49,9 @@ public class User implements UserDetails {
     @Column(name = "enabled")
     private boolean enabled;
 
+    @Column(name = "deactivate")
+    private Boolean deactivate;
+
     @Column(name = "last_password_reset_date")
     private Timestamp lastPasswordResetDate;
 
@@ -55,6 +60,14 @@ public class User implements UserDetails {
             joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private List<Role> roles = new ArrayList<>();
+
+    public void setDeactivate(Boolean deactivate) {
+        this.deactivate = deactivate;
+    }
+
+    public Boolean getDeactivate() {
+        return deactivate;
+    }
 
     public Long getId() {
         return id;

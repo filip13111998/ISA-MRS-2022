@@ -1,6 +1,7 @@
 package rs.ac.uns.ftn.backend.service;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -12,6 +13,7 @@ import rs.ac.uns.ftn.backend.repository.*;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
@@ -33,6 +35,9 @@ public class AdventureReservationService {
     private AdventurePricelistRepository apr;
 
     private AdventureActionRepository aar;
+
+    @Autowired
+    private EmailSenderService service;
 
     public AdventureReservationService(AdventureActionRepository aar,AdventureRepository ar, MyUserRepository mr,AdventureReservationRepository arr,AdventurePricelistRepository apr){
         this.ar = ar;
@@ -142,21 +147,38 @@ public class AdventureReservationService {
 
         MyUser muo = mr.findByUsername(srdto.getMyUsername());
 
+
+        muo.setPoint(muo.getPoint()+5);
+
+
+        Double procenat =  (double)(100- LoyalityProgram.getPercent(muo.getPoint()))/100;
+
+        Long myPrice = Math.round(( Math.round(srdto.getPrice()))*(srdto.getStart().until(srdto.getEnd(), ChronoUnit.DAYS)+1)*procenat);
+
+        aotr.setPrice(myPrice);
+
         muo.getAdventureResevations().add(aotr);
 
         Optional<Adventure> ato = ar.findById(srdto.getAdventureId());
 
         Adventure at = ato.get();
 
+
+
         at.getAdventureReservations().add(aotr);
 
         arr.save(aotr);
 
-        ar.save(at);
+//        ar.save(at);
 
 //        crr.save(cotr);
 
         mr.save(muo);
+
+        service.sendSimpleEmail("jeremy.cartwright96@ethereal.email",
+                "You are make succesfull adventure reservation" ,
+                "Adventure reservation for user: " + muo.getUsername()
+        );
 
         return CompletableFuture.completedFuture(true);
     }

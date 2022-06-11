@@ -13,9 +13,13 @@ export class MyUserDTO {
 
     lastName: String;
 
+    userCategory: String;
+
     roles: Role[];
 
     point: number;
+
+    penaltyPoint: number;
 
     phoneNumber: String;
 

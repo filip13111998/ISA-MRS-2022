@@ -32,6 +32,12 @@ export class AdventureserviceService {
   public getPricelist(id: number): Observable<AdventurePricelistDTO[]> {
     return this.http.get<AdventurePricelistDTO[]>(`${this.apiUrl}/pricelist/${id}`, { headers: this.headers });
   }
+  public addMark(cs: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/mark`, cs, { headers: this.headers });
+  }
+  public addComplaint(cs: any): Observable<Boolean> {
+    return this.http.post<Boolean>(`${this.apiUrl}/complaint`, cs, { headers: this.headers });
+  }
 
 
   error(error: HttpErrorResponse) {

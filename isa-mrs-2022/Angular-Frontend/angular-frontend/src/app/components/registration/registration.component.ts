@@ -14,6 +14,7 @@ export class RegistrationComponent implements OnInit {
   reg_user = this.fb.group({
     username: [null],
     password: [null],
+    password2: [null],
     firstName: [null],
     lastName: [null],
     email: [null],
@@ -30,6 +31,12 @@ export class RegistrationComponent implements OnInit {
 
   public register() {
     console.log(this.reg_user.value)
+
+    if (this.reg_user.value.password != this.reg_user.value.password2) {
+      console.log("DIFFERENT PASSWORD");
+      return;
+    }
+
     this.ls.register(this.reg_user.value).subscribe((b: Boolean) => {
       if (b) {
         this.router.navigate(['/', 'login']);

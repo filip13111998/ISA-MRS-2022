@@ -3,6 +3,8 @@ package rs.ac.uns.ftn.backend.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import rs.ac.uns.ftn.backend.dto.request.CottageComplaintDTO;
+import rs.ac.uns.ftn.backend.dto.request.CottageMarkDTO;
 import rs.ac.uns.ftn.backend.dto.request.CottageSearchSortDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
 import rs.ac.uns.ftn.backend.dto.response.CottageDTO;
@@ -55,6 +57,16 @@ public class CottageController {
     @GetMapping(value = "/pricelist/{id}",produces = "application/json")
     public CompletableFuture<ResponseEntity<List<CottagePricelist>>> getCottagePricelist(@PathVariable Long id) {
         return  cs.getCottagePricelist(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/mark",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addMark(@RequestBody CottageMarkDTO dto) {
+        return  cs.addMark(dto).thenApplyAsync(ResponseEntity::ok);
+    }
+
+    @PostMapping(value = "/complaint",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> addComplaint(@RequestBody CottageComplaintDTO dto) {
+        return  cs.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

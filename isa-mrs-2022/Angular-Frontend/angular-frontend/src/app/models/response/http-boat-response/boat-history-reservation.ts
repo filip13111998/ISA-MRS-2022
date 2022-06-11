@@ -6,6 +6,8 @@ export class BoatReservationHistoryDTO {
 
     reservationEnd: Date;
 
+    price: number;
+
     active: boolean;
 
     pricelistItem: BoatPricelistDTO;

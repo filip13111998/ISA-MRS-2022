@@ -30,15 +30,18 @@ public class CottageResevation {
     @Column(name = "active")
     private Boolean active;
 
+    @Column(name = "price")
+    private Long price;
+
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "cottage_pricelist_id")
     private CottagePricelist pricelistItem;
 
     //Racuna ukupnu cenu rezervacije kao broj dana pomnozen sa cenom jednog dana
-    public Double getPrice(){
-        Period period = Period.between( this.getReservationStart(),this.getReservationEnd());
-        return period.getDays() * this.getPricelistItem().getPrice();
-    }
+//    public Double getPrice(){
+//        Period period = Period.between( this.getReservationStart(),this.getReservationEnd());
+//        return period.getDays() * this.getPricelistItem().getPrice();
+//    }
 
     //Proveravakoliko dana je ostalo do pocetka rezervacije...ako je iznad 3 onda moze da je otkaze
     public Boolean reservationDeactivated(){

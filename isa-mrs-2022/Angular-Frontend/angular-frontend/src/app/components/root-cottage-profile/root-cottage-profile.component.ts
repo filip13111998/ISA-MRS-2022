@@ -207,7 +207,9 @@ export class RootCottageProfileComponent implements OnInit {
   public getCalendarData() {
 
     this.rcs.getAllCottageReservations(this.cottageProfile.id).subscribe((liste: CottageReservationCalendarDTO) => {
+
       liste.cottageResevations.forEach(element => {
+
         // console.log(element);
         // console.log({ title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).subtract(1, 'months').format('YYYY-MM-DD')}` });
         this.arr = [...this.arr, { borderColor: '#EB5353', backgroundColor: "#EB5353", title: 'Reservated', start: `${moment(element.reservationStart).subtract(1, 'months').format('YYYY-MM-DD')}`, end: `${moment(element.reservationEnd).add(1, 'days').subtract(1, 'months').format('YYYY-MM-DD')}` }];
@@ -249,7 +251,7 @@ export class RootCottageProfileComponent implements OnInit {
         });
       }
 
-      this.imgCollection.forEach(e => console.log(e));
+      // this.imgCollection.forEach(e => console.log(e));
       this.setSubscribeToggle();
       this.getPricelist();
       this.getCalendarData();
@@ -501,6 +503,9 @@ export class RootCottageProfileComponent implements OnInit {
   }
 
   public fast_action_disable(start: any): Boolean {
+    console.log("TU SAM" + moment(start).subtract(1, 'month').format('MMMM Do YYYY, h:mm:ss a') + "ha");
+
+    console.log("OP    " + moment().format('MMMM Do YYYY, h:mm:ss a') + "op");
 
     if (localStorage.getItem("user_token") == null) {
 
@@ -509,6 +514,7 @@ export class RootCottageProfileComponent implements OnInit {
     }
 
     if (moment(start) < moment()) {
+      console.log("JEDNOM");
       return true;
     }
 

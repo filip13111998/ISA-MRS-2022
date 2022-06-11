@@ -10,44 +10,115 @@
 
     <p class="h4 mb-4" style="color:#00C851;" color="success">Profile: {{myUser.username}}</p>
     <!-- Email -->
-    <input [(ngModel)]="myUser.email" readonly formControlName="email" type="text" id="defaultLoginFormEmail"
-        class="form-control mb-4" placeholder="E-mail">
+    <p style="color: #32CD32;">E-mail</p><input [(ngModel)]="myUser.email" readonly formControlName="email" type="text"
+        id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
     <!-- Password -->
-    <input [(ngModel)]="myUser.password" formControlName="password" type="password" id="defaultLoginFormPassword"
-        class="form-control mb-4" placeholder="New Password">
+    <p style="color: #32CD32;">Password</p><input [(ngModel)]="myUser.password" formControlName="password"
+        type="password" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="New Password">
 
     <!-- Password2 -->
-    <input formControlName="password2" type="password" id="defaultLoginFormPassword2" class="form-control mb-4"
-        placeholder="New Password2">
+    <p style="color: #32CD32;">Confirm Password</p><input formControlName="password2" type="password"
+        id="defaultLoginFormPassword2" class="form-control mb-4" placeholder="New Password2">
     <!-- First Name -->
-    <input [(ngModel)]="myUser.firstName" formControlName="firstName" type="text" id="defaultLoginFormFirstName"
-        class="form-control mb-4" placeholder="First Name">
+    <p style="color: #32CD32;">First Name</p><input [(ngModel)]="myUser.firstName" formControlName="firstName"
+        type="text" id="defaultLoginFormFirstName" class="form-control mb-4" placeholder="First Name">
     <!-- Last Name -->
-    <input [(ngModel)]="myUser.lastName" formControlName="lastName" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="Last Name">
+    <p style="color: #32CD32;">Last Name</p><input [(ngModel)]="myUser.lastName" formControlName="lastName" type="text"
+        id="defaultLoginFormLast" class="form-control mb-4" placeholder="Last Name">
 
-    <input [(ngModel)]="myUser.point" readonly formControlName="point" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="Point">
+    <!-- user category -->
+    <p style="color: #32CD32;">Loyality Category</p><input [(ngModel)]="myUser.userCategory" readonly
+        formControlName="userCategory" type="text" id="defaultLoginFormCategory" class="form-control mb-4"
+        placeholder="Category">
 
-    <input [(ngModel)]="myUser.phoneNumber" formControlName="phoneNumber" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="Phone Number">
+    <p style="color: #32CD32;">User Points</p><input [(ngModel)]="myUser.point" readonly formControlName="point"
+        type="text" id="defaultLoginFormLast" class="form-control mb-4" placeholder="Point">
 
-    <input [(ngModel)]="myUser.adresa" formControlName="adresa" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="Adress">
+    <p style="color: #32CD32;">Penalty Point</p><input [(ngModel)]="myUser.penaltyPoint" readonly
+        formControlName="penaltyPoint" type="text" id="defaultLoginFormPenaltyPoint" class="form-control mb-4"
+        placeholder="Penalty Point">
 
-    <input [(ngModel)]="myUser.grad" formControlName="grad" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="City">
+    <p style="color: #32CD32;">Phone Number</p><input [(ngModel)]="myUser.phoneNumber" formControlName="phoneNumber"
+        type="text" id="defaultLoginFormLast" class="form-control mb-4" placeholder="Phone Number">
 
-    <input [(ngModel)]="myUser.drzava" formControlName="drzava" type="text" id="defaultLoginFormLast"
-        class="form-control mb-4" placeholder="County">
+    <p style="color: #32CD32;">Address</p><input [(ngModel)]="myUser.adresa" formControlName="adresa" type="text"
+        id="defaultLoginFormLast" class="form-control mb-4" placeholder="Adress">
+
+    <p style="color: #32CD32;">City</p><input [(ngModel)]="myUser.grad" formControlName="grad" type="text"
+        id="defaultLoginFormLast" class="form-control mb-4" placeholder="City">
+
+    <p style="color: #32CD32;">Country</p><input [(ngModel)]="myUser.drzava" formControlName="drzava" type="text"
+        id="defaultLoginFormLast" class="form-control mb-4" placeholder="County">
 
 
     <div>
-        <label style="float:left ;margin-top: 1.3em;color: red;">Do yoy want to delete account?</label>
-        <button mdbBtn color="red" type="button" style="float:right ;" (click)="deleteAccount()">Delete</button>
+        <label style="float:left ;margin-top: 2.5em;color: red;">Do yoy want to delete account?</label>
+        <!-- <button mdbBtn color="red" type="button" style="float:right ;" (click)="deleteAccount()">Delete</button> -->
+        <!-- <hr /> -->
+        <hr />
+        <button type="button" class="btn btn-danger" (click)="openPopup()">Delete
+
+        </button>
+        <div class="modal" tabindex="-1" role="dialog" [ngStyle]="{'display':displayStyle}">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Delete Account</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form [formGroup]="deleteForm">
+                            <input id="reason" [(ngModel)]="reason" formControlName="reason" placeholder="Delete reason"
+                                class="form-control mb-4" type="text" />
+
+                        </form>
+
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-success" (click)="closePopup()">
+                            Close
+                        </button>
+                        <button type="button" class="btn btn-danger" (click)="deleteAccount()">
+                            Delete
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <hr />
+
+        <!-- Button trigger modal
+        <button type="button" class="btn btn-danger" style="float:right ;" (click)="deleteAccount()"
+            data-toggle=" modal" data-target="#exampleModal">
+            Delete
+        </button> -->
+
+        <!-- Modal -->
+        <!-- <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+            aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        ...
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary">Save changes</button>
+                    </div>
+                </div>
+            </div>
+        </div> -->
+
+
     </div>
     <!-- Sign in button -->
-    <button mdbBtn color="success" type="submit" style="margin-left: 10em;margin-top: 5em;">Edit</button>
+    <button mdbBtn color="success" type="submit" style="margin-left: 0em;margin-top: 5em;">Edit</button>
 
 
 </form>
