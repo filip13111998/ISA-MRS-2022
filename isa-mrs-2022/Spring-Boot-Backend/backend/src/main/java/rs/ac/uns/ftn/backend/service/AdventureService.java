@@ -255,5 +255,21 @@ public class AdventureService {
 
     }
 
+    @Async
+    public CompletableFuture<Boolean> deleteAdventure(Long id) {
+
+        log.info("DELETE ADVENTURE WITH ID: " + id);
+
+        Optional<Adventure> a = ar.findById(id);
+
+        a.get().setDelete(true);
+
+        ar.save(a.get());
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
 
 }

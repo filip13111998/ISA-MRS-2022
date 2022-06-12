@@ -69,4 +69,9 @@ public class CottageController {
         return  cs.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
+    @GetMapping(value = "/delete/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> delete(@PathVariable Long id) {
+        return  cs.deleteCottage(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
 }

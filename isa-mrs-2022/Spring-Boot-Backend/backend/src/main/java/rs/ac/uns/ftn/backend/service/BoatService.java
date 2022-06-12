@@ -42,6 +42,7 @@ public class BoatService {
     @Autowired
     private BoatMarkRepository bmr;
 
+
     private BoatRepository br;
 
     private List<String> possibleType = Arrays.asList("name","address", "type","lenght","engineNum","enginePower","maxSpeed");
@@ -325,5 +326,21 @@ public class BoatService {
 
     }
 
+    @Async
+    public CompletableFuture<Boolean> deleteCBoat(Long id) {
+
+        log.info("DELETE BOAT WITH ID: " + id);
+
+        Optional<Boat> b = br.findById(id);
+
+        b.get().setDelete(true);
+
+        br.save(b.get());
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
 
 }

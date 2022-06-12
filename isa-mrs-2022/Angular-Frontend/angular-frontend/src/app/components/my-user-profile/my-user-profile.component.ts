@@ -84,14 +84,17 @@ export class MyUserProfileComponent implements OnInit {
 
     this.mss.editMyUser(this.myUser).subscribe((bln: Boolean) => {
 
-      var millisecondsToWait = 500;
+      var millisecondsToWait = 1000;
       setTimeout(() => {
         this.automaticLogin(this.username, this.myUser.password);
+        // this.router.navigate(['/', 'register_profile']);
+        this.ngOnInit();
       }, millisecondsToWait);
 
       console.log("HAHAHA");
       // this.automaticLogin(this.username, this.myUser.password);
       // this.automaticLogin(this.username, this.myUser.password);
+
     }
     );
     // this.automaticLogin(this.username, this.myUser.password);

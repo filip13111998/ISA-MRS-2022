@@ -8,6 +8,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -21,6 +22,7 @@ import java.util.stream.Collectors;
 //@Data
 @Entity
 @Table(name = "boat")
+@Where(clause = "delete_bt=false")
 //@JsonIgnoreProperties(value= {"boatImages","marks","boatPricelists","boatResevations","boatActions"})
 public class Boat {
 

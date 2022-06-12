@@ -1,0 +1,32 @@
+<app-admin-menu></app-admin-menu>
+
+<!-- Default form login -->
+<img src="assets/adminacc1.png" style="width: 10%;height: 20%; margin-left: 45%;margin-top: 3em;" />
+
+<form [formGroup]="profileForm" (ngSubmit)="editUser()" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 1em;">
+
+    <p class="h4 mb-4" style="color:#FFA900;" color="success">Update Account: </p>
+
+
+    <p style="color: #FFA900;">E-mail</p><input [(ngModel)]="admin.email" formControlName="email" type="text"
+        id="defaultLoginFormEmail" class="form-control mb-4" placeholder="E-mail">
+
+    <p style="color: #FFA900;">Username</p><input readonly [(ngModel)]="admin.username" formControlName="username"
+        type="text" id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Username">
+
+    <p style="color: #FFA900;">Password</p><input formControlName="password" [(ngModel)]="admin.password"
+        type="password" id="defaultLoginFormPassword2" class="form-control mb-4" placeholder="Password">
+
+    <p style="color: #FFA900;">First Name</p><input [(ngModel)]="admin.firstName" formControlName="firstName"
+        type="text" id="defaultLoginFormFirstName" class="form-control mb-4" placeholder="First Name">
+
+    <p style="color: #FFA900;">Last Name</p><input [(ngModel)]="admin.lastName" formControlName="lastName" type="text"
+        id="defaultLoginFormLast" class="form-control mb-4" placeholder="Last Name">
+
+
+
+    <button mdbBtn color="warning" type="submit" style="margin-left: 0em;margin-top: 5em;color:white">Edit</button>
+
+
+</form>

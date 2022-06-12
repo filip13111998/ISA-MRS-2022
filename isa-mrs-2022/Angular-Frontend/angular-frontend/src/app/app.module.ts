@@ -51,6 +51,14 @@ import { AdminLoginComponent } from './components/admin-login/admin-login.compon
 import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
 import { AdminDeleteEntityComponent } from './components/admin-delete-entity/admin-delete-entity.component';
 import { ValidateUserComponent } from './components/validate-user/validate-user.component';
+import { AdminDeleteUserComponent } from './components/admin-delete-user/admin-delete-user.component';
+import { AdminDeleteOwnersComponent } from './components/admin-delete-owners/admin-delete-owners.component';
+import { AdminUpdateProfilComponent } from './components/admin-update-profil/admin-update-profil.component';
+import { AdminAddAdminComponent } from './components/admin-add-admin/admin-add-admin.component';
+import { AdminLoyalityPagComponent } from './components/admin-loyality-pag/admin-loyality-pag.component';
+import { AdminMarksComponent } from './components/admin-marks/admin-marks.component';
+import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
+import { AdminReportsComponent } from './components/admin-reports/admin-reports.component';
 
 
 
@@ -90,6 +98,14 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AdminNewPassComponent,
     AdminDeleteEntityComponent,
     ValidateUserComponent,
+    AdminDeleteUserComponent,
+    AdminDeleteOwnersComponent,
+    AdminUpdateProfilComponent,
+    AdminAddAdminComponent,
+    AdminLoyalityPagComponent,
+    AdminMarksComponent,
+    AdminComplaintsComponent,
+    AdminReportsComponent,
 
 
   ],

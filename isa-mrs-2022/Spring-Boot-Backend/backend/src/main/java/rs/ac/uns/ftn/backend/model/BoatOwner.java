@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "boat_owner")
+@Where(clause = "delete_own_boat=false")
 public class BoatOwner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

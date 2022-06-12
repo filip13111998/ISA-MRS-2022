@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 //@Data
 @Entity
 @Table(name = "adventure")
+@Where(clause = "delete_av=false")
 public class Adventure {
 
     @Id
@@ -57,6 +59,9 @@ public class Adventure {
     @Column(name = "cancellation_conditions")
     private String cancellationConditions;
 
+    @Column(name = "delete_av")
+    private Boolean delete;
+
     @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<AdventureImage> adventureImages = new HashSet<>();
@@ -82,6 +87,15 @@ public class Adventure {
     @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @Fetch(FetchMode.JOIN)
     private Set<MyUser> myUsers = new HashSet<MyUser>();
+
+
+    public void setDelete(Boolean delete) {
+        this.delete = delete;
+    }
+
+    public Boolean getDelete() {
+        return delete;
+    }
 
     public void setId(Long id) {
         this.id = id;

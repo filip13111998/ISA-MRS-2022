@@ -1,0 +1,267 @@
+<app-admin-menu></app-admin-menu>
+
+<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;" [gutterSize]="'5px'">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile><button (click)="set_entity_type_cottage()" type="button"
+            class="btn btn-new btn-lg box-shadow--8dp"><i class="fa fa-home" aria-hidden="true"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_boat()" type="button"
+            class="btn btn-primary btn-lg box-shadow--8dp"><i class="fa-solid fa-ship"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_adventure()" type=" button"
+            class="btn btn-info btn-lg box-shadow--8dp"><i class="fas fa-map-marked-alt"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+
+</mat-grid-list>
+
+
+
+
+
+<div>
+    <div *ngIf="entity_type==0" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="cottageMarks">
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="entityID">
+                    <th mat-header-cell *matHeaderCellDef> Entity ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityID}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date|date}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+                <ng-container matColumnDef="entityName">
+                    <th mat-header-cell *matHeaderCellDef> Entity Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="mark">
+                    <th mat-header-cell *matHeaderCellDef>Mark </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Answer">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Answer </th>
+                    <td mat-cell *matCellDef="let element"> <button style="color: white;"
+                            data-target="#cottageMarkModal" data-toggle="modal"
+                            (click)="remember(element.id,element.entityID)" class="btn btn-warning">Answer</button>
+
+
+                        <!-- Modal COTTAGE COMPLAINT-->
+                        <div class="modal fade" id="cottageMarkModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cottage Mark</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" style="color: white;"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" style="color: white;"
+                                            (click)="declineCottageMark()" data-dismiss="modal">
+                                            Decline </button>
+                                        <button type="button" class="btn btn-success" style="color: white;"
+                                            (click)="acceptCottageMark()" data-dismiss="modal">
+                                            Accept </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div *ngIf="entity_type==1" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="boatMarks">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="entityID">
+                    <th mat-header-cell *matHeaderCellDef> Entity ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityID}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date|date}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+                <ng-container matColumnDef="entityName">
+                    <th mat-header-cell *matHeaderCellDef> Entity Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="mark">
+                    <th mat-header-cell *matHeaderCellDef>Mark </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Answer">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Answer </th>
+                    <td mat-cell *matCellDef="let element"> <button style="color: white;" data-target="#boatMarkModal"
+                            data-toggle="modal" (click)="remember(element.id,element.entityID)"
+                            class="btn btn-warning">Answer</button>
+
+                        <!-- Modal COTTAGE COMPLAINT-->
+                        <div class="modal fade" id="boatMarkModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Boat Mark</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" style="color: white;"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" style="color: white;"
+                                            (click)="declineBoatMark()" data-dismiss="modal">
+                                            Decline </button>
+                                        <button type="button" class="btn btn-success" style="color: white;"
+                                            (click)="acceptBoatMark()" data-dismiss="modal">
+                                            Accept </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </td>
+                </ng-container>
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsBoat"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsBoat;"></tr>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="entity_type==2" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="adventureMarks">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="entityID">
+                    <th mat-header-cell *matHeaderCellDef> Entity ID </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityID}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="date">
+                    <th mat-header-cell *matHeaderCellDef> Date </th>
+                    <td mat-cell *matCellDef="let element"> {{element.date|date}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+                <ng-container matColumnDef="entityName">
+                    <th mat-header-cell *matHeaderCellDef> Entity Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.entityName}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="mark">
+                    <th mat-header-cell *matHeaderCellDef>Mark </th>
+                    <td mat-cell *matCellDef="let element"> {{element.mark}} </td>
+                </ng-container>
+
+
+                <ng-container matColumnDef="Answer">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Answer </th>
+                    <td mat-cell *matCellDef="let element"> <button style="color: white;"
+                            data-target="#adventureMarkModal" data-toggle="modal"
+                            (click)="remember(element.id,element.entityID)" class="btn btn-warning">Answer</button>
+
+                        <!-- Modal COTTAGE COMPLAINT-->
+                        <div class="modal fade" id="adventureMarkModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Adventure Mark</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-warning" style="color: white;"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-danger" style="color: white;"
+                                            (click)="declineAdventureMark()" data-dismiss="modal">
+                                            Decline </button>
+                                        <button type="button" class="btn btn-success" style="color: white;"
+                                            (click)="acceptAdventureMark()" data-dismiss="modal">
+                                            Accept </button>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumnsAdventure"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumnsAdventure;"></tr>
+            </table>
+        </div>
+    </div>
+
+</div>

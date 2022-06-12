@@ -39,6 +39,9 @@ export class BoatserviceService {
     return this.http.post<Boolean>(`${this.apiUrl}/complaint`, cs, { headers: this.headers });
   }
 
+  public delete(id: number): Observable<Boolean> {
+    return this.http.get<Boolean>(`${this.apiUrl}/delete/${id}`, { headers: this.headers });
+  }
 
   error(error: HttpErrorResponse) {
     let errorMessage = '';

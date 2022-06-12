@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 //@Data
 @Entity
 @Table(name = "cottage")
+@Where(clause = "delete_ctg=false")
 public class Cottage {
 
     @Id

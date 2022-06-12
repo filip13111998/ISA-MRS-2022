@@ -299,5 +299,22 @@ public class CottageService {
 
 
     }
+    @Async
+    public CompletableFuture<Boolean> deleteCottage(Long id) {
+
+        log.info("DELETE COTTAGE WITH ID: " + id);
+
+        Optional<Cottage> c = cr.findById(id);
+
+        c.get().setDelete(true);
+
+        cr.save(c.get());
+
+        return CompletableFuture.completedFuture(true);
+
+
+
+    }
+
 
 }

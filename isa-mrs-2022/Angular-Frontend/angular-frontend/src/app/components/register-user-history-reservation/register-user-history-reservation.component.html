@@ -125,7 +125,7 @@
                                             data-dismiss="modal">Close</button>
                                         <button type="button" class="btn btn-warning" style="color: white;"
                                             (click)="cottageComplaint(element.cottageID)" data-dismiss="modal">
-                                            Answer{{element.cottageID}}</button>
+                                            Answer</button>
                                     </div>
                                 </div>
                             </div>
@@ -142,11 +142,39 @@
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
                     <td mat-cell *matCellDef="let element">
-                        <button type="button" data-target="#cottageMarkModal" data-toggle="modal"
-                            [disabled]="checkCottageMarkComplaint(element.id)" class="btn btn-info">Mark</button>
+                        <button type="button" (click)="saveCtgId(element.cottageID)" data-target="#cottageMarkModal"
+                            data-toggle="modal" [disabled]="checkCottageMarkComplaint(element.id)"
+                            class="btn btn-info">Mark</button>
 
 
+                        <!-- Modal COTTAGE COMPLAINT-->
+                        <div class="modal fade" id="cottageMarkModal" tabindex="-1" role="dialog"
+                            aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div class="modal-dialog" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="exampleModalLabel">Cottage Mark</h5>
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                        </button>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form [formGroup]="cottageMarkForm">
+                                            <input id="answer" [(ngModel)]="answer" formControlName="answer"
+                                                placeholder="Write Mark" class="form-control mb-4" type="text" />
 
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-success"
+                                            data-dismiss="modal">Close</button>
+                                        <button type="button" class="btn btn-warning" style="color: white;"
+                                            (click)="cottageMark(element.cottageID)" data-dismiss="modal">
+                                            Answer </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
 
 
                     </td>
@@ -209,8 +237,9 @@
                 </ng-container>
                 <ng-container matColumnDef="complaints">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Complaints </th>
-                    <td mat-cell *matCellDef="let element"> <button type="button" data-target="#boatComplaintModal"
-                            data-toggle="modal" [disabled]="checkBoatMarkComplaint(element.id)" class="btn btn-warning"
+                    <td mat-cell *matCellDef="let element"> <button (click)="saveCtgId(element.boatID)" type="button"
+                            data-target="#boatComplaintModal" data-toggle="modal"
+                            [disabled]="checkBoatMarkComplaint(element.id)" class="btn btn-warning"
                             style="color: white;">Complaints</button>
 
                         <!-- Modal BOAT COMPLAINT-->
@@ -249,9 +278,9 @@
 
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
-                    <td mat-cell *matCellDef="let element"> <button type="button" data-target="#boatMarkModal"
-                            data-toggle="modal" [disabled]="checkBoatMarkComplaint(element.id)"
-                            class="btn btn-info">Mark</button>
+                    <td mat-cell *matCellDef="let element"> <button (click)="saveCtgId(element.boatID)" type="button"
+                            data-target="#boatMarkModal" data-toggle="modal"
+                            [disabled]="checkBoatMarkComplaint(element.id)" class="btn btn-info">Mark</button>
 
 
                         <!-- Modal BOAT MARK -->
@@ -335,8 +364,8 @@
                 </ng-container>
                 <ng-container matColumnDef="complaints">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Complaints </th>
-                    <td mat-cell *matCellDef="let element"> <button type="button"
-                            [disabled]="checkAdventureIdMarkComplaint(element.id)" class="btn btn-warning"
+                    <td mat-cell *matCellDef="let element"> <button (click)="saveCtgId(element.adventureID)"
+                            type="button" [disabled]="checkAdventureIdMarkComplaint(element.id)" class="btn btn-warning"
                             data-target="#adventureComplaintModal" data-toggle="modal"
                             style="color: white;">Complaints</button>
 
@@ -377,9 +406,9 @@
 
                 <ng-container matColumnDef="mark">
                     <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp;Mark </th>
-                    <td mat-cell *matCellDef="let element"> <button type="button" data-target="#adventureMarkModal"
-                            data-toggle="modal" [disabled]="checkAdventureIdMarkComplaint(element.id)"
-                            class="btn btn-info">Mark</button>
+                    <td mat-cell *matCellDef="let element"> <button (click)="saveCtgId(element.adventureID)"
+                            type="button" data-target="#adventureMarkModal" data-toggle="modal"
+                            [disabled]="checkAdventureIdMarkComplaint(element.id)" class="btn btn-info">Mark</button>
 
 
                         <!-- Modal ADVENTURE MARK -->

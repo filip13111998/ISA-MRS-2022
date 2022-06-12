@@ -63,4 +63,9 @@ public class AdventureController {
         return  as.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
+    @GetMapping(value = "/delete/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> delete(@PathVariable Long id) {
+        return  as.deleteAdventure(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
 }

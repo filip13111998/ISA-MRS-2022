@@ -30,6 +30,7 @@ export class AdminLoginComponent implements OnInit {
   public login() {
     // console.log(this.loginForm.value)
     this.ls.login(this.loginForm.value).subscribe((tkn: Token) => {
+
       // console.log(tkn.split('.')[1]);
       // console.log(JSON.parse(atob(tkn.accessToken.split('.')[1]))['roles']);
       localStorage.setItem('user_token', tkn.accessToken)

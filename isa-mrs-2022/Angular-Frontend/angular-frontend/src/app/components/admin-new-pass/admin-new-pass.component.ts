@@ -41,8 +41,15 @@ export class AdminNewPassComponent implements OnInit {
 
       this.as.newPassword(dto).subscribe((b: Boolean) => {
         if (b) {
-          this.automaticLogin(dto.username, dto.password);
-          this.router.navigate(['/', 'admin_home']);
+
+          var millisecondsToWait = 1000;
+          setTimeout(() => {
+            this.automaticLogin(dto.username, dto.password);
+            this.router.navigate(['/', 'admin_home']);
+            // this.router.navigate(['/', 'register_profile']);
+            this.ngOnInit();
+          }, millisecondsToWait);
+
 
         }
 

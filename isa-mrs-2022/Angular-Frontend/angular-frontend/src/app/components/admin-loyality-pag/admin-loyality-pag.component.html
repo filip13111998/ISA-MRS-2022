@@ -1,0 +1,34 @@
+<app-admin-menu></app-admin-menu>
+
+<!-- Default form login -->
+<img src="assets/loy1.png" style="width: 10%;height: 20%; margin-left: 45%;margin-top: 3em;" />
+
+<form [formGroup]="profileForm" (ngSubmit)="editLoyality()" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 1em;">
+
+    <p class="h4 mb-4" style="color:#FFA900;" color="success">Loyality Settings: </p>
+
+
+    <p style="color: #FFA900;">Application Profit</p><input [(ngModel)]="loyality.appProfit" formControlName="appProfit"
+        type="text" id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Application Profit">
+
+    <p style="color: #FFA900;">Silver Percent</p><input [(ngModel)]="loyality.silverPercent"
+        formControlName="silverPercent" type="text" id="defaultLoginFormPassword" class="form-control mb-4"
+        placeholder="Silver Percent">
+
+    <p style="color: #FFA900;">Gold Percent</p><input formControlName="goldPercent" [(ngModel)]="loyality.goldPercent"
+        type="text" id="defaultLoginFormPassword2" class="form-control mb-4" placeholder="Gold Percent">
+
+    <p style="color: #FFA900;">Silver Points</p><input [(ngModel)]="loyality.silverPoints"
+        formControlName="silverPoints" type="text" id="defaultLoginFormFirstName" class="form-control mb-4"
+        placeholder="Silver Points">
+
+    <p style="color: #FFA900;">Gold Points</p><input [(ngModel)]="loyality.goldPoints" formControlName="goldPoints"
+        type="text" id="defaultLoginFormLast" class="form-control mb-4" placeholder="Gold Points">
+
+
+
+    <button mdbBtn color="warning" type="submit" style="margin-left: 0em;margin-top: 5em;color:white">Edit</button>
+
+
+</form>

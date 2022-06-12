@@ -65,4 +65,9 @@ public class BoatController {
         return  bs.addComplaint(dto).thenApplyAsync(ResponseEntity::ok);
     }
 
+    @GetMapping(value = "/delete/{id}",produces = "application/json")
+    public CompletableFuture<ResponseEntity<Boolean>> delete(@PathVariable Long id) {
+        return  bs.deleteCBoat(id).thenApplyAsync(ResponseEntity::ok);
+    }
+
 }

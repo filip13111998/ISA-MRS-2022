@@ -1,3 +1,11 @@
+import { AdminReportsComponent } from './components/admin-reports/admin-reports.component';
+import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
+import { AdminMarksComponent } from './components/admin-marks/admin-marks.component';
+import { AdminLoyalityPagComponent } from './components/admin-loyality-pag/admin-loyality-pag.component';
+import { AdminUpdateProfilComponent } from './components/admin-update-profil/admin-update-profil.component';
+import { AdminAddAdminComponent } from './components/admin-add-admin/admin-add-admin.component';
+import { AdminDeleteOwnersComponent } from './components/admin-delete-owners/admin-delete-owners.component';
+import { AdminDeleteUserComponent } from './components/admin-delete-user/admin-delete-user.component';
 import { ValidateUserComponent } from './components/validate-user/validate-user.component';
 import { AdminDeleteEntityComponent } from './components/admin-delete-entity/admin-delete-entity.component';
 import { AdminNewPassComponent } from './components/admin-new-pass/admin-new-pass.component';
@@ -30,12 +38,22 @@ const routes: Routes = [
   { path: 'register_actions', component: MyUserActionsComponent },
 
 
-
+  /* ADMIN URLS */
   { path: 'admin_home', component: AdminHomePageComponent },
   { path: 'admin_login', component: AdminLoginComponent },
   { path: 'admin_new_pass', component: AdminNewPassComponent },
   { path: 'delete_entity', component: AdminDeleteEntityComponent },
+  { path: 'delete_users', component: AdminDeleteUserComponent },
+  { path: 'delete_owners', component: AdminDeleteOwnersComponent },
+  { path: 'add_admin', component: AdminAddAdminComponent },
+  { path: 'update_profile', component: AdminUpdateProfilComponent },
+  { path: 'loyality_program', component: AdminLoyalityPagComponent },
+  { path: 'admin_mark', component: AdminMarksComponent },
+  { path: 'admin_complaint', component: AdminComplaintsComponent },
+  { path: 'report', component: AdminReportsComponent },
 
+
+  /* REGISTER USER URLS */
   { path: 'login', component: LoginComponent },
   { path: 'registration', component: RegistrationComponent },
   { path: 'validate', component: ValidateUserComponent },
