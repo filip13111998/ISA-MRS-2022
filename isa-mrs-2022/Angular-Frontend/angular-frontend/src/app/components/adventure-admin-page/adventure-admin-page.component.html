@@ -1,5 +1,5 @@
 <div style="margin-left: 12.5%;" class="search-bar form-group container">
-    <form [formGroup]="profileForm" (ngSubmit)="filterCottage()">
+    <form [formGroup]="profileForm" (ngSubmit)="filterAdventure()">
         <div class="row" style="width: 50%;margin-left: 25%;">
 
             <div class="col col-example"><input class="form-control" type="text" formControlName="name"
@@ -8,16 +8,18 @@
             <div class="col col-example"><input class="form-control" type="text" formControlName="address"
                     placeholder="Address">
             </div>
-            <div class="w-100"></div>
-            <p></p>
-            <div class="col col-example"><input class="form-control" type="text" formControlName="numberOfRoom"
-                    placeholder="Room Number">
-            </div>
-
             <div class="col col-example"><input class="form-control" type="text" formControlName="averageMark"
                     placeholder="Average Mark">
             </div>
+            <div class="w-100"></div>
+            <p></p>
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxNumPersonFrom"
+                    placeholder="Max Number Person From">
+            </div>
 
+            <div class="col col-example"><input class="form-control" type="text" formControlName="maxNumPersonTo"
+                    placeholder="Max Number Person From">
+            </div>
             <p></p>
 
             <div class="col col-example" style="margin-left: 25%;">
@@ -38,24 +40,21 @@
             </div>
             <!-- <p>Form Status: {{ profileForm.status }}</p> -->
             <p></p>
-            <button class="btn btn-primary" type="submit" style="width: 60%;margin-left: 20%;">Search</button>
+            <button class="btn btn-primary" type="submit" style="width: 50%;margin-left: 25%;">Search</button>
         </div>
 
 
     </form>
-
-
-
 
 </div>
 
 <div class="sort-container">
 
     <mat-form-field appearance="fill">
-        <mat-label>Sort Cottage</mat-label>
+        <mat-label>Sort Adventure</mat-label>
         <mat-select (selectionChange)="setSortType($event.value)">
-            <mat-option *ngFor="let cottage of cottages" [value]="cottage.value">
-                {{cottage.viewValue}}
+            <mat-option *ngFor=" let adventure of adventures" [value]="adventure.value">
+                {{adventure.viewValue}}
             </mat-option>
         </mat-select>
     </mat-form-field>
@@ -65,17 +64,17 @@
 <div class="basic-container">
     <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
 
-        <mat-grid-tile *ngFor="let cottage of this.cttList">
+        <mat-grid-tile *ngFor="let adventure of this.adList">
             <div id="over" class="card text-center" style="width: auto; background-color: skyblue;border-radius: 3em;">
-                <img [src]="getImageName(cottage.cm.name)" width="50%" style="border-radius: 3em;">
+                <img [src]="getImageName(adventure.ai.name)" width="50%" style="margin-left: 25%;border-radius: 3em;">
                 <div class="card-body">
-                    <h5 class="card-title">{{cottage.name}}</h5>
+                    <h5 class="card-title">{{adventure.name}}</h5>
 
-                    <p class="card-text">{{cottage.address}}</p>
-                    <p class="card-text">{{cottage.bedNums}}</p>
-                    <p class="card-text">{{cottage.averageMark}}</p>
+                    <p class="card-text">{{adventure.address}}</p>
+                    <p class="card-text">{{adventure.maxNumPerson}}</p>
+                    <p class="card-text">{{adventure.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary" [routerLink]="goProfile(cottage.id)">Go Profile</a>
+                    <button class="btn btn-danger" (click)="delete(adventure.id)">Delete</button>
                 </div>
             </div>
         </mat-grid-tile>

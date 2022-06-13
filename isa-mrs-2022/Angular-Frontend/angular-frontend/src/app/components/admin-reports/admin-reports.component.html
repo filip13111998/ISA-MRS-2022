@@ -1,2 +1,83 @@
 <app-admin-menu></app-admin-menu>
-<p>admin-reports works!</p>
+
+
+<!-- Default form login -->
+<img src="assets/adminacc1.png" style="width: 10%;height: 20%; margin-left: 45%;margin-top: 3em;" />
+
+<form [formGroup]="searchForm" (ngSubmit)="searchReq()" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 1em;">
+
+    <p class="h4 mb-4" style="color:#FFA900;" color="success">Get Report: </p>
+    <p></p>
+
+    <div class="col col-example">
+        <mat-form-field appearance="fill">
+            <mat-label>Enter a date range</mat-label>
+            <mat-date-range-input [rangePicker]="picker">
+                <input matStartDate formControlName="start" placeholder="Start date">
+                <input matEndDate formControlName="end" placeholder="End date">
+            </mat-date-range-input>
+            <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-date-range-picker #picker></mat-date-range-picker>
+
+            <mat-error *ngIf="true">Invalid start date
+            </mat-error>
+            <mat-error *ngIf="true">Invalid end date</mat-error>
+        </mat-form-field>
+    </div>
+    <!-- <p>Form Status: {{ profileForm.status }}</p> -->
+    <p></p>
+
+    <!-- <p style="color: #FFA900;">Start Date</p><input [(ngModel)]="search.start" formControlName="start" type="text"
+        id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Start Date">
+
+    <p style="color: #FFA900;">End Date</p><input [(ngModel)]="search.end" formControlName="end" type="text"
+        id="defaultLoginFormPassword" class="form-control mb-4" placeholder="End Date"> -->
+
+    <button mdbBtn color="warning" type="submit" style="margin-left: 0em;margin-top: 5em;color:white">Report</button>
+
+
+</form>
+
+
+<form [formGroup]="reportForm" class="text-center border border-light p-5"
+    style="width: 30%;margin-left: 35%;margin-top: 1em;">
+
+    <p class="h4 mb-4" style="color:#FFA900;" color="success">Report View: </p>
+
+
+    <p style="color: #FFA900;">Cottage Number Reservation</p><input readonly
+        [(ngModel)]="report.numberCottageReservation" formControlName="numberCottageReservation" type="text"
+        id="defaultLoginFormEmail" class="form-control mb-4" placeholder="Cottage Number Reservation">
+
+    <p style="color: #FFA900;">Boat Number Reservation</p><input readonly [(ngModel)]="report.numberBoatReservation"
+        formControlName="numberBoatReservation" type="text" id="defaultLoginFormPassword" class="form-control mb-4"
+        placeholder="Boat Number Reservation">
+
+    <p style="color: #FFA900;">Adventure Number Reservation</p><input readonly
+        formControlName="numberAdventureReservation" [(ngModel)]="report.numberAdventureReservation" type="text"
+        id="defaultLoginFormPassword2" class="form-control mb-4" placeholder="Adventure Number Reservation">
+
+    <p style="color: #FFA900;">Cottage Price Reservation</p><input readonly [(ngModel)]="report.priceCottageReservation"
+        formControlName="priceCottageReservation" type="text" id="defaultLoginFormFirstName" class="form-control mb-4"
+        placeholder="Cottage Price Reservation">
+
+    <p style="color: #FFA900;">Boat Price Reservation</p><input readonly [(ngModel)]="report.priceBoatReservation"
+        formControlName="priceBoatReservation" type="text" id="defaultLoginFormLast" class="form-control mb-4"
+        placeholder="Boat Price Reservation">
+
+    <p style="color: #FFA900;">Adventure Price Reservation</p><input readonly
+        [(ngModel)]="report.priceAdventureReservation" formControlName="priceAdventureReservation" type="text"
+        id="defaultLoginFormPassword" class="form-control mb-4" placeholder="Adventure Price Reservation">
+
+    <p style="color: #FFA900;">Sum</p><input readonly formControlName="sum" [(ngModel)]="report.sum" type="text"
+        id="defaultLoginFormPassword2" class="form-control mb-4" placeholder="Sum">
+
+    <p style="color: #FFA900;">App Profit</p><input readonly [(ngModel)]="report.appProfit" formControlName="appProfit"
+        type="text" id="defaultLoginFormFirstName" class="form-control mb-4" placeholder="App Profit">
+
+    <p style="color: #FFA900;">Finish Sum</p><input readonly [(ngModel)]="report.finishSum" formControlName="finishSum"
+        type="text" id="defaultLoginFormLast" class="form-control mb-4" placeholder="Finish Sum">
+
+</form>

@@ -103,7 +103,7 @@
                     <p class="card-text">{{boat.type}}</p>
                     <p class="card-text">{{boat.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary" [routerLink]="goProfile(boat.id)">Go Profile</a>
+                    <button class="btn btn-danger" (click)="delete(boat.id)">Delete</button>
                 </div>
             </div>
         </mat-grid-tile>

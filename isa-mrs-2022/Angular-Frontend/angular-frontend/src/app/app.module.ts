@@ -59,6 +59,9 @@ import { AdminLoyalityPagComponent } from './components/admin-loyality-pag/admin
 import { AdminMarksComponent } from './components/admin-marks/admin-marks.component';
 import { AdminComplaintsComponent } from './components/admin-complaints/admin-complaints.component';
 import { AdminReportsComponent } from './components/admin-reports/admin-reports.component';
+import { CottageAdminPageComponent } from './components/cottage-admin-page/cottage-admin-page.component';
+import { BoatAdminPageComponent } from './components/boat-admin-page/boat-admin-page.component';
+import { AdventureAdminPageComponent } from './components/adventure-admin-page/adventure-admin-page.component';
 
 
 
@@ -106,6 +109,9 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     AdminMarksComponent,
     AdminComplaintsComponent,
     AdminReportsComponent,
+    CottageAdminPageComponent,
+    BoatAdminPageComponent,
+    AdventureAdminPageComponent,
 
 
   ],
@@ -129,7 +135,8 @@ FullCalendarModule.registerPlugins([ // register FullCalendar plugins
     MatTableModule,
     FullCalendarModule, // register FullCalendar with you app
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

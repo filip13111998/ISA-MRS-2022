@@ -5,11 +5,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import rs.ac.uns.ftn.backend.dto.request.AdminLoginDTO;
+import rs.ac.uns.ftn.backend.dto.request.ReportSearchDTO;
 import rs.ac.uns.ftn.backend.dto.response.*;
-import rs.ac.uns.ftn.backend.service.AdminComplaintMarkService;
-import rs.ac.uns.ftn.backend.service.AdminDeleteService;
-import rs.ac.uns.ftn.backend.service.AdminService;
-import rs.ac.uns.ftn.backend.service.MyUserService;
+import rs.ac.uns.ftn.backend.service.*;
 
 import java.util.List;
 import java.util.concurrent.CompletableFuture;
@@ -27,6 +25,8 @@ public class AdminController {
     @Autowired
     private AdminDeleteService ads;
 
+    @Autowired
+    private ReportService rs;
 
     @PostMapping(value = "/acc_active/{username}",produces = "application/json")
     public CompletableFuture<ResponseEntity<Boolean>> checkAdmin(@PathVariable String username) {
@@ -191,6 +191,12 @@ public class AdminController {
     @GetMapping(value = "/findAllInstructor",produces = "application/json")
     public CompletableFuture<ResponseEntity<List<OwnerEntityDTO>>> findAllInstructor() {
         return  ads.findAllInstructor().thenApplyAsync(ResponseEntity::ok);
+    }
+
+    /*REPORT*/
+    @PostMapping(value = "/report",produces = "application/json")
+    public CompletableFuture<ResponseEntity<ReportDTO>> report(@RequestBody ReportSearchDTO r) {
+        return  rs.report(r).thenApplyAsync(ResponseEntity::ok);
     }
 
 }

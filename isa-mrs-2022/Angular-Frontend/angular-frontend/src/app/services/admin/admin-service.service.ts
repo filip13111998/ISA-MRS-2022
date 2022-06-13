@@ -1,3 +1,4 @@
+import { ReportSearhDTO } from './../../models/report/report-search';
 import { HttpClient, HttpErrorResponse, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
@@ -11,6 +12,7 @@ import { OwnerEntityDTO } from 'src/app/models/response/admin/owner-entity';
 import { UserDeleteDTO } from 'src/app/models/response/admin/user-delete';
 import { Token } from 'src/app/models/response/login/login-token';
 import { LoyalityDTO } from 'src/app/models/response/loyality/loyality';
+import { ReportDTO } from 'src/app/models/report/report';
 
 @Injectable({
   providedIn: 'root'
@@ -166,6 +168,11 @@ export class AdminServiceService {
 
   public findAllInstructor(): Observable<OwnerEntityDTO[]> {
     return this.http.get<OwnerEntityDTO[]>(`${this.apiUrl}/findAllInstructor`, { headers: this.headers });
+  }
+
+  /*REPORT*/
+  public report(rs: ReportSearhDTO): Observable<ReportDTO> {
+    return this.http.post<ReportDTO>(`${this.apiUrl}/report`, rs, { headers: this.headers });
   }
 
 

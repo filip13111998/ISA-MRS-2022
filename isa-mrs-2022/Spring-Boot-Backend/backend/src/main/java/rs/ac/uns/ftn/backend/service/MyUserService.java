@@ -169,7 +169,7 @@ public class MyUserService {
 //        log.info("DESCRIPTION ISSSSSS: " + delus.getDescription());
         dr.setMyUser(mu);
         dr.setDescription(delus.getDescription());
-
+        dr.setActive(true);
         drr.save(dr);
 
         return CompletableFuture.completedFuture(true);

@@ -1,0 +1,50 @@
+.search-bar {
+    margin: 5em 30em 5em 10em;
+    display: flex;
+    justify-content: center;
+}
+
+
+.example-form-field {
+    margin: 0 8px 16px 0;
+}
+
+.sort-container {
+    display: flex;
+    justify-content: center;
+    margin: 5em 0em 0em 74em;
+}
+
+.basic-container {
+    margin: 1em 10em 1em 10em;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    display: flex;
+    justify-content: center;
+
+}
+
+#over img {
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
+.mat-form-field--inline {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.mat-form-field--inline .mat-form-field {
+    display: inline-block;
+    width: 100%;
+    vertical-align: middle;
+}
+
+.mat-form-field--inline .mat-form-field:nth-child(n) {
+    margin-right: 10px;
+}

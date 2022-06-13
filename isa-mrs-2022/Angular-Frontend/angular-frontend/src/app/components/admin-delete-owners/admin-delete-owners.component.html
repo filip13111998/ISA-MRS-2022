@@ -1,2 +1,159 @@
 <app-admin-menu></app-admin-menu>
-<p>admin-delete-owners works!</p>
+
+
+<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;margin-left: 2em;" [gutterSize]="'5px'">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile><button (click)="set_entity_type_cottage()" type="button"
+            class="btn btn-new btn-lg box-shadow--8dp"><img src="assets/cottageowner.png" width="50"
+                height="50" /></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_boat()" type="button"
+            class="btn btn-sample btn-lg box-shadow--8dp"><img src="assets/boatowner.png" width="50"
+                height="50" /></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_adventure()" type=" button"
+            class="btn btn-ins btn-lg box-shadow--8dp"><img src="assets/instructor.png" width="50"
+                height="50" /></button> </mat-grid-tile>
+
+</mat-grid-list>
+
+
+
+
+
+<div>
+    <div *ngIf="entity_type==0" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="cottageOwners">
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef>
+                        Name
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.name}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef>
+                        E-mail
+                    </th>
+                    <td mat-cell *matCellDef="let element">
+                        {{element.email}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef>Delete </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button style="color: white;" (click)="deleteCottageOwner(element.id)"
+                            class="btn btn-warning">Delete</button>
+
+                    </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+
+    </div>
+
+    <div *ngIf="entity_type==1" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="boatOwners">
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Delete </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button style="color: white;" (click)="deleteBoatOwner(element.id)"
+                            class="btn btn-warning">Delete</button>
+
+                    </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+
+    <div *ngIf="entity_type==2" [@fadeInOut]>
+        <div class="container mt mat-elevation-z8"
+            style="display: inline-block; margin-top: 3em;margin-bottom: 5em;margin-left: 13%;">
+            <table mat-table [dataSource]="adventureOwners">
+                <!-- id Column -->
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef> No. </th>
+                    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+                </ng-container>
+
+                <!-- startAction Column -->
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef> Name </th>
+                    <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+                </ng-container>
+
+                <!-- endAction Column -->
+                <ng-container matColumnDef="email">
+                    <th mat-header-cell *matHeaderCellDef> E-mail </th>
+                    <td mat-cell *matCellDef="let element"> {{element.email}} </td>
+                </ng-container>
+                <!-- endAction Column -->
+
+
+                <ng-container matColumnDef="Delete">
+                    <th mat-header-cell *matHeaderCellDef> &nbsp; &nbsp; &nbsp; &nbsp;Delete </th>
+                    <td mat-cell *matCellDef="let element">
+                        <button style="color: white;" (click)="deleteInstructor(element.id)"
+                            class="btn btn-warning">Delete</button>
+
+                    </td>
+                </ng-container>
+
+
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+        </div>
+    </div>
+
+</div>

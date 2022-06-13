@@ -1,0 +1,55 @@
+::ng-deep .nav-css nav {
+    background-color: #FFA900;
+}
+
+
+
+.btn-new {
+    color: #FFFFFF;
+    background-color: #612426;
+    border-color: #612426;
+}
+
+.btn-new:hover,
+.btn-new:focus,
+.btn-new:active,
+.btn-new.active,
+.open .dropdown-toggle.btn-new {
+    color: #FFFFFF;
+    background-color: #470B14;
+    border-color: #612426;
+}
+
+.btn-new:active,
+.btn-new.active,
+.open .dropdown-toggle.btn-new {
+    background-image: none;
+}
+
+.btn-new.disabled,
+.btn-new[disabled],
+fieldset[disabled] .btn-new,
+.btn-new.disabled:hover,
+.btn-new[disabled]:hover,
+fieldset[disabled] .btn-new:hover,
+.btn-new.disabled:focus,
+.btn-new[disabled]:focus,
+fieldset[disabled] .btn-new:focus,
+.btn-new.disabled:active,
+.btn-new[disabled]:active,
+fieldset[disabled] .btn-new:active,
+.btn-new.disabled.active,
+.btn-new[disabled].active,
+fieldset[disabled] .btn-new.active {
+    background-color: #612426;
+    border-color: #612426;
+}
+
+.btn-new .badge {
+    color: #612426;
+    background-color: #FFFFFF;
+}
+
+.box-shadow--8dp {
+    box-shadow: 0 8px 10px 1px rgba(0, 0, 0, .14), 0 3px 14px 2px rgba(0, 0, 0, .12), 0 5px 5px -3px rgba(0, 0, 0, .2)
+}

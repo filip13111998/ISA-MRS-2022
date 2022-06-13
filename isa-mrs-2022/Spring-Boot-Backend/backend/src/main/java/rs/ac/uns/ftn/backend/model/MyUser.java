@@ -50,20 +50,7 @@ public class MyUser extends User{
     @Column(name = "register_token")
     private String registerToken;
 
-//    @Column(name = "deactivate")
-//    private Boolean deactivate;
 
-//    @Column(name = "email")
-//    private String email;
-
-//    @Column(name = "username")
-//    private String username;
-//
-//    @Column(name = "password")
-//    private String password;
-
-//    @Column(name = "active")
-//    private Boolean active;
 
     @Column(name = "activate_usr")
     private Boolean activate;

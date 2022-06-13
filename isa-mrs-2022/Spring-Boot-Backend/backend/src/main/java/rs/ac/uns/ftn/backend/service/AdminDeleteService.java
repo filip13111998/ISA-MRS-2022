@@ -53,6 +53,12 @@ public class AdminDeleteService {
 
         log.info("DELETE USER "+ username);
 
+        List<DeleteRequest> req = drr.findAll();
+
+        Optional<DeleteRequest> d = req.stream().filter(r-> r.getMyUser().getUsername().equals(username)).findFirst();
+
+        d.get().setActive(false);
+
         MyUser mu = mur.findByUsername(username);
 
         mu.setEnabled(false);
@@ -70,6 +76,12 @@ public class AdminDeleteService {
 
 
         MyUser mu = mur.findByUsername(username);
+
+        List<DeleteRequest> req = drr.findAll();
+
+        Optional<DeleteRequest> d = req.stream().filter(r-> r.getMyUser().getUsername().equals(username)).findFirst();
+
+        d.get().setActive(false);
 
         mu.setDeactivate(true);
 

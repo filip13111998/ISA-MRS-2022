@@ -1,2 +1,33 @@
 <app-admin-menu></app-admin-menu>
-opa
+<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;margin-left: 6.5em;" [gutterSize]="'5px'">
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+    <mat-grid-tile></mat-grid-tile>
+
+    <mat-grid-tile><button (click)="set_entity_type_cottage()" type="button"
+            class="btn btn-new btn-lg box-shadow--8dp"><i class="fa fa-home" aria-hidden="true"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_boat()" type="button"
+            class="btn btn-primary btn-lg box-shadow--8dp"><i class="fa-solid fa-ship"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+    <mat-grid-tile><button (click)="set_entity_type_adventure()" type=" button"
+            class="btn btn-info btn-lg box-shadow--8dp"><i class="fas fa-map-marked-alt"
+                style="font-size: 50px;"></i></button> </mat-grid-tile>
+
+</mat-grid-list>
+
+<div>
+    <div *ngIf="entity_type==0" [@fadeInOut]>
+        <app-cottage-admin-page></app-cottage-admin-page>
+    </div>
+    <div *ngIf="entity_type==1" [@fadeInOut]>
+        <app-boat-admin-page></app-boat-admin-page>
+    </div>
+    <div *ngIf="entity_type==2" [@fadeInOut]>
+        <app-adventure-admin-page></app-adventure-admin-page>
+    </div>
+
+</div>

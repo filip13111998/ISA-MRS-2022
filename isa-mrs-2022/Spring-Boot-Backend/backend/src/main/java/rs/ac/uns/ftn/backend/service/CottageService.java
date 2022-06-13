@@ -6,6 +6,7 @@ import org.springframework.beans.support.PagedListHolder;
 import org.springframework.data.domain.*;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.request.CottageComplaintDTO;
 import rs.ac.uns.ftn.backend.dto.request.CottageMarkDTO;
@@ -300,13 +301,18 @@ public class CottageService {
 
     }
     @Async
+    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
     public CompletableFuture<Boolean> deleteCottage(Long id) {
 
         log.info("DELETE COTTAGE WITH ID: " + id);
 
         Optional<Cottage> c = cr.findById(id);
-
-        c.get().setDelete(true);
+        try {
+            c.get().setDelete(true);
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
 
         cr.save(c.get());
 

@@ -75,7 +75,7 @@
                     <p class="card-text">{{cottage.bedNums}}</p>
                     <p class="card-text">{{cottage.averageMark}}</p>
 
-                    <a href="#" class="btn btn-primary" [routerLink]="goProfile(cottage.id)">Go Profile</a>
+                    <button class="btn btn-danger" (click)="delete(cottage.id)">Delete</button>
                 </div>
             </div>
         </mat-grid-tile>

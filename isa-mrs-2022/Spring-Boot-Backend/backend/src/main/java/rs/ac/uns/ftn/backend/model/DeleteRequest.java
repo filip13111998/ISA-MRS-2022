@@ -3,6 +3,7 @@ package rs.ac.uns.ftn.backend.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
 
@@ -11,6 +12,7 @@ import javax.persistence.*;
 @Data
 @Entity
 @Table(name = "delete_request")
+@Where(clause = "active=true")
 public class DeleteRequest {
 
     @Id
@@ -25,5 +27,6 @@ public class DeleteRequest {
     @JoinColumn(name = "my_user_id")
     private MyUser myUser;
 
-
+    @Column(name = "active")
+    private Boolean active;
 }

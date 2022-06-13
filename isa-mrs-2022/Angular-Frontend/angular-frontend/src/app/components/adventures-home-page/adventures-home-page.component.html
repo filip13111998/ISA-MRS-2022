@@ -65,8 +65,8 @@
     <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
 
         <mat-grid-tile *ngFor="let adventure of this.adList">
-            <div id="over" class="card text-center" style="width: auto; background-color: skyblue;">
-                <img [src]="getImageName(adventure.ai.name)" width="50%" style="margin-left: 25%;">
+            <div id="over" class="card text-center" style="width: auto; background-color: skyblue;border-radius: 3em;">
+                <img [src]="getImageName(adventure.ai.name)" width="50%" style="margin-left: 25%;border-radius: 3em;">
                 <div class="card-body">
                     <h5 class="card-title">{{adventure.name}}</h5>
 
