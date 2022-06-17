@@ -109,6 +109,12 @@ export class AdminComplaintsComponent implements OnInit {
 
   public answerCottageComplaint() {
     this.ass.answerCottageComplaint({ 'id': this.id, 'description': this.cottageComplaintForm.value.answer }).subscribe((b: Boolean) => {
+      if (b == false) {
+        // this.ngOnInit();
+        window.alert("the answer is given!");
+      }
+      // location.reload();
+      console.log("REZULTAT JE: " + b);
       this.ngOnInit();
     });
 
@@ -117,6 +123,11 @@ export class AdminComplaintsComponent implements OnInit {
 
   public answerBoatComplaint() {
     this.ass.answerBoatComplaint({ 'id': this.id, 'description': this.boatComplaintForm.value.answer }).subscribe((b: Boolean) => {
+      if (b == false) {
+        // this.ngOnInit();
+        window.alert("the answer is given!");
+      }
+      // location.reload();
       this.ngOnInit();
       this.set_entity_type_boat();
     })
@@ -125,6 +136,12 @@ export class AdminComplaintsComponent implements OnInit {
 
   public answerAdventureComplaint() {
     this.ass.answerAdventureComplaint({ 'id': this.id, 'description': this.adventureComplaintForm.value.answer }).subscribe((b: Boolean) => {
+      if (b == false) {
+        // this.ngOnInit();
+        window.alert("the answer is given!");
+      }
+      console.log("REZULTAT JE: " + b);
+      // location.reload();
       this.ngOnInit();
       this.set_entity_type_adventure();
     });

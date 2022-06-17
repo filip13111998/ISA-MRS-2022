@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { CottageReservationService } from 'src/app/services/cottage-reservation/cottage-reservation.service';
 import { CottagePricelistDTO } from './../../models/response/http-cottage-response/cottage-pricelist';
 import { SubscribeDTO } from './../../models/subscription/subscribe';
@@ -114,13 +115,14 @@ export class RootCottageProfileComponent implements OnInit {
 
 
 
-  constructor(private cs: CottageServiceService, private ss: SubscriptionService, private rcs: CottageReservationService) {
-    this.getCottage();
+  constructor(private cs: CottageServiceService, private router: Router,
+    private ss: SubscriptionService, private rcs: CottageReservationService) {
+
 
   }
 
   ngOnInit(): void {
-
+    this.getCottage();
   }
 
 
@@ -393,6 +395,12 @@ export class RootCottageProfileComponent implements OnInit {
         //dobro je ako prodje ovde jer nije naso a stigo do kraja
         this.rcs.saveCottageReservation(sctg).subscribe((bol: Boolean) => {
           console.log("Uspesna rezervacija?" + bol);
+          if (bol == false) {
+            // this.ngOnInit();
+            window.alert("ENTITY IS RESERVATED!");
+          }
+          location.reload();
+          // this.ngOnInit();
         });
       }
       else {
@@ -439,6 +447,11 @@ export class RootCottageProfileComponent implements OnInit {
     //dobro je ako prodje ovde jer nije naso a stigo do kraja
     this.rcs.saveCottageReservation(sctg).subscribe((bol: Boolean) => {
       console.log("Uspesna rezervacija?" + bol);
+      if (bol == false) {
+        // this.ngOnInit();
+        window.alert("ENTITY IS RESERVATED!");
+      }
+      location.reload();
     });
 
 
@@ -503,9 +516,9 @@ export class RootCottageProfileComponent implements OnInit {
   }
 
   public fast_action_disable(start: any): Boolean {
-    console.log("TU SAM" + moment(start).subtract(1, 'month').format('MMMM Do YYYY, h:mm:ss a') + "ha");
+    // console.log("TU SAM" + moment(start).subtract(1, 'month').format('MMMM Do YYYY, h:mm:ss a') + "ha");
 
-    console.log("OP    " + moment().format('MMMM Do YYYY, h:mm:ss a') + "op");
+    // console.log("OP    " + moment().format('MMMM Do YYYY, h:mm:ss a') + "op");
 
     if (localStorage.getItem("user_token") == null) {
 
@@ -514,7 +527,7 @@ export class RootCottageProfileComponent implements OnInit {
     }
 
     if (moment(start) < moment()) {
-      console.log("JEDNOM");
+      // console.log("JEDNOM");
       return true;
     }
 

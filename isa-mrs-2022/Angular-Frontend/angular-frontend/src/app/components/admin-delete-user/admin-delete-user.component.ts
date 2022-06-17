@@ -44,6 +44,11 @@ export class AdminDeleteUserComponent implements OnInit {
 
   public acceptCottageMark() {
     this.ass.acceptDeleteUser(this.username + "").subscribe((b: Boolean) => {
+      if (b == false) {
+        // this.ngOnInit();
+        window.alert("DELETE USER REQUEST DON'T EXIST!");
+      }
+      // location.reload();
       this.ngOnInit();
     });
 
@@ -52,6 +57,11 @@ export class AdminDeleteUserComponent implements OnInit {
 
   public declineCottageMark() {
     this.ass.declineDeleteUser(this.username + "").subscribe((b: Boolean) => {
+      if (b == false) {
+        // this.ngOnInit();
+        window.alert("DELETE USER REQUEST DON'T EXIST!");
+      }
+      // location.reload();
       this.ngOnInit();
     })
   }

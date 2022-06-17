@@ -119,6 +119,33 @@ public class BoatReservationService {
 
         Optional<Boat> bot = br.findById(srdto.getBoatId());
 
+
+
+        List<BoatResevation> b2 =  bot.get().getBoatResevations().stream().filter(c->
+                (
+                        c.getReservationStart().equals(srdto.getStart())  || c.getReservationEnd().equals(srdto.getStart()) ||
+                                c.getReservationStart().equals(srdto.getEnd())  || c.getReservationEnd().equals(srdto.getEnd())
+
+                )
+        ).collect(Collectors.toList());
+        if(b2.size() >0){
+            log.info("WRONG" );
+            return CompletableFuture.completedFuture(false);
+        }
+
+        List<BoatResevation> b = bot.get().getBoatResevations().stream().filter(
+                        c-> (  c.getReservationStart().isBefore(srdto.getStart())  &&
+                                c.getReservationEnd().isAfter(srdto.getStart()))
+                                ||  c.getReservationStart().isAfter(srdto.getEnd())   && c.getReservationEnd().isBefore(srdto.getEnd())
+                                || (c.getReservationStart().isAfter(srdto.getStart()) && c.getReservationEnd().isAfter(srdto.getStart())
+                                && c.getReservationStart().isBefore(srdto.getEnd()) && c.getReservationEnd().isBefore(srdto.getEnd())    )
+                )
+                .collect(Collectors.toList());
+
+        if(b.size() >0){
+            log.info("WRONG" );
+            return CompletableFuture.completedFuture(false);
+        }
 //        System.out.println("USO");
 //        System.out.println(srdto.getStart());
 

@@ -382,6 +382,11 @@ export class RootBoatProfileComponent implements OnInit {
         //dobro je ako prodje ovde jer nije naso a stigo do kraja
         this.rbs.saveBoatReservation(sctg).subscribe((bol: Boolean) => {
           console.log("Uspesna rezervacija?" + bol);
+          if (bol == false) {
+            // this.ngOnInit();
+            window.alert("ENTITY IS RESERVATED!");
+          }
+          location.reload();
         });
       }
       else {
@@ -427,6 +432,11 @@ export class RootBoatProfileComponent implements OnInit {
     //dobro je ako prodje ovde jer nije naso a stigo do kraja
     this.rbs.saveBoatReservation(sctg).subscribe((bol: Boolean) => {
       console.log("Uspesna rezervacija?" + bol);
+      if (bol == false) {
+        // this.ngOnInit();
+        window.alert("ENTITY IS RESERVATED!");
+      }
+      location.reload();
     });
 
 

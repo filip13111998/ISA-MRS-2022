@@ -397,6 +397,11 @@ export class RootAdventureProfileComponent implements OnInit {
         //dobro je ako prodje ovde jer nije naso a stigo do kraja
         this.ras.saveAdventureReservation(sctg).subscribe((bol: Boolean) => {
           console.log("Uspesna rezervacija?" + bol);
+          if (bol == false) {
+            // this.ngOnInit();
+            window.alert("ENTITY IS RESERVATED!");
+          }
+          location.reload();
         });
       }
       else {
@@ -442,6 +447,11 @@ export class RootAdventureProfileComponent implements OnInit {
     //dobro je ako prodje ovde jer nije naso a stigo do kraja
     this.ras.saveAdventureReservation(sctg).subscribe((bol: Boolean) => {
       console.log("Uspesna rezervacija?" + bol);
+      if (bol == false) {
+        // this.ngOnInit();
+        window.alert("ENTITY IS RESERVATED!");
+      }
+      location.reload();
     });
 
 

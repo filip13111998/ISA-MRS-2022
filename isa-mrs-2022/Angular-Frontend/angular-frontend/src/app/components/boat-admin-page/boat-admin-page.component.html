@@ -97,11 +97,11 @@
             <div id="over" class="card text-center" style="width: auto; background-color: skyblue;border-radius: 3em;">
                 <img [src]="getImageName(boat.bi.name)" width="50%" style="margin-left: 25%;border-radius: 3em;">
                 <div class="card-body">
-                    <h5 class="card-title">{{boat.name}}</h5>
+                    <h5 class="card-title"><b>Boat Name: </b>{{boat.name}}</h5>
 
-                    <p class="card-text">{{boat.address}}</p>
-                    <p class="card-text">{{boat.type}}</p>
-                    <p class="card-text">{{boat.averageMark}}</p>
+                    <p class="card-text"><b>Boat Address: </b>{{boat.address}}</p>
+                    <p class="card-text"><b>Boat Type:</b>{{boat.type}}</p>
+                    <p class="card-text"><b>Boat Average Mark:</b>{{boat.averageMark}}</p>
 
                     <button class="btn btn-danger" (click)="delete(boat.id)">Delete</button>
                 </div>

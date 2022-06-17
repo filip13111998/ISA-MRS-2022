@@ -75,7 +75,7 @@
     <img src="assets/ads9.png" width="350" height="200">
     <img src="assets/ads10.png" width="350" height="200">
 </div>
-<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;" [gutterSize]="'5px'">
+<mat-grid-list cols="16" [style.background]="'fff'" style="margin-top: 10em;margin-left: 6.5em;" [gutterSize]="'5px'">
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
     <mat-grid-tile></mat-grid-tile>
@@ -92,10 +92,7 @@
     <mat-grid-tile><button (click)="set_entity_type_adventure()" type=" button"
             class="btn btn-info btn-lg box-shadow--8dp"><i class="fas fa-map-marked-alt"
                 style="font-size: 50px;"></i></button> </mat-grid-tile>
-    <mat-grid-tile><button (click)="set_entity_type_instructor()" type="button"
-            class="btn btn-success btn-lg box-shadow--8dp" style="margin-left: -0.8em;"><i class="fa fa-user"
-                aria-hidden="true" style="font-size: 50px;"></i></button>
-    </mat-grid-tile>
+
 </mat-grid-list>
 
 
@@ -109,7 +106,5 @@
     <div *ngIf="entity_type==2" [@fadeInOut]>
         <app-adventures-home-page></app-adventures-home-page>
     </div>
-    <div *ngIf="entity_type==3" [@fadeInOut]>
 
-    </div>
 </div>

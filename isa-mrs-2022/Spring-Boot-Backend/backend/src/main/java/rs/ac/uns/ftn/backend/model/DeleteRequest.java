@@ -29,4 +29,6 @@ public class DeleteRequest {
 
     @Column(name = "active")
     private Boolean active;
+
+
 }

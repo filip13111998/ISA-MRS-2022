@@ -9,6 +9,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.response.AdminProfileDTO;
 import rs.ac.uns.ftn.backend.dto.response.BoatDTO;
@@ -49,7 +50,7 @@ public class AdminDeleteService {
     private InstructorRepository ir;
 
     @Async
-    public CompletableFuture<Boolean> acceptDeleteUser(String username) {
+    public synchronized CompletableFuture<Boolean> acceptDeleteUser(String username) {
 
         log.info("DELETE USER "+ username);
 
@@ -57,7 +58,12 @@ public class AdminDeleteService {
 
         Optional<DeleteRequest> d = req.stream().filter(r-> r.getMyUser().getUsername().equals(username)).findFirst();
 
-        d.get().setActive(false);
+        try {
+            d.get().setActive(false);
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
 
         MyUser mu = mur.findByUsername(username);
 
@@ -70,7 +76,7 @@ public class AdminDeleteService {
     }
 
     @Async
-    public CompletableFuture<Boolean> declineDeleteUser(String username) {
+    public synchronized CompletableFuture<Boolean> declineDeleteUser(String username) {
 
         log.info("DECLINE USER "+ username);
 
@@ -81,7 +87,12 @@ public class AdminDeleteService {
 
         Optional<DeleteRequest> d = req.stream().filter(r-> r.getMyUser().getUsername().equals(username)).findFirst();
 
-        d.get().setActive(false);
+        try {
+            d.get().setActive(false);
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
 
         mu.setDeactivate(true);
 

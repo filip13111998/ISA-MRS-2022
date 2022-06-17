@@ -26,14 +26,15 @@
             <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
 
                 <mat-grid-tile *ngFor="let cottage of this.cttList">
-                    <div id="over" class="card text-center" style="width: auto; background-color: skyblue;">
-                        <img [src]="getImageName(cottage.cm.name)" width="50%">
+                    <div id="over" class="card text-center"
+                        style="width: auto; background-color: skyblue;border-radius: 3em;">
+                        <img [src]="getImageName(cottage.cm.name)" width="50%" style="border-radius: 3em;">
                         <div class="card-body">
-                            <h5 class="card-title">{{cottage.name}}</h5>
+                            <h5 class="card-title"><b>Cottage Name: </b>{{cottage.name}}</h5>
 
-                            <p class="card-text">{{cottage.address}}</p>
-                            <p class="card-text">{{cottage.bedNums}}</p>
-                            <p class="card-text">{{cottage.averageMark}}</p>
+                            <p class="card-text"><b>Cottage Address: </b>{{cottage.address}}</p>
+                            <p class="card-text"><b>Cottage Bed Num: </b>{{cottage.bedNums}}</p>
+                            <p class="card-text"><b>Cottage Average Mark: </b>{{cottage.averageMark}}</p>
                             <button (click)="unsubscribe_cottage(cottage.id)" style="margin-right: 1em;"
                                 class="btn btn-info" type="submit">UNSUBSCRIBE
                                 <i style="margin-left: 1em;" class="fas fa-bell" aria-hidden="true"></i>
@@ -55,14 +56,16 @@
             <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
 
                 <mat-grid-tile *ngFor="let boat of this.btList">
-                    <div id="over" class="card text-center" style="width: auto; background-color: skyblue;">
-                        <img [src]="getImageName(boat.bi.name)" width="50%" style="margin-left: 25%;">
+                    <div id="over" class="card text-center"
+                        style="width: auto; background-color: skyblue;border-radius: 3em;">
+                        <img [src]="getImageName(boat.bi.name)" width="50%" style="margin-left: 25%;"
+                            style="border-radius: 3em;">
                         <div class="card-body">
-                            <h5 class="card-title">{{boat.name}}</h5>
+                            <h5 class="card-title"><b>Boat Name: </b>{{boat.name}}</h5>
 
-                            <p class="card-text">{{boat.address}}</p>
-                            <p class="card-text">{{boat.type}}</p>
-                            <p class="card-text">{{boat.averageMark}}</p>
+                            <p class="card-text"><b>Boat Address: </b>{{boat.address}}</p>
+                            <p class="card-text"><b>Boat Type: </b>{{boat.type}}</p>
+                            <p class="card-text"><b>Boat Average Mark: </b>{{boat.averageMark}}</p>
                             <button (click)="unsubscribe_boat(boat.id)" style="margin-right: 1em;" class="btn btn-info"
                                 type="submit">UNSUBSCRIBE
                                 <i style="margin-left: 1em;" class="fas fa-bell" aria-hidden="true"></i>
@@ -80,14 +83,16 @@
             <mat-grid-list cols="3" rowHeight="1:1" [gutterSize]="'30px'">
 
                 <mat-grid-tile *ngFor="let adventure of this.adList">
-                    <div id="over" class="card text-center" style="width: auto; background-color: skyblue;">
-                        <img [src]="getImageName(adventure.ai.name)" width="50%" style="margin-left: 25%;">
+                    <div id="over" class="card text-center"
+                        style="width: auto; background-color: skyblue;border-radius: 3em;">
+                        <img [src]="getImageName(adventure.ai.name)" width="50%"
+                            style="margin-left: 25%;border-radius: 3em;">
                         <div class="card-body">
-                            <h5 class="card-title">{{adventure.name}}</h5>
+                            <h5 class="card-title"><b>Adventure Name: </b>{{adventure.name}}</h5>
 
-                            <p class="card-text">{{adventure.address}}</p>
-                            <p class="card-text">{{adventure.maxNumPerson}}</p>
-                            <p class="card-text">{{adventure.averageMark}}</p>
+                            <p class="card-text"><b>Adventure Address: </b>{{adventure.address}}</p>
+                            <p class="card-text"><b>Adventure Num Person: </b>{{adventure.maxNumPerson}}</p>
+                            <p class="card-text"><b>Adventure Average Mark: </b>{{adventure.averageMark}}</p>
                             <button (click)="unsubscribe_adventure(adventure.id)" style="margin-right: 1em;"
                                 class="btn btn-info" type="submit">UNSUBSCRIBE
                                 <i style="margin-left: 1em;" class="fas fa-bell" aria-hidden="true"></i>

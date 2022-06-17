@@ -29,6 +29,8 @@ public class CottageComplaint {
 
     @Column(name = "entity")
     private Long entity;
+
+
 //    @OneToOne(fetch = FetchType.LAZY)
 //    @JoinColumn(name = "my_user_id")
 //    private MyUser myUser;

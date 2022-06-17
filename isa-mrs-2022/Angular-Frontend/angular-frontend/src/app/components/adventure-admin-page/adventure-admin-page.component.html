@@ -68,11 +68,11 @@
             <div id="over" class="card text-center" style="width: auto; background-color: skyblue;border-radius: 3em;">
                 <img [src]="getImageName(adventure.ai.name)" width="50%" style="margin-left: 25%;border-radius: 3em;">
                 <div class="card-body">
-                    <h5 class="card-title">{{adventure.name}}</h5>
+                    <h5 class="card-title"><b>Adventure Name: </b>{{adventure.name}}</h5>
 
-                    <p class="card-text">{{adventure.address}}</p>
-                    <p class="card-text">{{adventure.maxNumPerson}}</p>
-                    <p class="card-text">{{adventure.averageMark}}</p>
+                    <p class="card-text"><b>Adventure Address: </b>{{adventure.address}}</p>
+                    <p class="card-text"><b>Adventure Num Person: </b>{{adventure.maxNumPerson}}</p>
+                    <p class="card-text"><b>Adventure Average Mark: </b>{{adventure.averageMark}}</p>
 
                     <button class="btn btn-danger" (click)="delete(adventure.id)">Delete</button>
                 </div>

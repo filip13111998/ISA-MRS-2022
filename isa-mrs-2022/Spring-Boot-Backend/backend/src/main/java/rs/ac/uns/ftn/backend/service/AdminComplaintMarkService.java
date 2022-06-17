@@ -8,6 +8,7 @@ import org.springframework.scheduling.annotation.Async;
 
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import rs.ac.uns.ftn.backend.dto.response.ComplaintAdminDTO;
 import rs.ac.uns.ftn.backend.dto.response.ExtendComplaintDTO;
@@ -235,13 +236,25 @@ public class AdminComplaintMarkService {
 
     /*COMPLAINT PART*/
     @Async
-    public CompletableFuture<Boolean> answerCottageComplaint(ComplaintAdminDTO cad) {
+    public synchronized CompletableFuture<Boolean> answerCottageComplaint(ComplaintAdminDTO cad) {
 
-        log.info("Save Complaint with id: " + cad.getId());
+        log.info("ANSWER Complaint with id: " + cad.getId());
 
         Optional<CottageComplaint> cm = ccr.findById(cad.getId());
 
-        cm.get().setEnable(true);
+        try {
+
+            if(cm.get().getEnable() == true){
+                return CompletableFuture.completedFuture(false);
+            }
+
+            cm.get().setEnable(true);
+
+
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
 
         ccr.save(cm.get());
 
@@ -275,15 +288,26 @@ public class AdminComplaintMarkService {
 
 
     @Async
-    public CompletableFuture<Boolean> answerBoatComplaint(ComplaintAdminDTO cad) {
+    public synchronized CompletableFuture<Boolean> answerBoatComplaint(ComplaintAdminDTO cad) {
 
-        log.info("Save Complaint with id: " + cad.getId());
+        log.info("ANSWER Complaint with id: " + cad.getId());
 
         Optional<BoatComplaint> cm = bcr.findById(cad.getId());
 
-        cm.get().setEnable(true);
+        try {
+            if(cm.get().getEnable() == true){
+                return CompletableFuture.completedFuture(false);
+            }
 
-        bcr.save(cm.get());
+            cm.get().setEnable(true);
+
+            bcr.save(cm.get());
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
+
+
 
         service.sendSimpleEmail("jeremy.cartwright96@ethereal.email",
                 cad.getDescription() ,
@@ -314,15 +338,25 @@ public class AdminComplaintMarkService {
     }
 
     @Async
-    public CompletableFuture<Boolean> answerAdventureComplaint(ComplaintAdminDTO cad) {
+     public synchronized CompletableFuture<Boolean> answerAdventureComplaint(ComplaintAdminDTO cad) {
 
-        log.info("Save Complaint with id: " + cad.getId());
+        log.info("ANSWER Complaint with id: " + cad.getId());
 
         Optional<AdventureComplaint> cm = acr.findById(cad.getId());
 
-        cm.get().setEnable(true);
+        try {
+            if(cm.get().getEnable() == true){
+                return CompletableFuture.completedFuture(false);
+            }
 
-        acr.save(cm.get());
+            cm.get().setEnable(true);
+
+            acr.save(cm.get());
+        }
+        catch (Exception e){
+            return CompletableFuture.completedFuture(false);
+        }
+
 
         service.sendSimpleEmail("jeremy.cartwright96@ethereal.email",
                 cad.getDescription() ,

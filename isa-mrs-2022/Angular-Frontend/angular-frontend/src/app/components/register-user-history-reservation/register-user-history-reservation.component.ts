@@ -475,30 +475,30 @@ export class RegisterUserHistoryReservationComponent implements OnInit {
   }
 
   public comparePriceCottage(o1: CottageReservationHistoryDTO, o2: CottageReservationHistoryDTO) {
-    if (o1.pricelistItem.price < o2.pricelistItem.price) {
+    if (o1.price < o2.price) {
       return -1;
     }
-    if (o1.pricelistItem.price > o2.pricelistItem.price) {
+    if (o1.price > o2.price) {
       return 1;
     }
     return 0;
   }
 
   public comparePriceBoat(o1: BoatReservationHistoryDTO, o2: BoatReservationHistoryDTO) {
-    if (o1.pricelistItem.price < o2.pricelistItem.price) {
+    if (o1.price < o2.price) {
       return -1;
     }
-    if (o1.pricelistItem.price > o2.pricelistItem.price) {
+    if (o1.price > o2.price) {
       return 1;
     }
     return 0;
   }
 
   public comparePriceAdventure(o1: AdventureReservationHistoryDTO, o2: AdventureReservationHistoryDTO) {
-    if (o1.pricelistItem.price < o2.pricelistItem.price) {
+    if (o1.price < o2.price) {
       return -1;
     }
-    if (o1.pricelistItem.price > o2.pricelistItem.price) {
+    if (o1.price > o2.price) {
       return 1;
     }
     return 0;

@@ -301,8 +301,7 @@ public class CottageService {
 
     }
     @Async
-    @Transactional(readOnly = false, propagation = Propagation.REQUIRES_NEW)
-    public CompletableFuture<Boolean> deleteCottage(Long id) {
+    public synchronized CompletableFuture<Boolean> deleteCottage(Long id) {
 
         log.info("DELETE COTTAGE WITH ID: " + id);
 
@@ -317,8 +316,6 @@ public class CottageService {
         cr.save(c.get());
 
         return CompletableFuture.completedFuture(true);
-
-
 
     }
 

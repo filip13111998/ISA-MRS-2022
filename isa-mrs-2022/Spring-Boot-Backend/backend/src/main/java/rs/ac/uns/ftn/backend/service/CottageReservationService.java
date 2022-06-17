@@ -41,6 +41,8 @@ public class CottageReservationService {
 
     private CottageActionRepository car;
 
+    private final Object lock = new Object();
+
     @Autowired
     private EmailSenderService service;
 
@@ -112,7 +114,7 @@ public class CottageReservationService {
 
 
     @Async
-    public CompletableFuture<Boolean> saveReservation(SaveCottageReservationDTO srdto) {
+    public synchronized CompletableFuture<Boolean> saveReservation(SaveCottageReservationDTO srdto) {
 
         log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
 
@@ -125,9 +127,34 @@ public class CottageReservationService {
 
         Optional<Cottage> cto = cr.findById(srdto.getCottageId());
 
+        List<CottageResevation> b2 =  cto.get().getCottageResevations().stream().filter(c->
+                (
+                        c.getReservationStart().equals(srdto.getStart())  || c.getReservationEnd().equals(srdto.getStart()) ||
+                        c.getReservationStart().equals(srdto.getEnd())  || c.getReservationEnd().equals(srdto.getEnd())
+
+                )
+        ).collect(Collectors.toList());
+        if(b2.size() >0){
+            log.info("WRONG" );
+            return CompletableFuture.completedFuture(false);
+        }
+
+        List<CottageResevation> b = cto.get().getCottageResevations().stream().filter(
+                        c-> (  c.getReservationStart().isBefore(srdto.getStart())  &&
+                                 c.getReservationEnd().isAfter(srdto.getStart()))
+                                ||  c.getReservationStart().isAfter(srdto.getEnd())   && c.getReservationEnd().isBefore(srdto.getEnd())
+                                || (c.getReservationStart().isAfter(srdto.getStart()) && c.getReservationEnd().isAfter(srdto.getStart())
+                                && c.getReservationStart().isBefore(srdto.getEnd()) && c.getReservationEnd().isBefore(srdto.getEnd())    )
+                )
+                .collect(Collectors.toList());
+
+        if(b.size() >0){
+            log.info("WRONG" );
+            return CompletableFuture.completedFuture(false);
+        }
 
         System.out.println(srdto.getStart());
-
+        System.out.println(srdto.getEnd());
         if (!ca.isEmpty()){
 
             cto.get().getCottageActions().remove(ca.get());
@@ -155,25 +182,13 @@ public class CottageReservationService {
         cotr.setPrice(myPrice);
 
 
-
-
         muo.getCottageResevations().add(cotr);
-
-//        System.out.println("COTR ID " + cotr.getId());
 
         Cottage ct = cto.get();
 
         ct.getCottageResevations().add(cotr);
 
-
-
-//        System.out.println("COTR ID " + cotr.getId());
-
         crr.save(cotr);
-
-//        cr.save(ct);
-
-
 
         mr.save(muo);
 

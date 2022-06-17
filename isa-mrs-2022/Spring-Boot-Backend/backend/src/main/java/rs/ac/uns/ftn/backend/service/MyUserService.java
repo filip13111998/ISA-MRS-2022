@@ -61,7 +61,7 @@ public class MyUserService {
     @Async
     public CompletableFuture<Boolean> registerUser(RegisterUserDTO rudto) {
 
-        log.info("REGISTER USER WITH USERNAME: " + rudto.getGrad());
+        log.info("REGISTER USER WITH USERNAME: " + rudto.getUsername());
 
         MyUser mu = new MyUser();
 
@@ -89,7 +89,7 @@ public class MyUserService {
         mu.setAdventures(new HashSet<>());
         mu.setRegisterToken(randomRegisterToken);
         mu.setActivate(false);
-
+        mu.setDeactivate(true);
 
         mu.setRoles(list_role);
 
