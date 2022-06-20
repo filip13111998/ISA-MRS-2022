@@ -4,4 +4,5 @@ export class BoatMarkDTO {
     date: Date;
 
     mark: number;
+    username: string;
 }

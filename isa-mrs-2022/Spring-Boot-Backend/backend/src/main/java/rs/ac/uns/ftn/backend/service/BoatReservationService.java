@@ -113,6 +113,12 @@ public class BoatReservationService {
 
         log.info("SAVE BOAT RESERVATION WITH USERNAME: " + srdto.getMyUsername());
 
+        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+
+        if(muo.getPenaltyPoint()>3){
+            return CompletableFuture.completedFuture(false);
+        }
+
         List<BoatAction> bal = bar.findAll();
 
         Optional<BoatAction> ba = bal.stream().filter(e->e.getStartAction().equals(srdto.getStart())).findFirst();
@@ -155,7 +161,7 @@ public class BoatReservationService {
             bar.delete(ba.get());
         }
 
-        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+//        MyUser muo = mr.findByUsername(srdto.getMyUsername());
 
         BoatResevation botr = new BoatResevation();
 

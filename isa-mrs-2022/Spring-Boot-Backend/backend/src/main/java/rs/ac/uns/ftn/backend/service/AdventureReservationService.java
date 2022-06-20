@@ -119,6 +119,12 @@ public class AdventureReservationService {
 
         log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
 
+        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+
+        if(muo.getPenaltyPoint()>3){
+            return CompletableFuture.completedFuture(false);
+        }
+
         List<AdventureAction> aal = aar.findAll();
 
         Optional<AdventureAction> aa = aal.stream().filter(e->e.getStartAction().equals(srdto.getStart())).findFirst();
@@ -172,7 +178,7 @@ public class AdventureReservationService {
 
         aotr.setPricelistItem(getPricelist(srdto.getDescription()));
 
-        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+        //MyUser muo = mr.findByUsername(srdto.getMyUsername());
 
 
         muo.setPoint(muo.getPoint()+5);

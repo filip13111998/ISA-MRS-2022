@@ -17,4 +17,6 @@ public class CottageMarkDTO {
 
     private Double mark;
 
+    private String username;
+
 }

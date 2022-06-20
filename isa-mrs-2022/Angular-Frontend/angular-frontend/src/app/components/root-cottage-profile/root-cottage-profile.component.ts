@@ -397,7 +397,7 @@ export class RootCottageProfileComponent implements OnInit {
           console.log("Uspesna rezervacija?" + bol);
           if (bol == false) {
             // this.ngOnInit();
-            window.alert("ENTITY IS RESERVATED!");
+            window.alert("ACTION DISABLED!");
           }
           location.reload();
           // this.ngOnInit();
@@ -449,7 +449,7 @@ export class RootCottageProfileComponent implements OnInit {
       console.log("Uspesna rezervacija?" + bol);
       if (bol == false) {
         // this.ngOnInit();
-        window.alert("ENTITY IS RESERVATED!");
+        window.alert("ACTION DISABLED!")
       }
       location.reload();
     });

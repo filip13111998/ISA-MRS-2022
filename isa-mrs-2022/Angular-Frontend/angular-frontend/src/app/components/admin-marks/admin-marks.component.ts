@@ -40,7 +40,9 @@ export class AdminMarksComponent implements OnInit {
 
   id: number;
 
-  entityID: number
+  entityID: number;
+
+
 
   constructor(private ass: AdminServiceService, private fb: FormBuilder, private router: Router) { }
 

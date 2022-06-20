@@ -90,6 +90,7 @@ public class MyUserService {
         mu.setRegisterToken(randomRegisterToken);
         mu.setActivate(false);
         mu.setDeactivate(true);
+        mu.setPenaltyPoint(0l);
 
         mu.setRoles(list_role);
 

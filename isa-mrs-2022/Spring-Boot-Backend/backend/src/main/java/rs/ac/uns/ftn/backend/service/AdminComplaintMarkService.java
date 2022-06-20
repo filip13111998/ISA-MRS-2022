@@ -60,7 +60,8 @@ public class AdminComplaintMarkService {
     private BoatComplaintRepository bcr;
     @Autowired
     private AdventureComplaintRepository acr;
-
+    @Autowired
+    private MyUserRepository mur;
 
     @Autowired
     private EmailSenderService service;
@@ -94,7 +95,13 @@ public class AdminComplaintMarkService {
 
         log.info("DECLINE MARK COTTAGE WITH ID: " + dto.getId());
 
+
+
         Optional<CottageMark> cm = cmr.findById(dto.getId());
+
+        MyUser mu = mur.findByUsername(cm.get().getUsername());
+
+        mu.setPenaltyPoint(mu.getPenaltyPoint()+1);
 
         cm.get().setEnable(true);
 
@@ -151,6 +158,10 @@ public class AdminComplaintMarkService {
         log.info("DECLINE BOAT COTTAGE WITH ID: " + dto.getId());
 
         Optional<BoatMark> bm = bmr.findById(dto.getId());
+
+        MyUser mu = mur.findByUsername(bm.get().getUsername());
+
+        mu.setPenaltyPoint(mu.getPenaltyPoint()+1);
 
         bm.get().setEnable(true);
 
@@ -209,6 +220,10 @@ public class AdminComplaintMarkService {
         log.info("DECLINE MARK ADVENTURE WITH ID: " + dto.getId());
 
         Optional<AdventureMark> am = amr.findById(dto.getId());
+
+        MyUser mu = mur.findByUsername(am.get().getUsername());
+
+        mu.setPenaltyPoint(mu.getPenaltyPoint()+1);
 
         am.get().setEnable(true);
 

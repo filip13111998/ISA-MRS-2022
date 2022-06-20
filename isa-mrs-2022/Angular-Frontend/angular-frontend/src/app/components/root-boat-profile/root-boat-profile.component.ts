@@ -384,7 +384,7 @@ export class RootBoatProfileComponent implements OnInit {
           console.log("Uspesna rezervacija?" + bol);
           if (bol == false) {
             // this.ngOnInit();
-            window.alert("ENTITY IS RESERVATED!");
+            window.alert("ACTION DISABLED!")
           }
           location.reload();
         });
@@ -434,7 +434,7 @@ export class RootBoatProfileComponent implements OnInit {
       console.log("Uspesna rezervacija?" + bol);
       if (bol == false) {
         // this.ngOnInit();
-        window.alert("ENTITY IS RESERVATED!");
+        window.alert("ACTION DISABLED!")
       }
       location.reload();
     });

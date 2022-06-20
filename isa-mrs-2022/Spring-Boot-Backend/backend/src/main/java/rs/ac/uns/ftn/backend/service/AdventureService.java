@@ -228,7 +228,7 @@ public class AdventureService {
         cm.setDate(dto.getDate());
         cm.setMark(dto.getMark());
         cm.setEnable(false);
-
+        cm.setUsername(dto.getUsername());
         amr.save(cm);
 
         return CompletableFuture.completedFuture(true);

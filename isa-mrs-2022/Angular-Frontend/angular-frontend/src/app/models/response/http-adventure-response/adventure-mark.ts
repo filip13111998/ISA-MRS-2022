@@ -4,4 +4,6 @@ export class AdventureMarkDTO {
     date: Date;
 
     mark: number;
+
+    username: string;
 }

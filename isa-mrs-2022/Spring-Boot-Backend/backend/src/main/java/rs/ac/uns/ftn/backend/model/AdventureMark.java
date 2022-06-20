@@ -30,4 +30,6 @@ public class AdventureMark {
     @Column(name = "entity")
     private Long entity;
 
+    @Column(name = "username")
+    private String username;
 }

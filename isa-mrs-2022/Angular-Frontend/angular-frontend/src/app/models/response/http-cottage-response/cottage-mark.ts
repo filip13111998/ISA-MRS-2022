@@ -4,4 +4,6 @@ export class CottageMarkDTO {
     date: Date;
 
     mark: number;
+
+    username: string;
 }

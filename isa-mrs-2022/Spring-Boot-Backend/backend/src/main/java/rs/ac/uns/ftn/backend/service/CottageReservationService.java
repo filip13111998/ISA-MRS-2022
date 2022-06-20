@@ -118,8 +118,15 @@ public class CottageReservationService {
 
         log.info("SAVE RESERVATION WITH USERNAME: " + srdto.getMyUsername());
 
+        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+
+        if(muo.getPenaltyPoint()>3){
+            return CompletableFuture.completedFuture(false);
+        }
 
 //        srdto.setEnd(srdto.getEnd().plusDays(1));
+
+
 
         List<CottageAction> cal = car.findAll();
 
@@ -161,7 +168,7 @@ public class CottageReservationService {
             car.delete(ca.get());
         }
 
-        MyUser muo = mr.findByUsername(srdto.getMyUsername());
+
 
         CottageResevation cotr = new CottageResevation();
 

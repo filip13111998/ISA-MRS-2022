@@ -15,4 +15,6 @@ public class AdventureMarkDTO {
     private LocalDate date;
 
     private Double mark;
+
+    private String username;
 }

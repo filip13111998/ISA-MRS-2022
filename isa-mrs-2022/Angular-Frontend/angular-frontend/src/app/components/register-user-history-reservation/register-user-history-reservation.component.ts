@@ -142,6 +142,7 @@ export class RegisterUserHistoryReservationComponent implements OnInit {
     cm.date = new Date();
     cm.entityID = this.cottageIdSave;
     cm.mark = this.cottageMarkForm.value.answer;
+    cm.username = this.username + "";
     this.css.addMark(cm).subscribe((b: Boolean) => {
       if (b) {
 
@@ -159,6 +160,7 @@ export class RegisterUserHistoryReservationComponent implements OnInit {
     bm.date = new Date();
     bm.entityID = this.cottageIdSave;
     bm.mark = this.boatMarkForm.value.answer;
+    bm.username = this.username + "";
     this.bss.addMark(bm).subscribe((b: Boolean) => {
       if (b) {
 
@@ -176,6 +178,7 @@ export class RegisterUserHistoryReservationComponent implements OnInit {
     am.date = new Date();
     am.entityID = this.cottageIdSave;
     am.mark = this.adventureMarkForm.value.answer;
+    am.username = this.username + "";
     this.ass.addMark(am).subscribe((b: Boolean) => {
       if (b) {
 

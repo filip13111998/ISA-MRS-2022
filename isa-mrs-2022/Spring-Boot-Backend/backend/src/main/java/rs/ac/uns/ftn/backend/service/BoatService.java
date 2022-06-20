@@ -299,7 +299,7 @@ public class BoatService {
         cm.setDate(dto.getDate());
         cm.setMark(dto.getMark());
         cm.setEnable(false);
-
+        cm.setUsername(dto.getUsername());
         bmr.save(cm);
 
         return CompletableFuture.completedFuture(true);

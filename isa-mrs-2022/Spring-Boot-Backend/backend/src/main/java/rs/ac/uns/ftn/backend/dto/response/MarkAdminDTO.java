@@ -14,6 +14,8 @@ public class MarkAdminDTO {
     private Long id;
 
     private Long entityID;
+
+
 //
 //    private LocalDate date;
 //

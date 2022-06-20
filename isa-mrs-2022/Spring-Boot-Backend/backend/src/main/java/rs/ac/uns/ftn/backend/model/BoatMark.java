@@ -29,4 +29,8 @@ public class BoatMark {
 
     @Column(name = "entity")
     private Long entity;
+
+    @Column(name = "username")
+    private String username;
+
 }
